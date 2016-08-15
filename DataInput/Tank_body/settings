@@ -1,4 +1,5 @@
 {
 	"basename" : "TankBase",
-	"outputFolder" : "Tank/body"
+	"outputFolder" : "tank/body",
+	"cells" : 1
 }

@@ -1,4 +1,5 @@
 {
 	"basename" : "Turret",
-	"outputFolder" : "Tank/head"
+	"outputFolder" : "tank/head",
+	"cells" : 1
 }
