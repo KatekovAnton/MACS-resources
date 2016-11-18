@@ -1,0 +1,16 @@
+{
+	"type": "animatedFrames",
+	"outputFolder": "shot",
+	"imageSizeW": 835,
+	"imageSizeH": 597,
+	"frameCount": 3,
+	"frameIndexStart": 1,
+	"framePattern": "%d.png",
+	"cutRectangle": {
+		"x": 0,
+		"y": 0,
+		"w": 350,
+		"h": 220
+	},
+	"cutType": "fromCenter"
+}
