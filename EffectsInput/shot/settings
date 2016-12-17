@@ -9,7 +9,7 @@
 	"cutRectangle": {
 		"x": 0,
 		"y": 0,
-		"w": 350,
+		"w": 380,
 		"h": 220
 	},
 	"cutType": "fromCenter"
