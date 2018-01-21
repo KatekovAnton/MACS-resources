@@ -47,8 +47,8 @@
             
             int cx = clipping->_payloadFrame.origin.x + x;
             int cy = clipping->_payloadFrame.origin.y + y;
-            Color colorDiffuse = _diffuseTexture->GetColorAtPoint(GPoint2DMake(cx, cy));
-            Color colorDiffuseAlpha = _diffuseAlphaTexture->GetColorAtPoint(GPoint2DMake(cx, cy));
+            Color colorDiffuse = _diffuseTexture->GetColorAtPoint(GPoint2D(cx, cy));
+            Color colorDiffuseAlpha = _diffuseAlphaTexture->GetColorAtPoint(GPoint2D(cx, cy));
             Color colorResult = Color(colorDiffuse.r,
                                       colorDiffuse.g,
                                       colorDiffuse.b,

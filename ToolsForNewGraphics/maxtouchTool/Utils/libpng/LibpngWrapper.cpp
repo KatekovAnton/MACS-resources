@@ -122,7 +122,7 @@ BitmapTexture* LibpngWrapper::BitmapTextureFromByteBuffer(ByteBuffer *buffer)
 
 
     bitmap->_info._chanels = color_type & PNG_COLOR_MASK_ALPHA ? 4 : 3;
-    bitmap->_info._textureSize = GSize2DMake(width, height);
+    bitmap->_info._textureSize = GSize2D(width, height);
     
     png_bytep *rowPtrs = new png_bytep[height];
     

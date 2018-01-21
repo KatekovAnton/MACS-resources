@@ -34,7 +34,7 @@ Color ColorInTexture(CPPITexture *texture, float x, float y, Color baseColor)
     if (y >= texture->GetHeight()) {
         return baseColor;
     }
-    return texture->GetColorAtPoint(GPoint2DMake(x, y));
+    return texture->GetColorAtPoint(GPoint2D(x, y));
 }
 
 
@@ -80,14 +80,14 @@ Color ColorInTexture(CPPITexture *texture, float x, float y, Color baseColor)
     
     const float alphaTreshold = 0.05;
     
-    BitmapComposer composer = BitmapComposer(GSize2DMake(frame->GetWidth(), frame->GetHeight()));
+    BitmapComposer composer = BitmapComposer(GSize2D(frame->GetWidth(), frame->GetHeight()));
     
     double difference = 0;
     double count = 0;
     for (float x = 0; x < frame->GetWidth(); x++) {
         for (float y = 0; y < frame->GetHeight(); y++) {
-            Color frameColor = frame->GetColorAtPoint(GPoint2DMake(x, y));
-            Color substractingFrameColor = substractingFrame->GetColorAtPoint(GPoint2DMake(x, y));
+            Color frameColor = frame->GetColorAtPoint(GPoint2D(x, y));
+            Color substractingFrameColor = substractingFrame->GetColorAtPoint(GPoint2D(x, y));
             
             ColorF cf = ColorF(frameColor);
             ColorF cs = ColorF(substractingFrameColor);
@@ -110,8 +110,8 @@ Color ColorInTexture(CPPITexture *texture, float x, float y, Color baseColor)
     
     for (float x = 0; x < frame->GetWidth(); x++) {
         for (float y = 0; y < frame->GetHeight(); y++) {
-            Color frameColor = frame->GetColorAtPoint(GPoint2DMake(x, y));
-            Color substractingFrameColor = substractingFrame->GetColorAtPoint(GPoint2DMake(x, y));
+            Color frameColor = frame->GetColorAtPoint(GPoint2D(x, y));
+            Color substractingFrameColor = substractingFrame->GetColorAtPoint(GPoint2D(x, y));
             
             ColorF cf = ColorF(frameColor);
             ColorF cs = ColorF(substractingFrameColor);

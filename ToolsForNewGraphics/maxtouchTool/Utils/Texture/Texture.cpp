@@ -204,7 +204,7 @@ CPPTextureClippingArray::CPPTextureClippingArray(const std::vector<CPPITexture *
         _textureClippings.push_back(clipping);
     }
     
-    GSize2D maxSize = GSize2DMake(0, 0);
+    GSize2D maxSize = GSize2D();
     for (int i = 0; i < _textureClippings.size(); i++)
     {
         CPPTextureClipping *clipping = _textureClippings[i];

@@ -74,7 +74,7 @@
         NSImage *image = [[NSImage alloc] initWithContentsOfFile:path];
         CPPITexture *t = new CPPTextureImplNSBitmapImageRep(image);
         CPPTextureClipping *c = new CPPTextureClipping(t, true);
-        BitmapComposer *comp = new BitmapComposer(GSize2DMake(c->_payloadFrame.size.width * 2, c->_payloadFrame.size.height * 2));
+        BitmapComposer *comp = new BitmapComposer(GSize2D(c->_payloadFrame.size.width * 2, c->_payloadFrame.size.height * 2));
         comp->insertTexture(c, GPoint2D(0, 0));
         comp->insertTexture(c, GPoint2D(c->_payloadFrame.size.width, c->_payloadFrame.size.height));
 

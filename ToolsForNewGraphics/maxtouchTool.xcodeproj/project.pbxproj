@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B87EA422014AC0A003D5321 /* BitmapTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6B87EA3C2014AC09003D5321 /* BitmapTexture.cpp */; };
+		6B87EA432014AC0A003D5321 /* ZipWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6B87EA3D2014AC09003D5321 /* ZipWrapper.cpp */; };
+		6B87EA442014AC0A003D5321 /* ByteBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6B87EA3E2014AC09003D5321 /* ByteBuffer.cpp */; };
 		6C3531B41DCFE19000A2F525 /* MTDiffuseComposer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C3531B31DCFE19000A2F525 /* MTDiffuseComposer.mm */; };
 		6C423E4E1D5C82C9001882E5 /* BitmapComposer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C423E4C1D5C82C9001882E5 /* BitmapComposer.cpp */; };
-		6C423E561D5C8337001882E5 /* BitmapTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C423E521D5C8337001882E5 /* BitmapTexture.cpp */; };
-		6C423E571D5C8337001882E5 /* ByteBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C423E541D5C8337001882E5 /* ByteBuffer.cpp */; };
 		6C4D07EB1D526BAA00C055AC /* MainWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C4D07EA1D526BAA00C055AC /* MainWindow.mm */; };
 		6C4D07EF1D526C2C00C055AC /* MTVisualObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C4D07EE1D526C2C00C055AC /* MTVisualObject.mm */; };
 		6C77ED4D1D65FDDC003FB5BC /* MTLightComposer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C77ED4C1D65FDDC003FB5BC /* MTLightComposer.mm */; };
@@ -43,7 +44,6 @@
 		6CCDA29B1DDD1E1A00B20A49 /* NSImage+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCDA29A1DDD1E1A00B20A49 /* NSImage+Utils.m */; };
 		6CD0CACB1E2C35CC000CBFC3 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CD0CACA1E2C35CC000CBFC3 /* OpenGL.framework */; };
 		6CEC95771E2B053100DBD1AA /* MTSequenceFrameSubstractor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6CEC95761E2B053100DBD1AA /* MTSequenceFrameSubstractor.mm */; };
-		6CF56F851D62478700632FCB /* ZipWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CF56F831D62478700632FCB /* ZipWrapper.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,28 +79,31 @@
 
 /* Begin PBXFileReference section */
 		51BF73A41E44C9AA0041EE76 /* MTOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTOptions.h; sourceTree = "<group>"; };
+		6B87EA2D2014ABFA003D5321 /* Colors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Colors.h; sourceTree = "<group>"; };
+		6B87EA2E2014ABFA003D5321 /* Geometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Geometry.h; sourceTree = "<group>"; };
+		6B87EA2F2014ABFA003D5321 /* GLKMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLKMath.h; sourceTree = "<group>"; };
+		6B87EA302014ABFA003D5321 /* GLKMathTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLKMathTypes.h; sourceTree = "<group>"; };
+		6B87EA312014ABFA003D5321 /* GLKMathUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLKMathUtils.h; sourceTree = "<group>"; };
+		6B87EA322014ABFA003D5321 /* GLKMatrix3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLKMatrix3.h; sourceTree = "<group>"; };
+		6B87EA332014ABFA003D5321 /* GLKMatrix4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLKMatrix4.h; sourceTree = "<group>"; };
+		6B87EA342014ABFA003D5321 /* GLKMatrixStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLKMatrixStack.h; sourceTree = "<group>"; };
+		6B87EA352014ABFA003D5321 /* GLKQuaternion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLKQuaternion.h; sourceTree = "<group>"; };
+		6B87EA362014ABFA003D5321 /* GLKVector2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLKVector2.h; sourceTree = "<group>"; };
+		6B87EA372014ABFA003D5321 /* GLKVector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLKVector3.h; sourceTree = "<group>"; };
+		6B87EA382014ABFA003D5321 /* GLKVector4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLKVector4.h; sourceTree = "<group>"; };
+		6B87EA392014ABFA003D5321 /* Matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix.h; sourceTree = "<group>"; };
+		6B87EA3A2014ABFA003D5321 /* MyMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMath.h; sourceTree = "<group>"; };
+		6B87EA3B2014AC09003D5321 /* ZipWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipWrapper.h; sourceTree = "<group>"; };
+		6B87EA3C2014AC09003D5321 /* BitmapTexture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BitmapTexture.cpp; sourceTree = "<group>"; };
+		6B87EA3D2014AC09003D5321 /* ZipWrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ZipWrapper.cpp; sourceTree = "<group>"; };
+		6B87EA3E2014AC09003D5321 /* ByteBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ByteBuffer.cpp; sourceTree = "<group>"; };
+		6B87EA3F2014AC09003D5321 /* GlobalConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalConstants.h; sourceTree = "<group>"; };
+		6B87EA402014AC0A003D5321 /* BitmapTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitmapTexture.h; sourceTree = "<group>"; };
+		6B87EA412014AC0A003D5321 /* ByteBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ByteBuffer.h; sourceTree = "<group>"; };
 		6C3531B21DCFE19000A2F525 /* MTDiffuseComposer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDiffuseComposer.h; sourceTree = "<group>"; };
 		6C3531B31DCFE19000A2F525 /* MTDiffuseComposer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MTDiffuseComposer.mm; sourceTree = "<group>"; };
 		6C423E4C1D5C82C9001882E5 /* BitmapComposer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BitmapComposer.cpp; sourceTree = "<group>"; };
 		6C423E4D1D5C82C9001882E5 /* BitmapComposer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BitmapComposer.hpp; sourceTree = "<group>"; };
-		6C423E521D5C8337001882E5 /* BitmapTexture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BitmapTexture.cpp; path = ../../../MAX/Utils/BitmapTexture.cpp; sourceTree = "<group>"; };
-		6C423E531D5C8337001882E5 /* BitmapTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BitmapTexture.h; path = ../../../MAX/Utils/BitmapTexture.h; sourceTree = "<group>"; };
-		6C423E541D5C8337001882E5 /* ByteBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ByteBuffer.cpp; path = ../../../MAX/Utils/ByteBuffer.cpp; sourceTree = "<group>"; };
-		6C423E551D5C8337001882E5 /* ByteBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ByteBuffer.h; path = ../../../MAX/Utils/ByteBuffer.h; sourceTree = "<group>"; };
-		6C423E591D5C83D7001882E5 /* Matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Matrix.h; path = ../../../MAX/Utils/MathKit/Matrix.h; sourceTree = "<group>"; };
-		6C423E5A1D5C83D7001882E5 /* MyMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyMath.h; path = ../../../MAX/Utils/MathKit/MyMath.h; sourceTree = "<group>"; };
-		6C423E5B1D5C83D7001882E5 /* GLKMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GLKMath.h; path = ../../../MAX/Utils/MathKit/GLKMath.h; sourceTree = "<group>"; };
-		6C423E5C1D5C83D7001882E5 /* GLKMathTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GLKMathTypes.h; path = ../../../MAX/Utils/MathKit/GLKMathTypes.h; sourceTree = "<group>"; };
-		6C423E5D1D5C83D7001882E5 /* GLKMathUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GLKMathUtils.h; path = ../../../MAX/Utils/MathKit/GLKMathUtils.h; sourceTree = "<group>"; };
-		6C423E5E1D5C83D7001882E5 /* GLKMatrix3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GLKMatrix3.h; path = ../../../MAX/Utils/MathKit/GLKMatrix3.h; sourceTree = "<group>"; };
-		6C423E5F1D5C83D7001882E5 /* GLKMatrix4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GLKMatrix4.h; path = ../../../MAX/Utils/MathKit/GLKMatrix4.h; sourceTree = "<group>"; };
-		6C423E601D5C83D7001882E5 /* GLKMatrixStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GLKMatrixStack.h; path = ../../../MAX/Utils/MathKit/GLKMatrixStack.h; sourceTree = "<group>"; };
-		6C423E611D5C83D7001882E5 /* GLKQuaternion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GLKQuaternion.h; path = ../../../MAX/Utils/MathKit/GLKQuaternion.h; sourceTree = "<group>"; };
-		6C423E621D5C83D7001882E5 /* GLKVector2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GLKVector2.h; path = ../../../MAX/Utils/MathKit/GLKVector2.h; sourceTree = "<group>"; };
-		6C423E631D5C83D7001882E5 /* GLKVector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GLKVector3.h; path = ../../../MAX/Utils/MathKit/GLKVector3.h; sourceTree = "<group>"; };
-		6C423E641D5C83D7001882E5 /* GLKVector4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GLKVector4.h; path = ../../../MAX/Utils/MathKit/GLKVector4.h; sourceTree = "<group>"; };
-		6C423E651D5C83D7001882E5 /* Geometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Geometry.h; path = ../../../MAX/Utils/MathKit/Geometry.h; sourceTree = "<group>"; };
-		6C423E661D5C83EC001882E5 /* GlobalConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GlobalConstants.h; path = ../../../MAX/Utils/GlobalConstants.h; sourceTree = "<group>"; };
 		6C4D07E41D5269F100C055AC /* Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		6C4D07E91D526BAA00C055AC /* MainWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainWindow.h; sourceTree = "<group>"; };
 		6C4D07EA1D526BAA00C055AC /* MainWindow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MainWindow.mm; sourceTree = "<group>"; };
@@ -161,8 +164,6 @@
 		6CD0CACA1E2C35CC000CBFC3 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		6CEC95751E2B053100DBD1AA /* MTSequenceFrameSubstractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSequenceFrameSubstractor.h; sourceTree = "<group>"; };
 		6CEC95761E2B053100DBD1AA /* MTSequenceFrameSubstractor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MTSequenceFrameSubstractor.mm; sourceTree = "<group>"; };
-		6CF56F831D62478700632FCB /* ZipWrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ZipWrapper.cpp; path = ../../../MAX/Utils/ZipWrapper.cpp; sourceTree = "<group>"; };
-		6CF56F841D62478700632FCB /* ZipWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZipWrapper.h; path = ../../../MAX/Utils/ZipWrapper.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +179,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6B87EA2C2014ABFA003D5321 /* MathKit */ = {
+			isa = PBXGroup;
+			children = (
+				6B87EA2D2014ABFA003D5321 /* Colors.h */,
+				6B87EA2E2014ABFA003D5321 /* Geometry.h */,
+				6B87EA2F2014ABFA003D5321 /* GLKMath.h */,
+				6B87EA302014ABFA003D5321 /* GLKMathTypes.h */,
+				6B87EA312014ABFA003D5321 /* GLKMathUtils.h */,
+				6B87EA322014ABFA003D5321 /* GLKMatrix3.h */,
+				6B87EA332014ABFA003D5321 /* GLKMatrix4.h */,
+				6B87EA342014ABFA003D5321 /* GLKMatrixStack.h */,
+				6B87EA352014ABFA003D5321 /* GLKQuaternion.h */,
+				6B87EA362014ABFA003D5321 /* GLKVector2.h */,
+				6B87EA372014ABFA003D5321 /* GLKVector3.h */,
+				6B87EA382014ABFA003D5321 /* GLKVector4.h */,
+				6B87EA392014ABFA003D5321 /* Matrix.h */,
+				6B87EA3A2014ABFA003D5321 /* MyMath.h */,
+			);
+			path = MathKit;
+			sourceTree = "<group>";
+		};
 		6C423E481D5C825F001882E5 /* Packing */ = {
 			isa = PBXGroup;
 			children = (
@@ -185,26 +207,6 @@
 				6C423E4D1D5C82C9001882E5 /* BitmapComposer.hpp */,
 			);
 			path = Packing;
-			sourceTree = "<group>";
-		};
-		6C423E581D5C83C8001882E5 /* MathKit */ = {
-			isa = PBXGroup;
-			children = (
-				6C423E591D5C83D7001882E5 /* Matrix.h */,
-				6C423E5A1D5C83D7001882E5 /* MyMath.h */,
-				6C423E5B1D5C83D7001882E5 /* GLKMath.h */,
-				6C423E5C1D5C83D7001882E5 /* GLKMathTypes.h */,
-				6C423E5D1D5C83D7001882E5 /* GLKMathUtils.h */,
-				6C423E5E1D5C83D7001882E5 /* GLKMatrix3.h */,
-				6C423E5F1D5C83D7001882E5 /* GLKMatrix4.h */,
-				6C423E601D5C83D7001882E5 /* GLKMatrixStack.h */,
-				6C423E611D5C83D7001882E5 /* GLKQuaternion.h */,
-				6C423E621D5C83D7001882E5 /* GLKVector2.h */,
-				6C423E631D5C83D7001882E5 /* GLKVector3.h */,
-				6C423E641D5C83D7001882E5 /* GLKVector4.h */,
-				6C423E651D5C83D7001882E5 /* Geometry.h */,
-			);
-			name = MathKit;
 			sourceTree = "<group>";
 		};
 		6C4D07E51D526B0400C055AC /* UI */ = {
@@ -348,17 +350,17 @@
 			children = (
 				6C833C1B1D62254D009ECC29 /* zip */,
 				6C833AC51D6223A2009ECC29 /* libpng */,
-				6C423E581D5C83C8001882E5 /* MathKit */,
+				6B87EA2C2014ABFA003D5321 /* MathKit */,
 				6CC8565A1D5258880012DDB0 /* Texture */,
-				6C423E521D5C8337001882E5 /* BitmapTexture.cpp */,
-				6C423E531D5C8337001882E5 /* BitmapTexture.h */,
-				6C423E541D5C8337001882E5 /* ByteBuffer.cpp */,
-				6C423E551D5C8337001882E5 /* ByteBuffer.h */,
-				6C423E661D5C83EC001882E5 /* GlobalConstants.h */,
+				6B87EA3C2014AC09003D5321 /* BitmapTexture.cpp */,
+				6B87EA402014AC0A003D5321 /* BitmapTexture.h */,
+				6B87EA3E2014AC09003D5321 /* ByteBuffer.cpp */,
+				6B87EA412014AC0A003D5321 /* ByteBuffer.h */,
+				6B87EA3F2014AC09003D5321 /* GlobalConstants.h */,
+				6B87EA3D2014AC09003D5321 /* ZipWrapper.cpp */,
+				6B87EA3B2014AC09003D5321 /* ZipWrapper.h */,
 				6C4D07F41D5277E300C055AC /* Structures.h */,
 				6C4D07E41D5269F100C055AC /* Utils.h */,
-				6CF56F831D62478700632FCB /* ZipWrapper.cpp */,
-				6CF56F841D62478700632FCB /* ZipWrapper.h */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -512,24 +514,24 @@
 				6C833C431D62254D009ECC29 /* uncompr.c in Sources */,
 				6C833C3A1D62254D009ECC29 /* gzclose.c in Sources */,
 				6CCDA29B1DDD1E1A00B20A49 /* NSImage+Utils.m in Sources */,
+				6B87EA442014AC0A003D5321 /* ByteBuffer.cpp in Sources */,
 				6C833C421D62254D009ECC29 /* trees.c in Sources */,
 				6C3531B41DCFE19000A2F525 /* MTDiffuseComposer.mm in Sources */,
 				6C833C3C1D62254D009ECC29 /* gzread.c in Sources */,
 				6C423E4E1D5C82C9001882E5 /* BitmapComposer.cpp in Sources */,
+				6B87EA422014AC0A003D5321 /* BitmapTexture.cpp in Sources */,
 				6C833AB81D5F75EB009ECC29 /* MTShadowComposer.mm in Sources */,
 				6C833C371D62254D009ECC29 /* compress.c in Sources */,
-				6C423E561D5C8337001882E5 /* BitmapTexture.cpp in Sources */,
 				6C833C3E1D62254D009ECC29 /* infback.c in Sources */,
 				6C833C381D62254D009ECC29 /* crc32.c in Sources */,
 				6C833C441D62254D009ECC29 /* zutil.c in Sources */,
 				6C4D07EF1D526C2C00C055AC /* MTVisualObject.mm in Sources */,
 				6C833C3F1D62254D009ECC29 /* inffast.c in Sources */,
-				6C423E571D5C8337001882E5 /* ByteBuffer.cpp in Sources */,
 				6CBE49151E1DE63000516F8A /* CPPTextureImplNSBitmapImageRep.mm in Sources */,
 				6C833C411D62254D009ECC29 /* inftrees.c in Sources */,
+				6B87EA432014AC0A003D5321 /* ZipWrapper.cpp in Sources */,
 				6CC8564D1D52578A0012DDB0 /* main.m in Sources */,
 				6C833BEE1D6223A2009ECC29 /* LibpngWrapper.cpp in Sources */,
-				6CF56F851D62478700632FCB /* ZipWrapper.cpp in Sources */,
 				6CEC95771E2B053100DBD1AA /* MTSequenceFrameSubstractor.mm in Sources */,
 				6C833C391D62254D009ECC29 /* deflate.c in Sources */,
 				6C83C1EB1D58F08300898B7E /* MTVisualObjectController.mm in Sources */,

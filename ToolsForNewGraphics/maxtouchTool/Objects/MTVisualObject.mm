@@ -104,9 +104,9 @@
 
 - (void)buildResultImageWithAoK:(float)aoK shadowK:(float)shadowK diffuseK:(float)diffuseK
 {
-    BitmapComposer *composerDiffuse = new BitmapComposer(GSize2DMake(_diffuseTexture->GetWidth(), _diffuseTexture->GetHeight()));
-    BitmapComposer *composerShadow = new BitmapComposer(GSize2DMake(_diffuseTexture->GetWidth(), _diffuseTexture->GetHeight()));
-    BitmapComposer *composerResult = new BitmapComposer(GSize2DMake(_diffuseTexture->GetWidth(), _diffuseTexture->GetHeight()));
+    BitmapComposer *composerDiffuse = new BitmapComposer(GSize2D(_diffuseTexture->GetWidth(), _diffuseTexture->GetHeight()));
+    BitmapComposer *composerShadow = new BitmapComposer(GSize2D(_diffuseTexture->GetWidth(), _diffuseTexture->GetHeight()));
+    BitmapComposer *composerResult = new BitmapComposer(GSize2D(_diffuseTexture->GetWidth(), _diffuseTexture->GetHeight()));
 
     
     ColorF armyColor = ColorF(0, 191, 255, 255.0);
@@ -176,7 +176,7 @@
 
 - (void)buildShadowImageWithAoK:(float)aoK shadowK:(float)shadowK diffuseK:(float)diffuseK
 {
-    BitmapComposer *composerShadow = new BitmapComposer(GSize2DMake(_diffuseTexture->GetWidth(), _diffuseTexture->GetHeight()));
+    BitmapComposer *composerShadow = new BitmapComposer(GSize2D(_diffuseTexture->GetWidth(), _diffuseTexture->GetHeight()));
     
     for (int x = 0; x < _diffuseTexture->GetWidth(); x++)
     {
