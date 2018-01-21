@@ -2,5 +2,5 @@
 	"basename" : "Turret",
 	"outputFolder" : "tank/head",
 	"cells" : 1,
-	"displacement":100
+	"shadowDisplacement":65
 }

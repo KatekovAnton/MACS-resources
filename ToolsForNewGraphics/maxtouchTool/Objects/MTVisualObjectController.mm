@@ -106,6 +106,7 @@
     NSString *_inputDirectoryPath;
     NSString *_baseName;
     int _cells;
+    float _shadowDisplacement;
     NSString *_outputFolderName;
     NSString *_outputFolderPath;
 }
@@ -130,6 +131,7 @@
         _baseName = settings[@"basename"];
         _outputFolderName = settings[@"outputFolder"];
         _cells = [settings[@"cells"] intValue];
+        _shadowDisplacement = [settings[@"shadowDisplacement"] floatValue];
         _outputFolderPath = [outputPath stringByAppendingString:_outputFolderName];
         _outputFolderPath = [_outputFolderPath stringByAppendingString:@"/"];
         
@@ -260,6 +262,12 @@
             MTVisualObjectSpriteData *spriteData = _data.rotatedSpritesData[i];
             @autoreleasepool {
                 NSImage *shadowImage = [[NSImage alloc] initWithContentsOfFile:spriteData.inputShadow];
+                if (_shadowDisplacement > 0)
+                {
+                    float angle = ((float)i * 45.0 + 20) * M_PI / 180.0;
+                    NSPoint displacement = NSMakePoint(-sin(angle) * _shadowDisplacement, -cos(angle) * _shadowDisplacement);
+                    shadowImage = [NSImage offsetImage:shadowImage delta:displacement backgroundColor:[NSColor blackColor]];
+                }
                 if (graphicsCellSize != gameCellSize) {
                     shadowImage = [NSImage resizeImage:shadowImage size:NSMakeSize(gameCellSize, gameCellSize)];
                 }

@@ -32,6 +32,29 @@
     return targetImage;
 }
 
++ (NSImage*)offsetImage:(NSImage*)sourceImage delta:(NSPoint)delta backgroundColor:(NSColor *)color
+{
+    NSRect targetFrame = [[NSScreen mainScreen] convertRectFromBacking:NSMakeRect(0, 0, sourceImage.size.width, sourceImage.size.height)];
+    NSImage*  targetImage = [[NSImage alloc] initWithSize:targetFrame.size];
+    
+    [targetImage lockFocus];
+    [color set];
+    NSRectFill(targetFrame);
+    
+    NSRect rect = NSMakeRect(delta.x, delta.y, sourceImage.size.width, sourceImage.size.height);
+    [sourceImage drawInRect:targetFrame
+                   fromRect:rect                //portion of source image to draw
+                  operation:NSCompositeCopy     //compositing operation
+                   fraction:1.0                 //alpha (transparency) value
+             respectFlipped:YES                 //coordinate system
+                      hints:@{NSImageHintInterpolation:
+                                  [NSNumber numberWithInt:NSImageInterpolationHigh]}];
+    
+    [targetImage unlockFocus];
+    
+    return targetImage;
+}
+
 + (NSImage*)copyImage:(NSImage*)image withSize:(NSSize)size
 {
     NSRect frame = NSMakeRect(0, 0, size.width, size.height);
