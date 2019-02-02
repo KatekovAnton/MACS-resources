@@ -53,10 +53,10 @@
                                       colorDiffuse.g,
                                       colorDiffuse.b,
                                       colorDiffuseAlpha.a);
-            ColorF colorResultF(colorResult);
-            float alpha = colorResultF.a;
-            colorResultF = ColorFMultScalar(colorResultF, alpha);
-            colorResult = colorResultF.getColor();
+//            ColorF colorResultF(colorResult);
+//            float alpha = colorResultF.a;
+//            colorResultF = ColorFMultScalar(colorResultF, alpha);
+//            colorResult = colorResultF.getColor();
             composer->setColor(colorResult, cx, cy);
         }
     }

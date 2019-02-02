@@ -31,6 +31,7 @@
 
 
 #define TEX_OUTPUT_DIFFUSE    @"diffuse.png"
+#define TEX_OUTPUT_DIFFUSE_BIN    @"diffuse.bin"
 #define TEX_OUTPUT_NORMALS    @"normals.png"
 #define TEX_OUTPUT_STRIPES    @"stripes.png"
 #define TEX_OUTPUT_SETTINGS    @"settings.json"
@@ -73,7 +74,7 @@
         _inputNormals = [inputPath stringByAppendingString:[NSString stringWithFormat:TEX_INPUT_NORMALS, baseName]];
         _inputStripes = [inputPath stringByAppendingString:TEX_INPUT_STRIPES];
         
-        _outputDiffuse = [outputPath stringByAppendingString:TEX_OUTPUT_DIFFUSE];
+        _outputDiffuse = [outputPath stringByAppendingString:TEX_OUTPUT_DIFFUSE_BIN];
         _outputNormals = [outputPath stringByAppendingString:TEX_OUTPUT_NORMALS];
         _outputStripes = [outputPath stringByAppendingString:TEX_OUTPUT_STRIPES];
         _outputSettings = [outputPath stringByAppendingString:TEX_OUTPUT_SETTINGS];
@@ -182,11 +183,11 @@
         textureDiffuse = new CPPTextureImplNSBitmapImageRep(diffuseImage);
         textureDiffuseAlpha = new CPPTextureImplNSBitmapImageRep(diffuseAlphaImage);
         
-        [self saveImage:diffuseImage toPath:_data.outputDiffuse];
-//        MTDiffuseComposer *composer = [[MTDiffuseComposer alloc] initWithDiffuseTexture:textureDiffuse
-//                                                                    diffuseAlphaTexture:textureDiffuseAlpha];
-//        [composer buildDiffuseImage];
-//        [composer.resultImageData writeToFile:_data.outputDiffuse atomically:NO];
+//        [self saveImage:diffuseImage toPath:_data.outputDiffuse];
+        MTDiffuseComposer *composer = [[MTDiffuseComposer alloc] initWithDiffuseTexture:textureDiffuse
+                                                                    diffuseAlphaTexture:textureDiffuseAlpha];
+        [composer buildDiffuseImage];
+        [composer.resultImageData writeToFile:_data.outputDiffuse atomically:NO];
         
         
         diffuseImage = [[NSImage alloc] initWithContentsOfFile:_data.inputDiffuse];
