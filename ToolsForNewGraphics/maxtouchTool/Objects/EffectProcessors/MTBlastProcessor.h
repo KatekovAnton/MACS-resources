@@ -11,6 +11,7 @@
 
 
 typedef NS_ENUM(NSUInteger, MTEffectProcessorTaskType) {
+    MTEffectProcessorTaskType_None,
     MTEffectProcessorTaskType_CutRectangle,
 };
 
@@ -20,6 +21,36 @@ typedef NS_ENUM(NSUInteger, MTEffectProcessorTaskType) {
 
 @property (nonatomic) MTEffectProcessorTaskType type;
 @property (nonatomic) CGRect rectInside;
+
+@end
+
+
+
+// Base class
+@interface MTEffectProcessorStep : NSObject
+
+@property (nonatomic) NSArray<__kindof MTEffectProcessorTask *> *tasks;
+
+- (NSArray *)doWork:(NSArray *)images;
+
+@end
+
+// Resampling all images to "decrease" times smaller
+@interface MTEffectProcessorStep_Resample : MTEffectProcessorStep
+
+@property (nonatomic) float decrease;
+
+@end
+
+// Calculating shared crop rectangle
+@interface MTEffectProcessorStep_CalculateCropRectangle : MTEffectProcessorStep
+
+@property (nonatomic, copy) void (^onRectCalculated)(CGRect rect);
+
+@end
+
+// Processing images
+@interface MTEffectProcessorStep_ProcessImages : MTEffectProcessorStep
 
 @end
 

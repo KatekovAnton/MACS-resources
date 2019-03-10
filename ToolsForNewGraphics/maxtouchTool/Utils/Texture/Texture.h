@@ -82,8 +82,9 @@ public:
     
     std::vector<CPPTextureClipping *> _textureClippings;
     GSize2D _inclusiveSize;
+    GPoint2D _inclusivePoint;
     
-    CPPTextureClippingArray(const std::vector<CPPITexture *> &textures);
+    CPPTextureClippingArray(const std::vector<CPPITexture *> &textures, bool clip = false);
     ~CPPTextureClippingArray();
     
     GPoint2D GetOffsetForTexture(int texture);

@@ -58,13 +58,13 @@
     _imageResult.image = object.resultImage;
 }
 
-- (IBAction)onProcessVideo:(id)sender {
-    NSString *path = @"/Users/katekovanton/Desktop/untitled folder 4/frame14.png";
-    NSString *substractingPath = @"/Users/katekovanton/Desktop/untitled folder 4/frame170.png";
-    
-    MTSequenceFrameSubstractor *substractor = [[MTSequenceFrameSubstractor alloc] initWithFramePath:path substractingFramePath:substractingPath];
-    [substractor dowork];
-}
+//- (IBAction)onProcessVideo:(id)sender {
+//    NSString *path = @"/Users/katekovanton/Desktop/untitled folder 4/frame14.png";
+//    NSString *substractingPath = @"/Users/katekovanton/Desktop/untitled folder 4/frame170.png";
+//
+//    MTSequenceFrameSubstractor *substractor = [[MTSequenceFrameSubstractor alloc] initWithFramePath:path substractingFramePath:substractingPath];
+//    [substractor dowork];
+//}
 
 // test composing 2 textures in one atlas and save it to png
 - (IBAction)onTest:(id)sender
@@ -248,6 +248,16 @@
             [directories addObject:[fullPath stringByAppendingString:@"/"]];
         }
     }
+    
+    [self processEffectDirectories:directories toOutputDirectory:settings.outputPath];
+}
+
+- (IBAction)onProcessVideo:(id)sender {
+    
+    MTProcessSettings *settings = [self requestSettingsForType:@"sequence"];
+    
+    NSMutableArray *directories = [NSMutableArray array];
+    [directories addObject:settings.inputPath];
     
     [self processEffectDirectories:directories toOutputDirectory:settings.outputPath];
 }

@@ -40,7 +40,7 @@
 		6CC8564F1D52578A0012DDB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CC8564E1D52578A0012DDB0 /* Assets.xcassets */; };
 		6CC856521D52578A0012DDB0 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CC856501D52578A0012DDB0 /* MainMenu.xib */; };
 		6CC8565D1D5258AF0012DDB0 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CC8565C1D5258AF0012DDB0 /* Texture.cpp */; };
-		6CCDA2941DDD002C00B20A49 /* MTBlastProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCDA2931DDD002C00B20A49 /* MTBlastProcessor.m */; };
+		6CCDA2941DDD002C00B20A49 /* MTBlastProcessor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6CCDA2931DDD002C00B20A49 /* MTBlastProcessor.mm */; };
 		6CCDA29B1DDD1E1A00B20A49 /* NSImage+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCDA29A1DDD1E1A00B20A49 /* NSImage+Utils.m */; };
 		6CD0CACB1E2C35CC000CBFC3 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CD0CACA1E2C35CC000CBFC3 /* OpenGL.framework */; };
 		6CEC95771E2B053100DBD1AA /* MTSequenceFrameSubstractor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6CEC95761E2B053100DBD1AA /* MTSequenceFrameSubstractor.mm */; };
@@ -100,6 +100,7 @@
 		6B87EA3F2014AC09003D5321 /* GlobalConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalConstants.h; sourceTree = "<group>"; };
 		6B87EA402014AC0A003D5321 /* BitmapTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitmapTexture.h; sourceTree = "<group>"; };
 		6B87EA412014AC0A003D5321 /* ByteBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ByteBuffer.h; sourceTree = "<group>"; };
+		6C079B2E2235187A00D4D736 /* ToolPrefix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ToolPrefix.h; sourceTree = "<group>"; };
 		6C3531B21DCFE19000A2F525 /* MTDiffuseComposer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDiffuseComposer.h; sourceTree = "<group>"; };
 		6C3531B31DCFE19000A2F525 /* MTDiffuseComposer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MTDiffuseComposer.mm; sourceTree = "<group>"; };
 		6C423E4C1D5C82C9001882E5 /* BitmapComposer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BitmapComposer.cpp; sourceTree = "<group>"; };
@@ -158,7 +159,7 @@
 		6CC8565B1D5258AF0012DDB0 /* Texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
 		6CC8565C1D5258AF0012DDB0 /* Texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Texture.cpp; sourceTree = "<group>"; };
 		6CCDA2921DDD002C00B20A49 /* MTBlastProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTBlastProcessor.h; sourceTree = "<group>"; };
-		6CCDA2931DDD002C00B20A49 /* MTBlastProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTBlastProcessor.m; sourceTree = "<group>"; };
+		6CCDA2931DDD002C00B20A49 /* MTBlastProcessor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MTBlastProcessor.mm; sourceTree = "<group>"; };
 		6CCDA2991DDD1E1A00B20A49 /* NSImage+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage+Utils.h"; sourceTree = "<group>"; };
 		6CCDA29A1DDD1E1A00B20A49 /* NSImage+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImage+Utils.m"; sourceTree = "<group>"; };
 		6CD0CACA1E2C35CC000CBFC3 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -327,6 +328,7 @@
 				6C4D07EC1D526C0A00C055AC /* Objects */,
 				6C4D07E51D526B0400C055AC /* UI */,
 				6C7F1F221D5E5DC900198F76 /* ToolSettings.h */,
+				6C079B2E2235187A00D4D736 /* ToolPrefix.h */,
 				6CC856481D52578A0012DDB0 /* AppDelegate.h */,
 				6CC856491D52578A0012DDB0 /* AppDelegate.mm */,
 				6CC8564E1D52578A0012DDB0 /* Assets.xcassets */,
@@ -378,7 +380,7 @@
 			isa = PBXGroup;
 			children = (
 				6CCDA2921DDD002C00B20A49 /* MTBlastProcessor.h */,
-				6CCDA2931DDD002C00B20A49 /* MTBlastProcessor.m */,
+				6CCDA2931DDD002C00B20A49 /* MTBlastProcessor.mm */,
 			);
 			path = EffectProcessors;
 			sourceTree = "<group>";
@@ -540,7 +542,7 @@
 				6C4D07EB1D526BAA00C055AC /* MainWindow.mm in Sources */,
 				6C77ED4D1D65FDDC003FB5BC /* MTLightComposer.mm in Sources */,
 				6CC8564A1D52578A0012DDB0 /* AppDelegate.mm in Sources */,
-				6CCDA2941DDD002C00B20A49 /* MTBlastProcessor.m in Sources */,
+				6CCDA2941DDD002C00B20A49 /* MTBlastProcessor.mm in Sources */,
 				6C833C361D62254D009ECC29 /* adler32.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

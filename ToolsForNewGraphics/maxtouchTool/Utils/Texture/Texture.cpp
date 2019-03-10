@@ -196,14 +196,14 @@ void CPPTextureClipping::CalculateClipping()
 
 
 
-CPPTextureClippingArray::CPPTextureClippingArray(const std::vector<CPPITexture *> &textures)
+CPPTextureClippingArray::CPPTextureClippingArray(const std::vector<CPPITexture *> &textures, bool clip)
 {
     
     for (int i = 0; i < textures.size(); i++) {
-        CPPTextureClipping *clipping = new CPPTextureClipping(textures[i], false);
+        CPPTextureClipping *clipping = new CPPTextureClipping(textures[i], clip);
         _textureClippings.push_back(clipping);
     }
-    
+    _inclusivePoint = GPoint2D(textures[0]->GetWidth(), textures[0]->GetHeight());
     GSize2D maxSize = GSize2D();
     for (int i = 0; i < _textureClippings.size(); i++)
     {
@@ -214,10 +214,14 @@ CPPTextureClippingArray::CPPTextureClippingArray(const std::vector<CPPITexture *
         if (maxSize.height < clipping->_payloadFrame.size.height) {
             maxSize.height = clipping->_payloadFrame.size.height;
         }
+        if (_inclusivePoint.x > clipping->_payloadFrame.getX()) {
+            _inclusivePoint.x = clipping->_payloadFrame.getX();
+        }
+        if (_inclusivePoint.y > clipping->_payloadFrame.getY()) {
+            _inclusivePoint.y = clipping->_payloadFrame.getY();
+        }
     }
     _inclusiveSize = maxSize;
-    
-
 }
 
 CPPTextureClippingArray::~CPPTextureClippingArray()
