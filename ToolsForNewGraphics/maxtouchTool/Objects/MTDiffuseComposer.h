@@ -20,6 +20,6 @@ class CPPITexture;
 
 - (id)initWithDiffuseTexture:(CPPITexture *)diffuseTexture diffuseAlphaTexture:(CPPITexture *)diffuseAlphaTexture;
 
-- (void)buildDiffuseImage;
+- (void)buildDiffuseImageWithDarkenMultiplier:(float)multiplier;
 
 @end

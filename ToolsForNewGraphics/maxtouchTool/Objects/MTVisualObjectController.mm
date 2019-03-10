@@ -48,11 +48,13 @@
 - (instancetype)initWithInputPath:(NSString*)inputPath
                        outputPath:(NSString*)outputPath
                          baseName:(NSString*)baseName
+                  lightingPattern:(NSString*)lightingPattern
+                    shadowPattern:(NSString*)shadowPattern
                          rotation:(int)rotation
 {
     if (self = [super init]) {
-        _inputLighting = [inputPath stringByAppendingString:[NSString stringWithFormat:TEX_INPUT_LIGHTING, baseName, rotation * 45]];
-        _inputShadow = [inputPath stringByAppendingString:[NSString stringWithFormat:TEX_INPUT_SHADOW, baseName, rotation * 45]];
+        _inputLighting = [inputPath stringByAppendingString:[NSString stringWithFormat:lightingPattern, baseName, rotation * 45]];
+        _inputShadow = [inputPath stringByAppendingString:[NSString stringWithFormat:shadowPattern, baseName, rotation * 45]];
     }
     return self;
 }
@@ -66,11 +68,16 @@
 - (instancetype)initWithInputPath:(NSString*)inputPath
                        outputPath:(NSString*)outputPath
                          baseName:(NSString*)baseName
+                         settings:(NSDictionary*)settings
 {
     if (self = [super init]) {
         _inputDiffuseAlpha = [inputPath stringByAppendingString:[NSString stringWithFormat:TEX_INPUT_ALPHA, baseName]];
         _inputDiffuse = [inputPath stringByAppendingString:[NSString stringWithFormat:TEX_INPUT_DIFFUSE, baseName]];
         _inputAO = [inputPath stringByAppendingString:[NSString stringWithFormat:TEX_INPUT_AO, baseName]];
+        if (settings[@"aoPattern"] != nil) {
+            _inputAO = settings[@"basename"];
+            _inputAO = [inputPath stringByAppendingString:[_inputAO stringByAppendingString:settings[@"aoPattern"]]];
+        }
         _inputNormals = [inputPath stringByAppendingString:[NSString stringWithFormat:TEX_INPUT_NORMALS, baseName]];
         _inputStripes = [inputPath stringByAppendingString:TEX_INPUT_STRIPES];
         
@@ -82,13 +89,25 @@
         
         _outputLight = [outputPath stringByAppendingString:TEX_OUTPUT_LIGHT];
         
+        NSString *lightingPattern = TEX_INPUT_LIGHTING;
+        NSString *shadowPattern = TEX_INPUT_SHADOW;
+        if (settings[@"colorPattern"] != nil) {
+            lightingPattern = [@"%@" stringByAppendingString:settings[@"colorPattern"]];
+        }
+        if (settings[@"shadowPattern"] != nil) {
+            shadowPattern = [@"%@" stringByAppendingString:settings[@"shadowPattern"]];
+        }
+        
         NSMutableArray *rotatedSpritesData = [NSMutableArray array];
-        for (int i = 0; i < 8; i++) {
-            
-            MTVisualObjectSpriteData *spriteData = [[MTVisualObjectSpriteData alloc] initWithInputPath:inputPath
-                                                                                            outputPath:outputPath
-                                                                                              baseName:baseName
-                                                                                              rotation:i];
+        for (int i = 0; i < 8; i++)
+        {
+            MTVisualObjectSpriteData *spriteData =
+            [[MTVisualObjectSpriteData alloc] initWithInputPath:inputPath
+                                                     outputPath:outputPath
+                                                       baseName:baseName
+                                                lightingPattern:lightingPattern
+                                                  shadowPattern:shadowPattern
+                                                       rotation:i];
             
             [rotatedSpritesData addObject:spriteData];
             
@@ -110,6 +129,8 @@
     float _shadowDisplacement;
     NSString *_outputFolderName;
     NSString *_outputFolderPath;
+    
+    NSDictionary *_settings;
 }
 
 @end
@@ -126,13 +147,13 @@
         _textureCache = [NSMutableDictionary dictionary];
         _inputDirectoryPath = inputPath;
         
-        NSData *settingsData = [NSData dataWithContentsOfFile:[_inputDirectoryPath stringByAppendingString:@"/settings"]];
-        NSDictionary *settings = [NSJSONSerialization JSONObjectWithData:settingsData options:0 error:nil];
+        NSData *settingsData = [NSData dataWithContentsOfFile:[_inputDirectoryPath stringByAppendingString:@"/settings.json"]];
+        _settings = [NSJSONSerialization JSONObjectWithData:settingsData options:0 error:nil];
         
-        _baseName = settings[@"basename"];
-        _outputFolderName = settings[@"outputFolder"];
-        _cells = [settings[@"cells"] intValue];
-        _shadowDisplacement = [settings[@"shadowDisplacement"] floatValue];
+        _baseName = _settings[@"basename"];
+        _outputFolderName = _settings[@"outputFolder"];
+        _cells = [_settings[@"cells"] intValue];
+        _shadowDisplacement = [_settings[@"shadowDisplacement"] floatValue];
         _outputFolderPath = [outputPath stringByAppendingString:_outputFolderName];
         _outputFolderPath = [_outputFolderPath stringByAppendingString:@"/"];
         
@@ -147,7 +168,8 @@
         
         _data = [[MTVisualObjectData alloc] initWithInputPath:_inputDirectoryPath
                                                    outputPath:_outputFolderPath
-                                                     baseName:_baseName];
+                                                     baseName:_baseName
+                                                     settings:_settings];
         
     }
     return self;
@@ -183,10 +205,14 @@
         textureDiffuse = new CPPTextureImplNSBitmapImageRep(diffuseImage);
         textureDiffuseAlpha = new CPPTextureImplNSBitmapImageRep(diffuseAlphaImage);
         
+        float darkenMultiplier = 1.0;
+        if (_settings[@"darken"] != nil) {
+            darkenMultiplier = [_settings[@"darken"] floatValue];
+        }
 //        [self saveImage:diffuseImage toPath:_data.outputDiffuse];
         MTDiffuseComposer *composer = [[MTDiffuseComposer alloc] initWithDiffuseTexture:textureDiffuse
                                                                     diffuseAlphaTexture:textureDiffuseAlpha];
-        [composer buildDiffuseImage];
+        [composer buildDiffuseImageWithDarkenMultiplier:darkenMultiplier];
         [composer.resultImageData writeToFile:_data.outputDiffuse atomically:NO];
         
         
@@ -204,7 +230,9 @@
                                           @"offsetX" : @(0),
                                           @"offsetY" : @(0),
                                           @"anchorX" : @(gameCellSize/2),
-                                          @"anchorY" : @(gameCellSize/2)};
+                                          @"anchorY" : @(gameCellSize/2),
+                                          @"premultiplied" : @(YES)
+                                          };
             [settings setObject:diffuseInfo forKey:@"diffuseTexture"];
         }
     }

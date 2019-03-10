@@ -47,7 +47,8 @@
 
 - (instancetype)initWithInputPath:(NSString*)inputPath
                        outputPath:(NSString*)outputPath
-                         baseName:(NSString*)baseName;
+                         baseName:(NSString*)baseName
+                         settings:(NSDictionary*)settings;
 
 @end
 

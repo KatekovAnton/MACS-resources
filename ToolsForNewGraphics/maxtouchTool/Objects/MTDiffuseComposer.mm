@@ -38,7 +38,7 @@
     return self;
 }
 
-- (void)buildDiffuseImage
+- (void)buildDiffuseImageWithDarkenMultiplier:(float)multiplier
 {
     CPPTextureClipping *clipping = new CPPTextureClipping(_diffuseAlphaTexture, false);
     BitmapComposer *composer = new BitmapComposer(clipping->_payloadFrame.size);
@@ -48,12 +48,17 @@
             int cx = clipping->_payloadFrame.origin.x + x;
             int cy = clipping->_payloadFrame.origin.y + y;
             Color colorDiffuse = _diffuseTexture->GetColorAtPoint(GPoint2D(cx, cy));
+            {
+                ColorF colorDiffuseF(colorDiffuse);
+                colorDiffuseF = ColorFMultScalar(colorDiffuseF, multiplier);
+                colorDiffuse = colorDiffuseF.getColor();
+            }
             Color colorDiffuseAlpha = _diffuseAlphaTexture->GetColorAtPoint(GPoint2D(cx, cy));
             Color colorResult = Color(colorDiffuse.r,
                                       colorDiffuse.g,
                                       colorDiffuse.b,
                                       colorDiffuseAlpha.a);
-//            ColorF colorResultF(colorResult);
+            ColorF colorResultF(colorResult);
 //            float alpha = colorResultF.a;
 //            colorResultF = ColorFMultScalar(colorResultF, alpha);
 //            colorResult = colorResultF.getColor();
