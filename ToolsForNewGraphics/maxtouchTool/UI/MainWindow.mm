@@ -203,7 +203,9 @@
 - (IBAction)onButchProcess:(id)sender
 {
     MTProcessSettings *settings = [self requestSettingsForType:@"units"];
-    
+    if (settings == nil) {
+        return;
+    }
     NSFileManager *manager = [NSFileManager defaultManager];
     NSArray *fileList = [manager contentsOfDirectoryAtPath:settings.inputPath error:nil];
     NSMutableArray *directories = [NSMutableArray array];
@@ -235,7 +237,9 @@
 - (IBAction)onButchProcessEffects:(id)sender
 {
     MTProcessSettings *settings = [self requestSettingsForType:@"effects"];
-    
+    if (settings == nil) {
+        return;
+    }
     NSFileManager *manager = [NSFileManager defaultManager];
     NSArray *fileList = [manager contentsOfDirectoryAtPath:settings.inputPath error:nil];
     NSMutableArray *directories = [NSMutableArray array];
@@ -255,7 +259,9 @@
 - (IBAction)onProcessVideo:(id)sender {
     
     MTProcessSettings *settings = [self requestSettingsForType:@"sequence"];
-    
+    if (settings == nil) {
+        return;
+    }
     NSMutableArray *directories = [NSMutableArray array];
     [directories addObject:settings.inputPath];
     
