@@ -231,7 +231,7 @@
                                           @"offsetY" : @(0),
                                           @"anchorX" : @(gameCellSize/2),
                                           @"anchorY" : @(gameCellSize/2),
-                                          @"premultiplied" : @(YES)
+                                          @"premultiplied" : @(NO)
                                           };
             [settings setObject:diffuseInfo forKey:@"diffuseTexture"];
         }

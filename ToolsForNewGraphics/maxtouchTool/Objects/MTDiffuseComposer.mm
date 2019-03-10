@@ -58,10 +58,16 @@
                                       colorDiffuse.g,
                                       colorDiffuse.b,
                                       colorDiffuseAlpha.a);
-            ColorF colorResultF(colorResult);
-//            float alpha = colorResultF.a;
-//            colorResultF = ColorFMultScalar(colorResultF, alpha);
-//            colorResult = colorResultF.getColor();
+            
+            
+            if (colorResult.a != 0) {
+                ColorF colorResultF(colorResult);
+                float alpha = colorResultF.a;
+                colorResultF = ColorFMultScalar(colorResultF, 1.0 / alpha);
+                colorResultF.a = alpha;
+                colorResultF = ColorFClamp(colorResultF);
+                colorResult = colorResultF.getColor();
+            }
             composer->setColor(colorResult, cx, cy);
         }
     }
