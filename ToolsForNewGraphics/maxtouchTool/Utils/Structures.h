@@ -189,7 +189,31 @@ static ColorF ColorFAddScalar(ColorF c1, float c2) {
     result.r = c1.r + c2;
     result.g = c1.g + c2;
     result.b = c1.b + c2;
-    result.a = c1.a + c2;
+//    result.a = c1.a + c2;
+   
+    return result;
+}
+
+static ColorF ColorFClamp(ColorF c1) {
+    ColorF result = c1;
+    if (result.r < 0) {
+        result.r = 0;
+    }
+    if (result.r > 1) {
+        result.r = 1;
+    }
+    if (result.g < 0) {
+        result.g = 0;
+    }
+    if (result.g > 1) {
+        result.g = 1;
+    }
+    if (result.a < 0) {
+        result.a = 0;
+    }
+    if (result.a > 1) {
+        result.a = 1;
+    }
     return result;
 }
 
