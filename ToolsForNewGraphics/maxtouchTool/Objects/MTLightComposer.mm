@@ -129,9 +129,9 @@
                     Color color = clipping->_texture->GetColorAtPoint(GPoint2D(x + clipping->_payloadFrame.origin.x,
                                                                                y + clipping->_payloadFrame.origin.y));
                     ColorF c = ColorF(color);
-                    c = ColorFAddScalar(c, -0.27);
+                    c = ColorFAddScalar(c, -0.2);
                     c = ColorFClamp(c);
-                    c = ColorFMultScalar(c, 1.70);
+                    c = ColorFMultScalar(c, 1.50);
                     c = ColorFClamp(c);
                     color = c.getColor();
                     if (i == 0)
