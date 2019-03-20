@@ -4,8 +4,8 @@
 	"cells" : 1,
 	"colorPattern" : "_s%d.png",
 	"diffusePattern" : "_s0.diffuse.png",
-	"shadowPattern" : "_s%d.Shadow.png",
+	"shadowPattern" : "_s%d.Shadow.matteShadow.png",
 	"aoPattern" : "_s0.AO.png",
 	"alphaPattern" : "_s0.Alpha.png",
-	"darken" : 0.6
+	"darken" : 1.0
 }
