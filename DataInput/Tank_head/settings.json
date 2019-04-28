@@ -2,5 +2,8 @@
 	"basename" : "Turret",
 	"outputFolder" : "tank/head",
 	"cells" : 1,
-	"shadowDisplacement":65
+	"shadowDisplacement":65,
+	"childSlots": [
+		
+	]
 }

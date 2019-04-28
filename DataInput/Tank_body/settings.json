@@ -1,5 +1,13 @@
 {
 	"basename" : "TankBase",
 	"outputFolder" : "tank/body",
-	"cells" : 1
+	"cells" : 1,
+	"childSlots": [
+		{
+			"type": "head",
+			"offsetX": "0",
+			"offsetY": "0", 
+			"meaning": "vector in pixels from center"
+		}
+	]
 }

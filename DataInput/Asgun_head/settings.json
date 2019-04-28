@@ -7,5 +7,8 @@
 	"shadowPattern" : "_s%d.Shadow.matteShadow.png",
 	"aoPattern" : "_s0.AO.png",
 	"alphaPattern" : "_s0.Alpha.png",
-	"darken" : 1.0
+	"darken" : 1.0,
+	"childSlots": [
+		
+	]
 }

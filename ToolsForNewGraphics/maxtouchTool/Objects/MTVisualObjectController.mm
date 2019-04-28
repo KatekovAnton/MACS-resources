@@ -188,7 +188,6 @@
     NSMutableDictionary *settings = [NSMutableDictionary dictionary];
     [settings setObject:@(gameCellSize) forKey:@"cellSize"];
     
-    
     @autoreleasepool {
         
         // TODO:
@@ -198,12 +197,36 @@
         NSImage *diffuseAlphaImage = [[NSImage alloc] initWithContentsOfFile:_data.inputDiffuseAlpha];
         
         graphicsCellSize = diffuseImage.size.width / _cells;
+        float multiplier = 1.0;
         if (graphicsCellSize != gameCellSize) {
             diffuseImage = [NSImage resizeImage:diffuseImage size:NSMakeSize(gameCellSize, gameCellSize)];
             diffuseAlphaImage = [NSImage resizeImage:diffuseAlphaImage size:NSMakeSize(gameCellSize, gameCellSize)];
+            multiplier = graphicsCellSize / gameCellSize;
         }
         textureDiffuse = new CPPTextureImplNSBitmapImageRep(diffuseImage);
         textureDiffuseAlpha = new CPPTextureImplNSBitmapImageRep(diffuseAlphaImage);
+        
+        // convert child slots
+        {
+            NSArray *childSlots = _settings[@"childSlots"];
+            if (childSlots != nil)
+            {
+                NSMutableArray *newChildSlots = [NSMutableArray new];
+                for (NSDictionary *childSlot in childSlots)
+                {
+                    NSMutableDictionary *newChildSlot = [NSMutableDictionary new];
+                    float offsetX = [childSlot[@"offsetX"] floatValue];
+                    float offsetY = [childSlot[@"offsetY"] floatValue];
+                    offsetX /= multiplier;
+                    offsetY /= multiplier;
+                    newChildSlot[@"offsetX"] = [NSNumber numberWithInteger:offsetX];
+                    newChildSlot[@"offsetY"] = [NSNumber numberWithInteger:offsetY];
+                    newChildSlot[@"type"] = childSlot[@"type"];
+                    [newChildSlots addObject:newChildSlot];
+                }
+                [settings setObject:newChildSlots forKey:@"childSlots"];
+            }
+        }
         
         float darkenMultiplier = 1.0;
         if (_settings[@"darken"] != nil) {
