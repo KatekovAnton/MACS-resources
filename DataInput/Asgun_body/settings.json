@@ -13,6 +13,11 @@
 			"type": "head",
 			"offsetX": "0",
 			"offsetY": "0"
+		},
+		{
+			"type": "shot",
+			"offsetX": "0",
+			"offsetY": "300"
 		}
 	]
 }
