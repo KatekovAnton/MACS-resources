@@ -5,14 +5,9 @@
 	"childSlots": [
 		{
 			"type": "head",
-			"offsetX": "0",
-			"offsetY": "0", 
+			"offsetX": 0,
+			"offsetY": 0, 
 			"meaning": "vector in pixels from center"
-		},
-		{
-			"type": "shot",
-			"offsetX": "0",
-			"offsetY": "300"
 		}
 	]
 }

@@ -9,6 +9,10 @@
 	"alphaPattern" : "_s0.Alpha.png",
 	"darken" : 1.0,
 	"childSlots": [
-		
+		{
+			"type": "shot",
+			"offsetX": 0,
+			"offsetY": -300
+		}
 	]
 }

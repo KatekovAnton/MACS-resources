@@ -4,6 +4,10 @@
 	"cells" : 1,
 	"shadowDisplacement":65,
 	"childSlots": [
-		
+		{
+			"type": "shot",
+			"offsetX": 0,
+			"offsetY": -300
+		}
 	]
 }
