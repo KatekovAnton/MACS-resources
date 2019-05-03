@@ -54,6 +54,7 @@ class CPPTextureClipping {
 public:
     
     CPPITexture *_texture;
+    GRect2D _fullFrame;
     GRect2D _payloadFrame;
     
     CPPTextureClipping(CPPITexture *texture, bool clip);
@@ -81,8 +82,8 @@ class CPPTextureClippingArray {
 public:
     
     std::vector<CPPTextureClipping *> _textureClippings;
-    GSize2D _inclusiveSize;
-    GPoint2D _inclusivePoint;
+    BoundingBox _inclusiveBox;
+    GRect2D _inclusiveRect;
     
     CPPTextureClippingArray(const std::vector<CPPITexture *> &textures, bool clip = false);
     ~CPPTextureClippingArray();

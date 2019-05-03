@@ -82,13 +82,15 @@
     CPPTextureClippingArray *clipping = new CPPTextureClippingArray(textures, true);
 
     float scale = [NSScreen mainScreen].backingScaleFactor;
-    self.onRectCalculated(CGRectMake(clipping->_inclusivePoint.x / scale, clipping->_inclusivePoint.y / scale, clipping->_inclusiveSize.width / scale, clipping->_inclusiveSize.height / scale));
+    self.onRectCalculated(CGRectMake(clipping->_inclusiveRect.origin.x / scale, clipping->_inclusiveRect.origin.y / scale, clipping->_inclusiveRect.size.width / scale, clipping->_inclusiveRect.size.height / scale));
     
     delete clipping;
     return images;
 }
 
 @end
+
+
 
 @implementation MTEffectProcessorStep_ProcessImages
 

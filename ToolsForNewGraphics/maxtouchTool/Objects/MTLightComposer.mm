@@ -80,14 +80,14 @@
         
         CPPTextureClippingArray *clipping = new CPPTextureClippingArray(textures);
         clippingArrays.push_back(clipping);
-        composers[0] = new BitmapComposer(clippingArrays[0]->_inclusiveSize);
+        composers[0] = new BitmapComposer(clippingArrays[0]->_inclusiveRect.size);
     }
     {
         std::vector<CPPITexture *> textures = {_textures[4], _textures[5], _textures[6], _textures[7]};
         
         CPPTextureClippingArray *clipping = new CPPTextureClippingArray(textures);
         clippingArrays.push_back(clipping);
-        composers[1] = new BitmapComposer(clippingArrays[1]->_inclusiveSize);
+        composers[1] = new BitmapComposer(clippingArrays[1]->_inclusiveRect.size);
     }
     
     _textureInfo = [NSMutableArray array];
@@ -95,8 +95,8 @@
     {
         CPPTextureClippingArray *clippingArray = clippingArrays[i];
         MTLightTextureInfo *info = [MTLightTextureInfo new];
-        info.sizeW = clippingArray->_inclusiveSize.width;
-        info.sizeH = clippingArray->_inclusiveSize.height;
+        info.sizeW = clippingArray->_inclusiveRect.size.width;
+        info.sizeH = clippingArray->_inclusiveRect.size.height;
         
         info.channelInfo = [NSMutableArray array];
         for (int channel = 0; channel < clippingArray->_textureClippings.size(); channel++)
@@ -119,8 +119,8 @@
     {
         CPPTextureClippingArray *clippingArray = clippingArrays[j];
         
-        for (int x = 0; x < clippingArray->_inclusiveSize.width; x++) {
-            for (int y = 0; y < clippingArray->_inclusiveSize.height; y++) {
+        for (int x = 0; x < clippingArray->_inclusiveRect.size.width; x++) {
+            for (int y = 0; y < clippingArray->_inclusiveRect.size.height; y++) {
                 
                 Color resultColor = Color(0, 0, 0, 0);
                 for (int i = 0; i < clippingArray->_textureClippings.size(); i++) {

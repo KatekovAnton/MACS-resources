@@ -71,18 +71,18 @@ CPPITexture::~CPPITexture()
 //@end
 
 
-
+inline bool __isTranparentForClipping(const Color &c) {
+    return c.a > 1;
+}
 
 CPPTextureClipping::CPPTextureClipping(CPPITexture *texture, bool clip)
 :_texture(texture)
 {
+    _payloadFrame = GRect2DMake(0, 0, _texture->GetWidth(), _texture->GetHeight());
+    _fullFrame = _payloadFrame;
     if (clip) {
         CalculateClipping();
     }
-    else {
-        _payloadFrame = GRect2DMake(0, 0, _texture->GetWidth(), _texture->GetHeight());
-    }
-    
 }
 
 void CPPTextureClipping::CalculateClipping()
@@ -92,7 +92,7 @@ void CPPTextureClipping::CalculateClipping()
         bool isLineTransparent = true;
         for (int x = 0; x < _texture->GetWidth(); x++)
         {
-            if (_texture->GetColorAtPoint(GPoint2D(x, y)).a != 0) {
+            if (__isTranparentForClipping(_texture->GetColorAtPoint(GPoint2D(x, y)))) {
                 isLineTransparent = false;
                 break;
             }
@@ -103,20 +103,22 @@ void CPPTextureClipping::CalculateClipping()
             break;
         }
     }
+    int yToCut = 0;
     for (int y = _texture->GetHeight() - 1; y > _payloadFrame.origin.y; y--)
     {
         bool isLineTransparent = true;
         for (int x = 0; x < _texture->GetWidth(); x++)
         {
-            if (_texture->GetColorAtPoint(GPoint2D(x, y)).a != 0) {
+            if (__isTranparentForClipping(_texture->GetColorAtPoint(GPoint2D(x, y)))) {
                 isLineTransparent = false;
                 break;
             }
         }
         if (!isLineTransparent) {
-            _payloadFrame.size.height -= _texture->GetHeight() - 1 - y;
+            _payloadFrame.size.height -= yToCut;
             break;
         }
+        yToCut ++;
     }
     
     for (int x = 0; x < _texture->GetWidth(); x++)
@@ -124,7 +126,7 @@ void CPPTextureClipping::CalculateClipping()
         bool isLineTransparent = true;
         for (int y = _payloadFrame.origin.y; y < _payloadFrame.origin.y + _payloadFrame.size.height; y++)
         {
-            if (_texture->GetColorAtPoint(GPoint2D(x, y)).a != 0) {
+            if (__isTranparentForClipping(_texture->GetColorAtPoint(GPoint2D(x, y)))) {
                 isLineTransparent = false;
                 break;
             }
@@ -135,20 +137,22 @@ void CPPTextureClipping::CalculateClipping()
             break;
         }
     }
+    int xToCut = 0;
     for (int x = _texture->GetWidth() - 1; x > _payloadFrame.origin.x; x--)
     {
         bool isLineTransparent = true;
         for (int y = _payloadFrame.origin.y; y < _payloadFrame.origin.y + _payloadFrame.size.height; y++)
         {
-            if (_texture->GetColorAtPoint(GPoint2D(x, y)).a != 0) {
+            if (__isTranparentForClipping(_texture->GetColorAtPoint(GPoint2D(x, y)))) {
                 isLineTransparent = false;
                 break;
             }
         }
         if (!isLineTransparent) {
-            _payloadFrame.size.width -= _texture->GetWidth() - 1 - x;
+            _payloadFrame.size.width -= xToCut;
             break;
         }
+        xToCut ++;
     }
 
 }
@@ -198,30 +202,42 @@ void CPPTextureClipping::CalculateClipping()
 
 CPPTextureClippingArray::CPPTextureClippingArray(const std::vector<CPPITexture *> &textures, bool clip)
 {
-    
     for (int i = 0; i < textures.size(); i++) {
+        if (i == 49) {
+            int a = 0;
+            a++;
+        }
         CPPTextureClipping *clipping = new CPPTextureClipping(textures[i], clip);
         _textureClippings.push_back(clipping);
     }
-    _inclusivePoint = GPoint2D(textures[0]->GetWidth(), textures[0]->GetHeight());
-    GSize2D maxSize = GSize2D();
+    
+    BoundingBox bb;
+    bb.min.x = textures[0]->GetWidth();
+    bb.min.y = textures[0]->GetHeight();
+    bb.max.x = 0;
+    bb.max.y = 0;
+    
     for (int i = 0; i < _textureClippings.size(); i++)
     {
         CPPTextureClipping *clipping = _textureClippings[i];
-        if (maxSize.width < clipping->_payloadFrame.size.width) {
-            maxSize.width = clipping->_payloadFrame.size.width;
+        BoundingBox payload = BoundingBoxMake(clipping->_payloadFrame);
+        
+        if (bb.max.x < payload.max.x) {
+            bb.max.x = payload.max.x;
         }
-        if (maxSize.height < clipping->_payloadFrame.size.height) {
-            maxSize.height = clipping->_payloadFrame.size.height;
+        if (bb.max.y < payload.max.y) {
+            bb.max.y = payload.max.y;
         }
-        if (_inclusivePoint.x > clipping->_payloadFrame.getX()) {
-            _inclusivePoint.x = clipping->_payloadFrame.getX();
+        if (bb.min.x > payload.min.x) {
+            bb.min.x = payload.min.x;
         }
-        if (_inclusivePoint.y > clipping->_payloadFrame.getY()) {
-            _inclusivePoint.y = clipping->_payloadFrame.getY();
+        if (bb.min.y > payload.min.y) {
+            bb.min.y = payload.min.y;
         }
     }
-    _inclusiveSize = maxSize;
+    
+    _inclusiveBox = bb;
+    _inclusiveRect = GRect2DMake(_inclusiveBox.min.x, _inclusiveBox.min.y, _inclusiveBox.max.x - _inclusiveBox.min.x, _inclusiveBox.max.y - _inclusiveBox.min.y);
 }
 
 CPPTextureClippingArray::~CPPTextureClippingArray()

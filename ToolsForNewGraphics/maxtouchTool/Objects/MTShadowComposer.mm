@@ -56,7 +56,7 @@
 - (void)buildShadowImage
 {
     CPPTextureClippingArray *clippings = new CPPTextureClippingArray(_shadowTextures);
-    BitmapComposer *composer = new BitmapComposer(clippings->_inclusiveSize);
+    BitmapComposer *composer = new BitmapComposer(clippings->_inclusiveRect.size);
     _resultImageSize = CGSizeMake(composer->getSize().width, composer->getSize().height);
     
     _textureInfo = [NSMutableArray array];
@@ -76,8 +76,8 @@
     }
     
     
-    for (int x = 0; x < clippings->_inclusiveSize.width; x++) {
-        for (int y = 0; y < clippings->_inclusiveSize.height; y++) {
+    for (int x = 0; x < clippings->_inclusiveRect.size.width; x++) {
+        for (int y = 0; y < clippings->_inclusiveRect.size.height; y++) {
             
             Color resultColor = Color(0,0,0,0);
             
