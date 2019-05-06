@@ -202,7 +202,10 @@
                 
                 WEAK(task2);
                 step1.onRectCalculated = ^(CGRect rect) {
-                    task2_weak_.rectInside = rect;
+                    task2_weak_.rectInside = CGRectMake((int)(rect.origin.x + 0.5),
+                                                        (int)(rect.origin.y + 0.5),
+                                                        (int)rect.size.width,
+                                                        (int)rect.size.height);
                 };
                 
                 [steps addObject:step1];

@@ -86,6 +86,8 @@
 
 + (NSImage*)cropImage:(NSImage*)sourceImage toRect:(NSRect)rect
 {
+    // WARNING
+    // does not work corrctly
     NSImageRep *rep = [sourceImage bestRepresentationForRect:rect context:nil hints:nil];
     NSImage* img = [[NSImage alloc] initWithSize:rect.size];
     
