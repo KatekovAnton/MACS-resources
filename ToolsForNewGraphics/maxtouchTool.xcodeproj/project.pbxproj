@@ -43,6 +43,11 @@
 		6CCDA2941DDD002C00B20A49 /* MTBlastProcessor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6CCDA2931DDD002C00B20A49 /* MTBlastProcessor.mm */; };
 		6CCDA29B1DDD1E1A00B20A49 /* NSImage+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCDA29A1DDD1E1A00B20A49 /* NSImage+Utils.m */; };
 		6CD0CACB1E2C35CC000CBFC3 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CD0CACA1E2C35CC000CBFC3 /* OpenGL.framework */; };
+		6CE847082290549A008EDD9D /* BinaryWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CE8470022905499008EDD9D /* BinaryWriter.cpp */; };
+		6CE847092290549A008EDD9D /* BinaryReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CE847062290549A008EDD9D /* BinaryReader.cpp */; };
+		6CE8470A2290549A008EDD9D /* BinaryWriterMemory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CE847072290549A008EDD9D /* BinaryWriterMemory.cpp */; };
+		6CE8470E22905542008EDD9D /* StringUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CE8470C22905542008EDD9D /* StringUtils.cpp */; };
+		6CE8471022905613008EDD9D /* FileManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CE8470F22905613008EDD9D /* FileManager.cpp */; };
 		6CEC95771E2B053100DBD1AA /* MTSequenceFrameSubstractor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6CEC95761E2B053100DBD1AA /* MTSequenceFrameSubstractor.mm */; };
 /* End PBXBuildFile section */
 
@@ -163,6 +168,16 @@
 		6CCDA2991DDD1E1A00B20A49 /* NSImage+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage+Utils.h"; sourceTree = "<group>"; };
 		6CCDA29A1DDD1E1A00B20A49 /* NSImage+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImage+Utils.m"; sourceTree = "<group>"; };
 		6CD0CACA1E2C35CC000CBFC3 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		6CE8470022905499008EDD9D /* BinaryWriter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BinaryWriter.cpp; sourceTree = "<group>"; };
+		6CE847032290549A008EDD9D /* BinaryWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BinaryWriter.h; sourceTree = "<group>"; };
+		6CE847042290549A008EDD9D /* BinaryReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BinaryReader.h; sourceTree = "<group>"; };
+		6CE847052290549A008EDD9D /* BinaryWriterMemory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BinaryWriterMemory.hpp; sourceTree = "<group>"; };
+		6CE847062290549A008EDD9D /* BinaryReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BinaryReader.cpp; sourceTree = "<group>"; };
+		6CE847072290549A008EDD9D /* BinaryWriterMemory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BinaryWriterMemory.cpp; sourceTree = "<group>"; };
+		6CE8470B229054E5008EDD9D /* FileManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileManager.h; sourceTree = "<group>"; };
+		6CE8470C22905542008EDD9D /* StringUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StringUtils.cpp; sourceTree = "<group>"; };
+		6CE8470D22905542008EDD9D /* StringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringUtils.h; sourceTree = "<group>"; };
+		6CE8470F22905613008EDD9D /* FileManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileManager.cpp; sourceTree = "<group>"; };
 		6CEC95751E2B053100DBD1AA /* MTSequenceFrameSubstractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSequenceFrameSubstractor.h; sourceTree = "<group>"; };
 		6CEC95761E2B053100DBD1AA /* MTSequenceFrameSubstractor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MTSequenceFrameSubstractor.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -361,6 +376,16 @@
 				6B87EA3F2014AC09003D5321 /* GlobalConstants.h */,
 				6B87EA3D2014AC09003D5321 /* ZipWrapper.cpp */,
 				6B87EA3B2014AC09003D5321 /* ZipWrapper.h */,
+				6CE8470F22905613008EDD9D /* FileManager.cpp */,
+				6CE8470B229054E5008EDD9D /* FileManager.h */,
+				6CE847062290549A008EDD9D /* BinaryReader.cpp */,
+				6CE847042290549A008EDD9D /* BinaryReader.h */,
+				6CE8470022905499008EDD9D /* BinaryWriter.cpp */,
+				6CE847032290549A008EDD9D /* BinaryWriter.h */,
+				6CE847072290549A008EDD9D /* BinaryWriterMemory.cpp */,
+				6CE847052290549A008EDD9D /* BinaryWriterMemory.hpp */,
+				6CE8470C22905542008EDD9D /* StringUtils.cpp */,
+				6CE8470D22905542008EDD9D /* StringUtils.h */,
 				6C4D07F41D5277E300C055AC /* Structures.h */,
 				6C4D07E41D5269F100C055AC /* Utils.h */,
 			);
@@ -516,13 +541,17 @@
 				6C833C431D62254D009ECC29 /* uncompr.c in Sources */,
 				6C833C3A1D62254D009ECC29 /* gzclose.c in Sources */,
 				6CCDA29B1DDD1E1A00B20A49 /* NSImage+Utils.m in Sources */,
+				6CE8470E22905542008EDD9D /* StringUtils.cpp in Sources */,
 				6B87EA442014AC0A003D5321 /* ByteBuffer.cpp in Sources */,
+				6CE8470A2290549A008EDD9D /* BinaryWriterMemory.cpp in Sources */,
 				6C833C421D62254D009ECC29 /* trees.c in Sources */,
 				6C3531B41DCFE19000A2F525 /* MTDiffuseComposer.mm in Sources */,
 				6C833C3C1D62254D009ECC29 /* gzread.c in Sources */,
 				6C423E4E1D5C82C9001882E5 /* BitmapComposer.cpp in Sources */,
 				6B87EA422014AC0A003D5321 /* BitmapTexture.cpp in Sources */,
+				6CE847082290549A008EDD9D /* BinaryWriter.cpp in Sources */,
 				6C833AB81D5F75EB009ECC29 /* MTShadowComposer.mm in Sources */,
+				6CE8471022905613008EDD9D /* FileManager.cpp in Sources */,
 				6C833C371D62254D009ECC29 /* compress.c in Sources */,
 				6C833C3E1D62254D009ECC29 /* infback.c in Sources */,
 				6C833C381D62254D009ECC29 /* crc32.c in Sources */,
@@ -535,6 +564,7 @@
 				6CC8564D1D52578A0012DDB0 /* main.m in Sources */,
 				6C833BEE1D6223A2009ECC29 /* LibpngWrapper.cpp in Sources */,
 				6CEC95771E2B053100DBD1AA /* MTSequenceFrameSubstractor.mm in Sources */,
+				6CE847092290549A008EDD9D /* BinaryReader.cpp in Sources */,
 				6C833C391D62254D009ECC29 /* deflate.c in Sources */,
 				6C83C1EB1D58F08300898B7E /* MTVisualObjectController.mm in Sources */,
 				6C833C401D62254D009ECC29 /* inflate.c in Sources */,
