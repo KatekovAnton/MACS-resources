@@ -51,8 +51,8 @@
 		6CE84754229056B1008EDD9D /* libassimp.4.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CE8474A229056B1008EDD9D /* libassimp.4.1.0.dylib */; };
 		6CE84755229056CD008EDD9D /* libassimp.4.1.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 6CE8474A229056B1008EDD9D /* libassimp.4.1.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		6CE8475C2290FC78008EDD9D /* AssimpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE8475B2290FC78008EDD9D /* AssimpView.m */; };
-		6CE84760229103B6008EDD9D /* AssimpScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE8475F229103B6008EDD9D /* AssimpScene.m */; };
-		6CE847632291061D008EDD9D /* AssimpNodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE847622291061D008EDD9D /* AssimpNodeView.m */; };
+		6CE84760229103B6008EDD9D /* AssimpScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6CE8475F229103B6008EDD9D /* AssimpScene.mm */; };
+		6CE847632291061D008EDD9D /* AssimpNodeView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6CE847622291061D008EDD9D /* AssimpNodeView.mm */; };
 		6CE8476722910666008EDD9D /* AssimpNodeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CE8476622910666008EDD9D /* AssimpNodeView.xib */; };
 		6CE8476B229107B8008EDD9D /* MTProcessSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE8476A229107B8008EDD9D /* MTProcessSettings.m */; };
 		6CEC95771E2B053100DBD1AA /* MTSequenceFrameSubstractor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6CEC95761E2B053100DBD1AA /* MTSequenceFrameSubstractor.mm */; };
@@ -203,9 +203,9 @@
 		6CE8475A2290FC78008EDD9D /* AssimpView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssimpView.h; sourceTree = "<group>"; };
 		6CE8475B2290FC78008EDD9D /* AssimpView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AssimpView.m; sourceTree = "<group>"; };
 		6CE8475E229103B6008EDD9D /* AssimpScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssimpScene.h; sourceTree = "<group>"; };
-		6CE8475F229103B6008EDD9D /* AssimpScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AssimpScene.m; sourceTree = "<group>"; };
+		6CE8475F229103B6008EDD9D /* AssimpScene.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AssimpScene.mm; sourceTree = "<group>"; };
 		6CE847612291061D008EDD9D /* AssimpNodeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssimpNodeView.h; sourceTree = "<group>"; };
-		6CE847622291061D008EDD9D /* AssimpNodeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AssimpNodeView.m; sourceTree = "<group>"; };
+		6CE847622291061D008EDD9D /* AssimpNodeView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AssimpNodeView.mm; sourceTree = "<group>"; };
 		6CE8476622910666008EDD9D /* AssimpNodeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AssimpNodeView.xib; sourceTree = "<group>"; };
 		6CE84769229107B8008EDD9D /* MTProcessSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTProcessSettings.h; sourceTree = "<group>"; };
 		6CE8476A229107B8008EDD9D /* MTProcessSettings.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTProcessSettings.m; sourceTree = "<group>"; };
@@ -484,9 +484,9 @@
 			isa = PBXGroup;
 			children = (
 				6CE8475E229103B6008EDD9D /* AssimpScene.h */,
-				6CE8475F229103B6008EDD9D /* AssimpScene.m */,
+				6CE8475F229103B6008EDD9D /* AssimpScene.mm */,
 				6CE847612291061D008EDD9D /* AssimpNodeView.h */,
-				6CE847622291061D008EDD9D /* AssimpNodeView.m */,
+				6CE847622291061D008EDD9D /* AssimpNodeView.mm */,
 				6CE8476622910666008EDD9D /* AssimpNodeView.xib */,
 			);
 			path = AssimpScene;
@@ -614,7 +614,7 @@
 			files = (
 				6C833C3D1D62254D009ECC29 /* gzwrite.c in Sources */,
 				6CC8565D1D5258AF0012DDB0 /* Texture.cpp in Sources */,
-				6CE847632291061D008EDD9D /* AssimpNodeView.m in Sources */,
+				6CE847632291061D008EDD9D /* AssimpNodeView.mm in Sources */,
 				6C833C431D62254D009ECC29 /* uncompr.c in Sources */,
 				6C833C3A1D62254D009ECC29 /* gzclose.c in Sources */,
 				6CCDA29B1DDD1E1A00B20A49 /* NSImage+Utils.m in Sources */,
@@ -641,7 +641,7 @@
 				6B87EA432014AC0A003D5321 /* ZipWrapper.cpp in Sources */,
 				6CE8476B229107B8008EDD9D /* MTProcessSettings.m in Sources */,
 				6CC8564D1D52578A0012DDB0 /* main.m in Sources */,
-				6CE84760229103B6008EDD9D /* AssimpScene.m in Sources */,
+				6CE84760229103B6008EDD9D /* AssimpScene.mm in Sources */,
 				6C833BEE1D6223A2009ECC29 /* LibpngWrapper.cpp in Sources */,
 				6CEC95771E2B053100DBD1AA /* MTSequenceFrameSubstractor.mm in Sources */,
 				6CE847092290549A008EDD9D /* BinaryReader.cpp in Sources */,

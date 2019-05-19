@@ -10,12 +10,37 @@
 #import <AppKit/AppKit.h>
 
 
+@implementation MTProcessOpenOptions
+
+@end
+
+
 @implementation MTProcessSettings
 
 + (MTProcessSettings*)requestSettingsForType:(NSString*)type
 {
+    MTProcessSettings *result1 = [self requestLoadForType:type];
+    if (result1 == nil) {
+        return nil;
+    }
+    MTProcessSettings *result2 = [self requestSaveForType:type];
+    if (result2 == nil) {
+        return nil;
+    }
+    MTProcessSettings *s = [MTProcessSettings new];
+    s.inputPath = result1.inputPath;
+    s.outputPath = result1.outputPath;
+    return s;
+}
+
++ (MTProcessSettings*)requestLoadForType:(NSString*)type
+{
+    return [self requestLoadForType:type options:nil];
+}
+
++ (MTProcessSettings*)requestLoadForType:(NSString*)type options:(MTProcessOpenOptions * _Nullable)options
+{
     MTProcessSettings *result = [MTProcessSettings new];
-    
     
     @autoreleasepool {
         {
@@ -24,6 +49,12 @@
             [panel setCanChooseFiles:NO];
             [panel setCanChooseDirectories:YES];
             [panel setAllowsMultipleSelection:NO];
+            if (options != nil) {
+                [panel setCanChooseFiles:options.canChooseFiles];
+                [panel setCanChooseDirectories:options.canChooseDirectories];
+                [panel setAllowsMultipleSelection:options.allowsMultipleSelection];
+                [panel setAllowedFileTypes:options.allowedFileTypes];
+            }
             
             NSString *key = [@"inputDir" stringByAppendingString:type];
             {
@@ -32,6 +63,14 @@
                     [panel setDirectoryURL:[NSURL URLWithString:url]];
                 
             }
+            
+//            if (options.window != nil)
+//            {
+//                [panel beginSheetModalForWindow:options.window completionHandler:^(NSModalResponse result) {
+//                    
+//                }];
+//                return nil;
+//            }
             
             NSInteger clicked = [panel runModal];
             
@@ -49,6 +88,12 @@
             result.inputPath = [result.inputPath substringFromIndex:7];
         }
     }
+    return result;
+}
+
++ (MTProcessSettings*)requestSaveForType:(NSString*)type
+{
+    MTProcessSettings *result = [MTProcessSettings new];
     
     @autoreleasepool {
         {
@@ -82,6 +127,11 @@
     }
     
     return result;
+}
+
+- (NSString *)inputPathWithoutPercentIncapsulation
+{
+    return [self.inputPath stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
 @end

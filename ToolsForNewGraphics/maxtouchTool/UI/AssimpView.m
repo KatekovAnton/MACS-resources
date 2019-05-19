@@ -9,6 +9,8 @@
 #import "AssimpView.h"
 #import "AssimpScene.h"
 #import "AssimpNodeView.h"
+#import "MTProcessSettings.h"
+
 
 
 @interface AssimpView() <NSOutlineViewDelegate, NSOutlineViewDataSource>
@@ -17,7 +19,26 @@
 @implementation AssimpView
 
 - (IBAction)onOpen:(id)sender
-{}
+{
+    MTProcessOpenOptions *o = [MTProcessOpenOptions new];
+    o.canChooseFiles = YES;
+    o.canChooseDirectories = NO;
+    o.allowsMultipleSelection = NO;
+    o.allowedFileTypes = @[@"obj"];
+    MTProcessSettings *s = [MTProcessSettings requestLoadForType:@"3dassimp" options:o];
+    if (s == nil) {
+        return;
+    }
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        _scene = [[AssimpScene alloc] initWithPath:[s inputPathWithoutPercentIncapsulation]];
+        [self update];
+    });
+}
+
+- (void)update
+{
+    [_table reloadData];
+}
 
 - (IBAction)onExport:(id)sender
 {}
@@ -27,6 +48,7 @@
 - (nullable NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(nullable NSTableColumn *)tableColumn item:(id)item
 {
     AssimpNodeView * view = [AssimpNodeView create];
+    view.data = item;
     return view;
 }
 
@@ -35,7 +57,7 @@
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(nullable id)item
 {
     if (item == nil) {
-        return _scene.root.childs.count;
+        return 1;
     }
     AssimpNode *n = item;
     return n.childs.count;
@@ -43,13 +65,17 @@
 
 - (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(nullable id)item
 {
+    if (item == nil) {
+        return _scene.root;
+    }
     AssimpNode *n = item;
     return n.childs[index];
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
 {
-    return YES;
+    AssimpNode *n = item;
+    return n.childs.count > 0;
 }
 
 /* NOTE: this method is optional for the View Based OutlineView.

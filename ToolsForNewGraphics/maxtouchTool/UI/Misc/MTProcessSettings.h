@@ -7,8 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+@interface MTProcessOpenOptions : NSObject
+
+@property (nonatomic) BOOL canChooseFiles;
+@property (nonatomic) BOOL canChooseDirectories;
+@property (nonatomic) BOOL allowsMultipleSelection;
+@property (nonatomic) NSArray<NSString *> *allowedFileTypes;
+@property (nonatomic, weak) NSWindow *window;
+
+@end
 
 
 @interface MTProcessSettings : NSObject
@@ -17,6 +28,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) NSString *outputPath;
 
 + (MTProcessSettings*)requestSettingsForType:(NSString*)type;
+
++ (MTProcessSettings*)requestLoadForType:(NSString*)type;
++ (MTProcessSettings*)requestLoadForType:(NSString*)type options:(MTProcessOpenOptions * _Nullable)options;
++ (MTProcessSettings*)requestSaveForType:(NSString*)type;
+
+- (NSString *)inputPathWithoutPercentIncapsulation;
 
 @end
 

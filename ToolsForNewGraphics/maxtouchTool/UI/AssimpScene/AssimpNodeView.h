@@ -8,9 +8,16 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class AssimpNode;
+
 NS_ASSUME_NONNULL_BEGIN
 
-@interface AssimpNodeView : NSView
+@interface AssimpNodeView : NSView {
+    
+    IBOutlet NSTextField *_labelName;
+}
+
+@property (nonatomic) AssimpNode *data;
 
 + (AssimpNodeView *)create;
 

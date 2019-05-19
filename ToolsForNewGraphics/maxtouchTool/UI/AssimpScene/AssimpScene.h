@@ -7,25 +7,36 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <GLKit/GLKit.h>
+
+
 
 NS_ASSUME_NONNULL_BEGIN
 
+#define MAX_VERTEX_BONE_RELATIONS 4
+const float fThreshold = 0.000001f;
+const float fThresholdPow2 = fThreshold*fThreshold;
+const float dThreshold = 0.000000000001;
 
 typedef struct __AssimpMeshVertex {
-    float position[4];
-    float normal[3];
-    float tcoord[2];
-    float color[4];
+    GLKVector3 position;
+    GLKVector3 normal;
+    GLKVector2 tcoord;
+    GLKVector3 color;
+    
+    GLKVector3 tangent;
+    
 } AssimpMeshVertex;
 
 AssimpMeshVertex AssimpMeshVertexMake();
 
 @interface AssimpMesh : NSObject
 
-@property (nonatomic) int vertexCount;
+@property (nonatomic) NSString *name;
+@property (nonatomic) int verticesCount;
 @property (nonatomic) AssimpMeshVertex *vertices;
-@property (nonatomic) int indexCount;
-@property (nonatomic) int *indices;
+@property (nonatomic) int indicesCount;
+@property (nonatomic) uint *indices;
 
 @end
 
@@ -42,6 +53,7 @@ AssimpMeshVertex AssimpMeshVertexMake();
 @interface AssimpNode : NSObject
 
 @property (nonatomic) NSString *name;
+@property (nonatomic) GLKMatrix4 transform;
 @property (nonatomic) NSMutableArray *childs;
 
 @property (nonatomic) AssimpMesh *mesh;
@@ -52,6 +64,8 @@ AssimpMeshVertex AssimpMeshVertexMake();
 @interface AssimpScene : NSObject
 
 @property (nonatomic) AssimpNode *root;
+
+- (id)initWithPath:(NSString *)path;
 
 @end
 
