@@ -24,7 +24,7 @@
     o.canChooseFiles = YES;
     o.canChooseDirectories = NO;
     o.allowsMultipleSelection = NO;
-    o.allowedFileTypes = @[@"obj"];
+    o.allowedFileTypes = @[@"obj", @"dae"];
     MTProcessSettings *s = [MTProcessSettings requestLoadForType:@"3dassimp" options:o];
     if (s == nil) {
         return;

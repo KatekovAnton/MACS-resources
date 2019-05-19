@@ -45,7 +45,7 @@ void BinaryWriterMemory::WriterWriteUInt(unsigned int value)
 
 void BinaryWriterMemory::WriterWriteFloat(float value)
 {
-    WriterWriteBuffer(reinterpret_cast<const char *>(&value), sizeof(value));
+    _destinationBuffer->appendData(reinterpret_cast<void *>(&value), sizeof(value), 1);
 }
 
 void BinaryWriterMemory::WriterWriteBuffer(ByteBuffer *buffer)
@@ -55,7 +55,7 @@ void BinaryWriterMemory::WriterWriteBuffer(ByteBuffer *buffer)
 
 void BinaryWriterMemory::WriterWriteBuffer(const char *buffer, unsigned int length)
 {
-    _destinationBuffer->appendData(reinterpret_cast<unsigned char *>(const_cast<char *>(buffer)), length, 1);
+    _destinationBuffer->appendData(reinterpret_cast<void *>(const_cast<char *>(buffer)), length, 1);
 }
 
 void BinaryWriterMemory::WriterWriteTile(char tile, unsigned int count)

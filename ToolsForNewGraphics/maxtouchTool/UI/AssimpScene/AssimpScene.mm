@@ -11,6 +11,10 @@
 #import <assimp/scene.h>
 #import <assimp/postprocess.h>
 #include "FileManager.h"
+#include "ByteBuffer.h"
+#include "BinaryReader.h"
+#include "BinaryWriterMemory.hpp"
+
 
 
 AssimpMeshVertex AssimpMeshVertexMake() {
@@ -36,36 +40,52 @@ AssimpMeshVertex AssimpMeshVertexMake() {
 
 - (void)write:(IBinaryWriter *)writer
 {
-    writer->WriterWriteInt(_verticesCount);
-    for (int i = 0; i < _verticesCount; i++) {
-        writer->WriterWriteFloat(_vertices[i].position.x);
-        writer->WriterWriteFloat(_vertices[i].position.y);
-        writer->WriterWriteFloat(_vertices[i].position.z);
+    ByteBuffer b;
+    {
+        BinaryWriterMemory bb(&b);
         
-        writer->WriterWriteFloat(_vertices[i].normal.x);
-        writer->WriterWriteFloat(_vertices[i].normal.y);
-        writer->WriterWriteFloat(_vertices[i].normal.z);
-        
-        writer->WriterWriteFloat(_vertices[i].tcoord.x);
-        writer->WriterWriteFloat(_vertices[i].tcoord.y);
-        
-        writer->WriterWriteFloat(_vertices[i].color.x);
-        writer->WriterWriteFloat(_vertices[i].color.y);
-        writer->WriterWriteFloat(_vertices[i].color.z);
-        
-        writer->WriterWriteFloat(_vertices[i].tangent.x);
-        writer->WriterWriteFloat(_vertices[i].tangent.y);
-        writer->WriterWriteFloat(_vertices[i].tangent.z);
-        
-        writer->WriterWriteFloat(_vertices[i].binormal.x);
-        writer->WriterWriteFloat(_vertices[i].binormal.y);
-        writer->WriterWriteFloat(_vertices[i].binormal.z);
+        bb.WriterWriteUInt(_verticesCount);
+        for (int i = 0; i < _verticesCount; i++) {
+            bb.WriterWriteFloat(_vertices[i].position.x);
+            bb.WriterWriteFloat(_vertices[i].position.y);
+            bb.WriterWriteFloat(_vertices[i].position.z);
+            
+            bb.WriterWriteFloat(_vertices[i].normal.x);
+            bb.WriterWriteFloat(_vertices[i].normal.y);
+            bb.WriterWriteFloat(_vertices[i].normal.z);
+            
+            bb.WriterWriteFloat(_vertices[i].tcoord.x);
+            bb.WriterWriteFloat(_vertices[i].tcoord.y);
+            
+            bb.WriterWriteFloat(_vertices[i].color.x);
+            bb.WriterWriteFloat(_vertices[i].color.y);
+            bb.WriterWriteFloat(_vertices[i].color.z);
+            
+            bb.WriterWriteFloat(_vertices[i].tangent.x);
+            bb.WriterWriteFloat(_vertices[i].tangent.y);
+            bb.WriterWriteFloat(_vertices[i].tangent.z);
+            
+            bb.WriterWriteFloat(_vertices[i].binormal.x);
+            bb.WriterWriteFloat(_vertices[i].binormal.y);
+            bb.WriterWriteFloat(_vertices[i].binormal.z);
+        }
+        bb.WriterWriteUInt(_indicesCount);
+        for (int i = 0; i < _indicesCount; i++) {
+            bb.WriterWriteUInt(_indices[i]);
+        }
+        bb.WriterFlush();
     }
-    writer->WriterWriteInt(_indicesCount);
-    for (int i = 0; i < _indicesCount; i++) {
-        writer->WriterWriteUInt(_indices[i]);
-    }
-    writer->WriterFlush();
+    writer->WriterWriteBuffer(&b);
+//#if defined DEBUG
+//    BinaryReader br(reinterpret_cast<char *>(b.getPointer()), b.getDataSize());
+//    int storedVerticesCount = br.ReadUInt();
+//    float _vertices0positionx = br.ReadSingle();
+//    float _vertices0positiony = br.ReadSingle();
+//    float _vertices0positionz = br.ReadSingle();
+//
+//    int a = 0;
+//    a++;    
+//#endif
 }
 
 - (void)dealloc

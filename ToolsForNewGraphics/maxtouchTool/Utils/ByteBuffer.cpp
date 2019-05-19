@@ -59,7 +59,7 @@ size_t ByteBuffer::getAvailableSize()
     return _dataSize - _size;
 }
 
-void ByteBuffer::appendData(unsigned char* buffer, size_t size, size_t nitems)
+void ByteBuffer::appendData(void* buffer, size_t size, size_t nitems)
 {
     size_t rembuff = 0;
     size *= nitems;

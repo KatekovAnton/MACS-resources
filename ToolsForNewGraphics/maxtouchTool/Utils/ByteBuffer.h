@@ -27,7 +27,7 @@ public:
     size_t getDataSize();
     size_t getFullSize();
     size_t getAvailableSize();
-    void appendData(unsigned char* buffer, size_t size, size_t nitems);
+    void appendData(void* buffer, size_t size, size_t nitems);
     void increaseBuffer();
     void increaseBufferBy(size_t additionalPlace);
     
