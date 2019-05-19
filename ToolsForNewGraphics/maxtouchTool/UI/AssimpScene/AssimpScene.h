@@ -45,6 +45,8 @@ AssimpMeshVertex AssimpMeshVertexMake();
 @interface AssimpMaterial : NSObject
 
 @property (nonatomic) NSString *diffuse;
+@property (nonatomic) NSString *specular;
+@property (nonatomic) NSString *heigth;
 
 @end
 

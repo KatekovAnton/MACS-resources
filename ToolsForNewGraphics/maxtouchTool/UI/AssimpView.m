@@ -41,7 +41,11 @@
 }
 
 - (IBAction)onExport:(id)sender
-{}
+{
+    AssimpNode *n = [_table itemAtRow:[_table selectedRow]];
+    int a = 0;
+//    AssimpNode *n = [_table selec]
+}
 
 #pragma mark - NSOutlineViewDelegate
 
@@ -50,6 +54,11 @@
     AssimpNodeView * view = [AssimpNodeView create];
     view.data = item;
     return view;
+}
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item
+{
+    return item != _scene.root;
 }
 
 #pragma mark - NSOutlineViewDataSource

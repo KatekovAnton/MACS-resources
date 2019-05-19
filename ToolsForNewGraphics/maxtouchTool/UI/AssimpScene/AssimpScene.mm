@@ -21,6 +21,9 @@ AssimpMeshVertex AssimpMeshVertexMake() {
 
 
 
+@interface AssimpMesh ()
+@property (nonatomic) int materialIndex;
+@end
 @implementation AssimpMesh
 
 - (id)init
@@ -107,8 +110,6 @@ AssimpMeshVertex AssimpMeshVertexMake() {
             self.root = [AssimpNode new];
             self.root.name = [NSString stringWithFormat:@"root_%@", path.lastPathComponent];
             [self loadNodeRecurse:aScene srcNode:aScene->mRootNode destNode:self.root];
-            int a = 0;
-            a++;
         }
         
     }
@@ -274,6 +275,7 @@ AssimpMeshVertex AssimpMeshVertexMake() {
         }
         
         AssimpMesh *m = [AssimpMesh new];
+        m.materialIndex = aMesh->mMaterialIndex;
         m.name = name;
         m.verticesCount = aMesh->mNumVertices;
         m.vertices = pVertices;
@@ -342,10 +344,93 @@ AssimpMeshVertex AssimpMeshVertexMake() {
                 if (_meshes[idxMesh] != [NSNull null]) {
                     AssimpMesh *m = _meshes[idxMesh];
                     newNode.mesh = m;
+                    
+                    {
+                        
+                        aiMaterial *aMat = aScene->mMaterials[m.materialIndex];
+                        AssimpMaterial *mat = [AssimpMaterial new];
+                        
+                        //название материала
+//                        aiString aStr;
+//                        if(AI_SUCCESS == aMat->Get(AI_MATKEY_NAME, aStr)) newMat.name = [self toStr:aStr];
+                        
+                        //параметры
+//                        int aParam;
+//                        if(AI_SUCCESS == aMat->Get(AI_MATKEY_TWOSIDED, aParam)) newMat.sideType = (aParam) ? @(MMaterialDoubleSide) : @(MMaterialFrontSide);
+                        
+                        //прозрачность
+//                        float fParam;
+//                        if(AI_SUCCESS == aMat->Get(AI_MATKEY_OPACITY, fParam)) newMat.opacity = @(fParam);
+                        
+                        //сияние
+//                        if(AI_SUCCESS == aMat->Get(AI_MATKEY_SHININESS, fParam)) newMat.shininess = @(fParam);
+                        
+                        //цвета
+                        aiColor3D aColor;
+//                        if(AI_SUCCESS == aMat->Get(AI_MATKEY_COLOR_AMBIENT, aColor)) {
+//                            GLKVector3 color = GLKVector3Make(aColor.r, aColor.g, aColor.b);
+//                            if ([dataSource convertTosRGB]) {
+//                                color = [MLoader sRGBColorWithRGBColor:color];
+//                            }
+//                            newMat.ambient = [NSColor colorWithRed:color.r green:color.g blue:color.b alpha:1];
+//                        }
+//                        if(AI_SUCCESS == aMat->Get(AI_MATKEY_COLOR_DIFFUSE, aColor)) {
+//                            GLKVector3 color = GLKVector3Make(aColor.r, aColor.g, aColor.b);
+//                            if ([dataSource convertTosRGB]) {
+//                                color = [MLoader sRGBColorWithRGBColor:color];
+//                            }
+//                            newMat.diffuse = [NSColor colorWithRed:color.r green:color.g blue:color.b alpha:1];
+//                        }
+//                        if(AI_SUCCESS == aMat->Get(AI_MATKEY_COLOR_SPECULAR, aColor)) {
+//                            GLKVector3 color = GLKVector3Make(aColor.r, aColor.g, aColor.b);
+//                            if ([dataSource convertTosRGB]) {
+//                                color = [MLoader sRGBColorWithRGBColor:color];
+//                            }
+//                            newMat.specular = [NSColor colorWithRed:color.r green:color.g blue:color.b alpha:1];
+//                        }
+//                        if(AI_SUCCESS == aMat->Get(AI_MATKEY_COLOR_EMISSIVE, aColor)) {
+//                            GLKVector3 color = GLKVector3Make(aColor.r, aColor.g, aColor.b);
+//                            if ([dataSource convertTosRGB]) {
+//                                color = [MLoader sRGBColorWithRGBColor:color];
+//                            }
+//                            newMat.emissive = [NSColor colorWithRed:color.r green:color.g blue:color.b alpha:1];
+//                        }
+                        
+//                        NSError *error = nil;
+                        //текcтуры только первого уровня в соотв. стеке
+                        mat.diffuse = [self loadTexture:aMat type:aiTextureType_DIFFUSE index:0];
+                        mat.specular = [self loadTexture:aMat type:aiTextureType_SPECULAR index:0];
+                        mat.heigth = [self loadTexture:aMat type:aiTextureType_HEIGHT index:0];
+                        mat.diffuse = [self loadTexture:aMat type:aiTextureType_AMBIENT index:0];
+                        
+//                        newMat.heightMap = [self load2DTexture:aMat type:aiTextureType_HEIGHT index:0];
+//                        newMat.normalMap = [self load2DTexture:aMat type:aiTextureType_NORMALS index:0 dataSource:dataSource error:&error];
+//                        newMat.specularMap = [self load2DTexture:aMat type:aiTextureType_SPECULAR index:0 dataSource:dataSource error:&error];
+//                        newMat.emissiveMap = [self load2DTexture:aMat type:aiTextureType_EMISSIVE index:0 dataSource:dataSource error:&error];
+//                        if (newMat.diffuseMap) {
+//                            newMat.diffuseMapState = @(YES);
+//                        }
+//                        if (newMat.heightMap) {
+//                            newMat.heightMapState = @(YES);
+//                        }
+//                        if (newMat.normalMap) {
+//                            newMat.normalMapState = @(YES);
+//                        }
+//                        if (newMat.specularMap) {
+//                            newMat.specularMapState = @(YES);
+//                        }
+//                        if (newMat.emissiveMap) {
+//                            newMat.emissiveMapState = @(YES);
+//                        }
+                        //тип материала
+
+                        newNode.material = mat;
+                    }
                 }
                 
                 newNode.transform = [self toMatrix:assimpNode->mTransformation];
                 newNode.name = [self toStr:assimpNode->mName];
+                
                 if (j == 0) {
                     [self loadNodeRecurse:aScene srcNode:assimpNode destNode:newNode ];
                 }
@@ -367,6 +452,27 @@ AssimpMeshVertex AssimpMeshVertexMake() {
             [self loadNodeRecurse:aScene srcNode:assimpNode destNode:newNode];
         }
     }
+}
+
+- (NSString *)loadTexture:(aiMaterial*)aMat type:(aiTextureType)texType index:(int)texIdx
+{
+    uint texCount;
+    aiTextureMapping aTexMapping;
+    if ((texCount = aMat->GetTextureCount(texType)) > 0) {
+        
+        aiString path;
+        aiTextureMapMode mapModes[3];
+        uint uvIndex = 0;
+        float blendFactor;
+        aiTextureOp texOperation;
+        
+        if (AI_SUCCESS == aMat -> GetTexture(texType, texIdx, &path, &aTexMapping, &uvIndex, &blendFactor, &texOperation, mapModes)) {
+            
+            NSString *imagePath = [self toStr:path];
+            return imagePath;
+        }
+    }
+    return nil;
 }
 
 @end
