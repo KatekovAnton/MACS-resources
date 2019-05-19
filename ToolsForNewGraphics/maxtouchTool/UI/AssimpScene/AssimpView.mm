@@ -10,7 +10,7 @@
 #import "AssimpScene.h"
 #import "AssimpNodeView.h"
 #import "MTProcessSettings.h"
-
+#include "BinaryWriterMemory.hpp"
 
 
 @interface AssimpView() <NSOutlineViewDelegate, NSOutlineViewDataSource>
@@ -42,9 +42,36 @@
 
 - (IBAction)onExport:(id)sender
 {
-    AssimpNode *n = [_table itemAtRow:[_table selectedRow]];
-    int a = 0;
-//    AssimpNode *n = [_table selec]
+    MTProcessSettings *s = [MTProcessSettings requestSaveForType:@"3dassimp"];
+    if (s == nil) {
+        return;
+    }
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        NSIndexSet *selected = _table.selectedRowIndexes;
+        [selected enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
+            AssimpNode *n = [_table itemAtRow:[_table selectedRow]];
+            NSString *outputSetting = [[s outputPathWithoutPercentIncapsulation] stringByAppendingFormat:@"%@setting.json", n.name];
+            if ([[NSFileManager defaultManager] fileExistsAtPath:outputSetting]) {
+                [[NSFileManager defaultManager] removeItemAtPath:outputSetting error:nil];
+            }
+            
+            NSDictionary *d = [n asData];
+            NSData *dData = [NSJSONSerialization dataWithJSONObject:d options:NSJSONWritingPrettyPrinted error:nil];
+            [dData writeToFile:outputSetting atomically:YES];
+            
+            ByteBuffer buffer;
+            BinaryWriterMemory m(&buffer);
+            [n.mesh write:&m];
+            
+            NSString *outputMesh = [[s outputPathWithoutPercentIncapsulation] stringByAppendingFormat:@"%@mesh.bin", n.name];
+            if ([[NSFileManager defaultManager] fileExistsAtPath:outputMesh]) {
+                [[NSFileManager defaultManager] removeItemAtPath:outputMesh error:nil];
+            }
+            NSData *mData = [NSData dataWithBytes:buffer.getPointer() length:buffer.getDataSize()];
+            [mData writeToFile:outputMesh atomically:YES];
+        }];
+    });
 }
 
 #pragma mark - NSOutlineViewDelegate

@@ -34,6 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (MTProcessSettings*)requestSaveForType:(NSString*)type;
 
 - (NSString *)inputPathWithoutPercentIncapsulation;
+- (NSString *)outputPathWithoutPercentIncapsulation;
 
 @end
 

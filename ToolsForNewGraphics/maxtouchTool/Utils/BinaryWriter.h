@@ -41,6 +41,7 @@ public:
     
     void WriterWriteInt(int value) override;
     void WriterWriteUInt(unsigned int value) override;
+    void WriterWriteFloat(float value) override;
     void WriterWriteBuffer(ByteBuffer *buffer) override;
     void WriterWriteBuffer(const char *buffer, unsigned int length) override;
     void WriterWriteTile(char tile, unsigned int count) override;

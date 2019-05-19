@@ -10,7 +10,7 @@
 #import <assimp/Importer.hpp>
 #import <assimp/scene.h>
 #import <assimp/postprocess.h>
-
+#include "FileManager.h"
 
 
 AssimpMeshVertex AssimpMeshVertexMake() {
@@ -32,6 +32,40 @@ AssimpMeshVertex AssimpMeshVertexMake() {
         
     }
     return self;
+}
+
+- (void)write:(IBinaryWriter *)writer
+{
+    writer->WriterWriteInt(_verticesCount);
+    for (int i = 0; i < _verticesCount; i++) {
+        writer->WriterWriteFloat(_vertices[i].position.x);
+        writer->WriterWriteFloat(_vertices[i].position.y);
+        writer->WriterWriteFloat(_vertices[i].position.z);
+        
+        writer->WriterWriteFloat(_vertices[i].normal.x);
+        writer->WriterWriteFloat(_vertices[i].normal.y);
+        writer->WriterWriteFloat(_vertices[i].normal.z);
+        
+        writer->WriterWriteFloat(_vertices[i].tcoord.x);
+        writer->WriterWriteFloat(_vertices[i].tcoord.y);
+        
+        writer->WriterWriteFloat(_vertices[i].color.x);
+        writer->WriterWriteFloat(_vertices[i].color.y);
+        writer->WriterWriteFloat(_vertices[i].color.z);
+        
+        writer->WriterWriteFloat(_vertices[i].tangent.x);
+        writer->WriterWriteFloat(_vertices[i].tangent.y);
+        writer->WriterWriteFloat(_vertices[i].tangent.z);
+        
+        writer->WriterWriteFloat(_vertices[i].binormal.x);
+        writer->WriterWriteFloat(_vertices[i].binormal.y);
+        writer->WriterWriteFloat(_vertices[i].binormal.z);
+    }
+    writer->WriterWriteInt(_indicesCount);
+    for (int i = 0; i < _indicesCount; i++) {
+        writer->WriterWriteUInt(_indices[i]);
+    }
+    writer->WriterFlush();
 }
 
 - (void)dealloc
@@ -57,6 +91,21 @@ AssimpMeshVertex AssimpMeshVertexMake() {
     return self;
 }
 
+- (NSDictionary *)asData
+{
+    NSMutableDictionary *result = [NSMutableDictionary dictionary];
+    if (self.diffuse != nil) {
+        [result setObject:self.diffuse forKey:@"diffuse"];
+    }
+    if (self.specular != nil) {
+        [result setObject:self.specular forKey:@"specular"];
+    }
+    if (self.heigth != nil) {
+        [result setObject:self.heigth forKey:@"heigth"];
+    }
+    return result;
+}
+
 @end
 
 
@@ -69,6 +118,27 @@ AssimpMeshVertex AssimpMeshVertexMake() {
         self.childs = [NSMutableArray new];
     }
     return self;
+}
+
+- (NSDictionary *)asData
+{
+    NSMutableDictionary *result = [NSMutableDictionary dictionary];
+    [result setObject:self.name forKey:@"name"];
+    if (self.material != nil) {
+        [result setObject:[self.material asData] forKey:@"material"];
+    }
+    NSString *ms = [NSString stringWithFormat:@"%f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f",
+                    _transform.m00, _transform.m01, _transform.m02, _transform.m03,
+                    _transform.m10, _transform.m11, _transform.m12, _transform.m13,
+                    _transform.m20, _transform.m21, _transform.m22, _transform.m23,
+                    _transform.m30, _transform.m31, _transform.m32, _transform.m33];
+    [result setObject:ms forKey:@"transform"];
+    NSMutableArray *children = [NSMutableArray new];
+    for (int i = 0; i < _childs.count; i++) {
+        [children addObject:[_childs[i] asData]];
+    }
+    [result setObject:children forKey:@"children"];
+    return result;
 }
 
 @end
@@ -206,6 +276,9 @@ AssimpMeshVertex AssimpMeshVertexMake() {
                 pVertices[i].tangent = GLKVector3Make(aMesh->mTangents[i].x,
                                                       aMesh->mTangents[i].y,
                                                       aMesh->mTangents[i].z);
+                GLKVector3 binormal = GLKVector3CrossProduct(pVertices[i].normal, pVertices[i].tangent);
+                binormal = GLKVector3Normalize(binormal);
+                pVertices[i].binormal = binormal;
             }
             
             if (hasColors)
@@ -340,6 +413,7 @@ AssimpMeshVertex AssimpMeshVertexMake() {
                 int idxMesh = assimpNode->mMeshes[j];
                 
                 AssimpNode *newNode = [AssimpNode new];
+                newNode.parent = destNode;
                 [destNode.childs addObject:newNode];
                 if (_meshes[idxMesh] != [NSNull null]) {
                     AssimpMesh *m = _meshes[idxMesh];
@@ -473,6 +547,15 @@ AssimpMeshVertex AssimpMeshVertexMake() {
         }
     }
     return nil;
+}
+
+- (NSDictionary *)asData
+{
+    NSMutableDictionary *result = [NSMutableDictionary dictionary];
+    if (_root != nil) {
+        [result setObject:[_root asData] forKey:@"root"];
+    }
+    return result;
 }
 
 @end

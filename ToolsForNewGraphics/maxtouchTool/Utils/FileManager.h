@@ -48,6 +48,7 @@ public:
     virtual unsigned int WriterGetSize() = 0;
     
     virtual void WriterWriteInt(int value) = 0;
+    virtual void WriterWriteFloat(float value) = 0;
     virtual void WriterWriteUInt(unsigned int value) = 0;
     virtual void WriterWriteBuffer(ByteBuffer *buffer) = 0;
     virtual void WriterWriteBuffer(const char *buffer, unsigned int length) = 0;

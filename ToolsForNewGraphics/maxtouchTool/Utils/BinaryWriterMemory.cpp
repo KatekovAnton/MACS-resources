@@ -43,6 +43,11 @@ void BinaryWriterMemory::WriterWriteUInt(unsigned int value)
     WriterWriteBuffer(reinterpret_cast<const char *>(&value), sizeof(value));
 }
 
+void BinaryWriterMemory::WriterWriteFloat(float value)
+{
+    WriterWriteBuffer(reinterpret_cast<const char *>(&value), sizeof(value));
+}
+
 void BinaryWriterMemory::WriterWriteBuffer(ByteBuffer *buffer)
 {
     WriterWriteBuffer(reinterpret_cast<const char *>(buffer->getPointer()), static_cast<unsigned int>(buffer->getDataSize()));

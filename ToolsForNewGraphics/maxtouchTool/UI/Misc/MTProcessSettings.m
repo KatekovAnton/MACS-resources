@@ -134,4 +134,9 @@
     return [self.inputPath stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
+- (NSString *)outputPathWithoutPercentIncapsulation
+{
+    return [self.outputPath stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+}
+
 @end

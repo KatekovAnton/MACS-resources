@@ -13,6 +13,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+
+class IBinaryWriter;
 #define MAX_VERTEX_BONE_RELATIONS 4
 const float fThreshold = 0.000001f;
 const float fThresholdPow2 = fThreshold*fThreshold;
@@ -25,6 +27,7 @@ typedef struct __AssimpMeshVertex {
     GLKVector3 color;
     
     GLKVector3 tangent;
+    GLKVector3 binormal;
     
 } AssimpMeshVertex;
 
@@ -37,6 +40,8 @@ AssimpMeshVertex AssimpMeshVertexMake();
 @property (nonatomic) AssimpMeshVertex *vertices;
 @property (nonatomic) int indicesCount;
 @property (nonatomic) uint *indices;
+
+- (void)write:(IBinaryWriter *)writer;
 
 @end
 
@@ -54,12 +59,15 @@ AssimpMeshVertex AssimpMeshVertexMake();
 
 @interface AssimpNode : NSObject
 
+@property (nonatomic, weak) AssimpNode *parent;
 @property (nonatomic) NSString *name;
 @property (nonatomic) GLKMatrix4 transform;
 @property (nonatomic) NSMutableArray *childs;
 
 @property (nonatomic) AssimpMesh *mesh;
 @property (nonatomic) AssimpMaterial *material;
+
+- (NSDictionary *)asData;
 
 @end
 
@@ -68,6 +76,8 @@ AssimpMeshVertex AssimpMeshVertexMake();
 @property (nonatomic) AssimpNode *root;
 
 - (id)initWithPath:(NSString *)path;
+
+- (NSDictionary *)asData;
 
 @end
 

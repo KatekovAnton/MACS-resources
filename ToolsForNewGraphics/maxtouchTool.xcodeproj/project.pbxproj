@@ -50,11 +50,12 @@
 		6CE8471022905613008EDD9D /* FileManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CE8470F22905613008EDD9D /* FileManager.cpp */; };
 		6CE84754229056B1008EDD9D /* libassimp.4.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CE8474A229056B1008EDD9D /* libassimp.4.1.0.dylib */; };
 		6CE84755229056CD008EDD9D /* libassimp.4.1.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 6CE8474A229056B1008EDD9D /* libassimp.4.1.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		6CE8475C2290FC78008EDD9D /* AssimpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE8475B2290FC78008EDD9D /* AssimpView.m */; };
+		6CE8475C2290FC78008EDD9D /* AssimpView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6CE8475B2290FC78008EDD9D /* AssimpView.mm */; };
 		6CE84760229103B6008EDD9D /* AssimpScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6CE8475F229103B6008EDD9D /* AssimpScene.mm */; };
 		6CE847632291061D008EDD9D /* AssimpNodeView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6CE847622291061D008EDD9D /* AssimpNodeView.mm */; };
 		6CE8476722910666008EDD9D /* AssimpNodeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CE8476622910666008EDD9D /* AssimpNodeView.xib */; };
 		6CE8476B229107B8008EDD9D /* MTProcessSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE8476A229107B8008EDD9D /* MTProcessSettings.m */; };
+		6CE847722291662B008EDD9D /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CE847712291662B008EDD9D /* GLKit.framework */; };
 		6CEC95771E2B053100DBD1AA /* MTSequenceFrameSubstractor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6CEC95761E2B053100DBD1AA /* MTSequenceFrameSubstractor.mm */; };
 /* End PBXBuildFile section */
 
@@ -201,7 +202,7 @@
 		6CE8470F22905613008EDD9D /* FileManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileManager.cpp; sourceTree = "<group>"; };
 		6CE8474A229056B1008EDD9D /* libassimp.4.1.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libassimp.4.1.0.dylib; sourceTree = "<group>"; };
 		6CE8475A2290FC78008EDD9D /* AssimpView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssimpView.h; sourceTree = "<group>"; };
-		6CE8475B2290FC78008EDD9D /* AssimpView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AssimpView.m; sourceTree = "<group>"; };
+		6CE8475B2290FC78008EDD9D /* AssimpView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AssimpView.mm; sourceTree = "<group>"; };
 		6CE8475E229103B6008EDD9D /* AssimpScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssimpScene.h; sourceTree = "<group>"; };
 		6CE8475F229103B6008EDD9D /* AssimpScene.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AssimpScene.mm; sourceTree = "<group>"; };
 		6CE847612291061D008EDD9D /* AssimpNodeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssimpNodeView.h; sourceTree = "<group>"; };
@@ -209,6 +210,7 @@
 		6CE8476622910666008EDD9D /* AssimpNodeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AssimpNodeView.xib; sourceTree = "<group>"; };
 		6CE84769229107B8008EDD9D /* MTProcessSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTProcessSettings.h; sourceTree = "<group>"; };
 		6CE8476A229107B8008EDD9D /* MTProcessSettings.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTProcessSettings.m; sourceTree = "<group>"; };
+		6CE847712291662B008EDD9D /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		6CEC95751E2B053100DBD1AA /* MTSequenceFrameSubstractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSequenceFrameSubstractor.h; sourceTree = "<group>"; };
 		6CEC95761E2B053100DBD1AA /* MTSequenceFrameSubstractor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MTSequenceFrameSubstractor.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -218,6 +220,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6CE847722291662B008EDD9D /* GLKit.framework in Frameworks */,
 				6CD0CACB1E2C35CC000CBFC3 /* OpenGL.framework in Frameworks */,
 				6C833C131D622432009ECC29 /* liblibpngOSX.a in Frameworks */,
 				6CE84754229056B1008EDD9D /* libassimp.4.1.0.dylib in Frameworks */,
@@ -265,8 +268,6 @@
 				6CC856501D52578A0012DDB0 /* MainMenu.xib */,
 				6C4D07E91D526BAA00C055AC /* MainWindow.h */,
 				6C4D07EA1D526BAA00C055AC /* MainWindow.mm */,
-				6CE8475A2290FC78008EDD9D /* AssimpView.h */,
-				6CE8475B2290FC78008EDD9D /* AssimpView.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -459,6 +460,7 @@
 		6CD0CAC91E2C35CC000CBFC3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6CE847712291662B008EDD9D /* GLKit.framework */,
 				6CD0CACA1E2C35CC000CBFC3 /* OpenGL.framework */,
 			);
 			name = Frameworks;
@@ -483,6 +485,8 @@
 		6CE8475D229103A2008EDD9D /* AssimpScene */ = {
 			isa = PBXGroup;
 			children = (
+				6CE8475A2290FC78008EDD9D /* AssimpView.h */,
+				6CE8475B2290FC78008EDD9D /* AssimpView.mm */,
 				6CE8475E229103B6008EDD9D /* AssimpScene.h */,
 				6CE8475F229103B6008EDD9D /* AssimpScene.mm */,
 				6CE847612291061D008EDD9D /* AssimpNodeView.h */,
@@ -622,7 +626,7 @@
 				6B87EA442014AC0A003D5321 /* ByteBuffer.cpp in Sources */,
 				6CE8470A2290549A008EDD9D /* BinaryWriterMemory.cpp in Sources */,
 				6C833C421D62254D009ECC29 /* trees.c in Sources */,
-				6CE8475C2290FC78008EDD9D /* AssimpView.m in Sources */,
+				6CE8475C2290FC78008EDD9D /* AssimpView.mm in Sources */,
 				6C3531B41DCFE19000A2F525 /* MTDiffuseComposer.mm in Sources */,
 				6C833C3C1D62254D009ECC29 /* gzread.c in Sources */,
 				6C423E4E1D5C82C9001882E5 /* BitmapComposer.cpp in Sources */,

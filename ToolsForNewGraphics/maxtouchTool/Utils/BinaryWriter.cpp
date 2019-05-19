@@ -65,6 +65,12 @@ void BinaryWriter::WriterWriteInt(int value)
     _position += sizeof(value);
 }
 
+void BinaryWriter::WriterWriteFloat(float value)
+{
+    fwrite(&value, sizeof(value), 1, _file);
+    _position += sizeof(value);
+}
+
 void BinaryWriter::WriterWriteUInt(unsigned int value)
 {
     fwrite(&value, sizeof(value), 1, _file);
