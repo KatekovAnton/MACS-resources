@@ -91,43 +91,6 @@
     });
 }
 
-- (IBAction)onSave:(id)sender
-{
-    
-    NSSavePanel *panel = [NSSavePanel savePanel];
-    
-    
-    [panel setAllowedFileTypes:[NSArray arrayWithObject:@"png"]];
-    NSInteger clicked = [panel runModal];
-    
-    if (clicked == NSFileHandlingPanelOKButton)
-    {
-        
-        NSString *name = panel.URL.absoluteString;
-        name = [name stringByReplacingOccurrencesOfString:@"file://" withString:@""];
-        
-        NSString *nameL = [name stringByReplacingOccurrencesOfString:@".png" withString:@"_light.png"];
-        NSString *nameR = [name stringByReplacingOccurrencesOfString:@".png" withString:@"_result.png"];
-        
-        {
-            NSData *imageData = [_imageShadow.image TIFFRepresentation];
-            NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData:imageData];
-            NSDictionary *imageProps = [NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:1.0] forKey:NSImageCompressionFactor];
-            imageData = [imageRep representationUsingType:NSPNGFileType properties:imageProps];
-            [imageData writeToFile:nameL atomically:NO];
-        }
-        {
-            NSData *imageData = [_imageResult.image TIFFRepresentation];
-            NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData:imageData];
-            NSDictionary *imageProps = [NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:1.0] forKey:NSImageCompressionFactor];
-            imageData = [imageRep representationUsingType:NSPNGFileType properties:imageProps];
-            [imageData writeToFile:nameR atomically:NO];
-        }
-        
-        
-    }
-}
-
 - (MTProcessSettings*)requestSettingsForType:(NSString*)type
 {
     MTProcessSettings *result = [MTProcessSettings new];
