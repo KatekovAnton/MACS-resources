@@ -50,6 +50,7 @@
 		6CE8471022905613008EDD9D /* FileManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CE8470F22905613008EDD9D /* FileManager.cpp */; };
 		6CE84754229056B1008EDD9D /* libassimp.4.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CE8474A229056B1008EDD9D /* libassimp.4.1.0.dylib */; };
 		6CE84755229056CD008EDD9D /* libassimp.4.1.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 6CE8474A229056B1008EDD9D /* libassimp.4.1.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		6CE8475C2290FC78008EDD9D /* AssimpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE8475B2290FC78008EDD9D /* AssimpView.m */; };
 		6CEC95771E2B053100DBD1AA /* MTSequenceFrameSubstractor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6CEC95761E2B053100DBD1AA /* MTSequenceFrameSubstractor.mm */; };
 /* End PBXBuildFile section */
 
@@ -195,6 +196,8 @@
 		6CE8470D22905542008EDD9D /* StringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringUtils.h; sourceTree = "<group>"; };
 		6CE8470F22905613008EDD9D /* FileManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileManager.cpp; sourceTree = "<group>"; };
 		6CE8474A229056B1008EDD9D /* libassimp.4.1.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libassimp.4.1.0.dylib; sourceTree = "<group>"; };
+		6CE8475A2290FC78008EDD9D /* AssimpView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssimpView.h; sourceTree = "<group>"; };
+		6CE8475B2290FC78008EDD9D /* AssimpView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AssimpView.m; sourceTree = "<group>"; };
 		6CEC95751E2B053100DBD1AA /* MTSequenceFrameSubstractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSequenceFrameSubstractor.h; sourceTree = "<group>"; };
 		6CEC95761E2B053100DBD1AA /* MTSequenceFrameSubstractor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MTSequenceFrameSubstractor.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -249,6 +252,8 @@
 				6CC856501D52578A0012DDB0 /* MainMenu.xib */,
 				6C4D07E91D526BAA00C055AC /* MainWindow.h */,
 				6C4D07EA1D526BAA00C055AC /* MainWindow.mm */,
+				6CE8475A2290FC78008EDD9D /* AssimpView.h */,
+				6CE8475B2290FC78008EDD9D /* AssimpView.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -581,6 +586,7 @@
 				6B87EA442014AC0A003D5321 /* ByteBuffer.cpp in Sources */,
 				6CE8470A2290549A008EDD9D /* BinaryWriterMemory.cpp in Sources */,
 				6C833C421D62254D009ECC29 /* trees.c in Sources */,
+				6CE8475C2290FC78008EDD9D /* AssimpView.m in Sources */,
 				6C3531B41DCFE19000A2F525 /* MTDiffuseComposer.mm in Sources */,
 				6C833C3C1D62254D009ECC29 /* gzread.c in Sources */,
 				6C423E4E1D5C82C9001882E5 /* BitmapComposer.cpp in Sources */,
