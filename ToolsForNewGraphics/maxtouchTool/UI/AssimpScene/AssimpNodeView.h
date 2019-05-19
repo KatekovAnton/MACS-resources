@@ -1,5 +1,5 @@
 //
-//  AssimpView.h
+//  AssimpNodeView.h
 //  maxtouchTool
 //
 //  Created by Katekov Anton on 5/19/19.
@@ -7,18 +7,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <AppKit/AppKit.h>
-
-@class AssimpScene;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface AssimpView : NSView {
-    
-    AssimpScene *_scene;
-    
-    IBOutlet NSOutlineView *_table;
-}
+@interface AssimpNodeView : NSView
+
++ (AssimpNodeView *)create;
 
 @end
 

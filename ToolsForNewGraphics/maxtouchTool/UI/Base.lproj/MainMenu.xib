@@ -210,6 +210,10 @@
                                                                         </prototypeCellViews>
                                                                     </tableColumn>
                                                                 </tableColumns>
+                                                                <connections>
+                                                                    <outlet property="dataSource" destination="ay8-jP-SRW" id="g28-1D-N8a"/>
+                                                                    <outlet property="delegate" destination="ay8-jP-SRW" id="G2n-5C-mzd"/>
+                                                                </connections>
                                                             </outlineView>
                                                         </subviews>
                                                     </clipView>

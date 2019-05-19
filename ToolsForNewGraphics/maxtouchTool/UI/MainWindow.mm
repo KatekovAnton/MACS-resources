@@ -17,20 +17,7 @@
 #include "MTVisualObject.h"
 #include "LibpngWrapper.h"
 #include "ByteBuffer.h"
-
-
-
-
-@interface MTProcessSettings : NSObject
-
-@property (nonatomic) NSString *inputPath;
-@property (nonatomic) NSString *outputPath;
-
-@end
-
-@implementation MTProcessSettings
-
-@end
+#include "MTProcessSettings.h"
 
 
 
@@ -91,81 +78,9 @@
     });
 }
 
-- (MTProcessSettings*)requestSettingsForType:(NSString*)type
-{
-    MTProcessSettings *result = [MTProcessSettings new];
-    
-    
-    @autoreleasepool {
-        {
-            
-            NSOpenPanel *panel = [[NSOpenPanel alloc] init];
-            [panel setCanChooseFiles:NO];
-            [panel setCanChooseDirectories:YES];
-            [panel setAllowsMultipleSelection:NO];
-            
-            NSString *key = [@"inputDir" stringByAppendingString:type];
-            {
-                NSString *url = [[NSUserDefaults standardUserDefaults] objectForKey:key];
-                if (url)
-                    [panel setDirectoryURL:[NSURL URLWithString:url]];
-                
-            }
-            
-            NSInteger clicked = [panel runModal];
-            
-            if (clicked != NSFileHandlingPanelOKButton)
-                return nil;
-            
-            
-            {
-                [[NSUserDefaults standardUserDefaults] setObject:panel.URL.absoluteString
-                                                          forKey:key];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-            }
-            
-            result.inputPath = panel.URL.absoluteString;
-            result.inputPath = [result.inputPath substringFromIndex:7];
-        }
-    }
-    
-    @autoreleasepool {
-        {
-            NSOpenPanel *savePanel = [[NSOpenPanel alloc] init];
-            [savePanel setCanCreateDirectories:YES];
-            [savePanel setCanChooseDirectories:YES];
-            [savePanel setCanChooseFiles:NO];
-            [savePanel setAllowsMultipleSelection:NO];
-            
-            NSString *key = [@"outputDir" stringByAppendingString:type];
-            {
-                NSString *url = [[NSUserDefaults standardUserDefaults] objectForKey:key];
-                if (url)
-                    [savePanel setDirectoryURL:[NSURL URLWithString:url]];
-                
-            }
-            
-            NSInteger saveClicked = [savePanel runModal];
-            if (saveClicked != NSFileHandlingPanelOKButton)
-                return nil;
-            
-            {
-                [[NSUserDefaults standardUserDefaults] setObject:savePanel.URL.absoluteString
-                                                          forKey:key];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-            }
-            
-            result.outputPath = savePanel.URL.absoluteString;
-            result.outputPath = [result.outputPath substringFromIndex:7];
-        }
-    }
-    
-    return result;
-}
-
 - (IBAction)onButchProcess:(id)sender
 {
-    MTProcessSettings *settings = [self requestSettingsForType:@"units"];
+    MTProcessSettings *settings = [MTProcessSettings requestSettingsForType:@"units"];
     if (settings == nil) {
         return;
     }
@@ -199,7 +114,7 @@
 
 - (IBAction)onButchProcessEffects:(id)sender
 {
-    MTProcessSettings *settings = [self requestSettingsForType:@"effects"];
+    MTProcessSettings *settings = [MTProcessSettings requestSettingsForType:@"effects"];
     if (settings == nil) {
         return;
     }
@@ -221,7 +136,7 @@
 
 - (IBAction)onProcessVideo:(id)sender {
     
-    MTProcessSettings *settings = [self requestSettingsForType:@"sequence"];
+    MTProcessSettings *settings = [MTProcessSettings requestSettingsForType:@"sequence"];
     if (settings == nil) {
         return;
     }
