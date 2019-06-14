@@ -29,7 +29,7 @@
     }
     MTProcessSettings *s = [MTProcessSettings new];
     s.inputPath = result1.inputPath;
-    s.outputPath = result1.outputPath;
+    s.outputPath = result2.outputPath;
     return s;
 }
 
