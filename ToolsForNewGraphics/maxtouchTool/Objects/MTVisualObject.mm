@@ -95,6 +95,10 @@
         
         _diffuseAlphaTexture = diffuseAlphaTexture;
         _diffuseTexture = diffuseTexture;
+        if (_diffuseTexture == nullptr) {
+            int a=  0;
+            a++;
+        }
         _lightTexture = lightTexture;
         _aoTexture = aoTexture;
         

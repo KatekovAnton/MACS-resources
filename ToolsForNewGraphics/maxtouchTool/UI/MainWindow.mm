@@ -27,11 +27,17 @@
 {
     [super awakeFromNib];
     
-    MTVisualObject *object = [[MTVisualObject alloc] initWithDiffuseName:@"Turret_p0.diffuse"
-                                                        duffuseAlphaName:@"Turret_s0.Alpha"
-                                                               lightName:@"Turret_ALL_s0"
+    MTVisualObject *object = [[MTVisualObject alloc] initWithDiffuseName:@"SCBase_s0.diffuse"
+                                                        duffuseAlphaName:@"SCBase_s0.Alpha"
+                                                               lightName:@"SCBase_s0"
                                                              stripesName:@"TankBase_p0.ARMY"
-                                                                  aoName:@"TankTurret_p0.extraTex_VRayDirt2"];
+                                                                  aoName:@"SCBase_s0.extraTex_VRayDirt2"];
+    
+//    MTVisualObject *object = [[MTVisualObject alloc] initWithDiffuseName:@"Turret_p0.diffuse"
+//                                                        duffuseAlphaName:@"Turret_s0.Alpha"
+//                                                               lightName:@"Turret_ALL_s0"
+//                                                             stripesName:@"TankBase_p0.ARMY"
+//                                                                  aoName:@"TankTurret_p0.extraTex_VRayDirt2"];
     [object buildResultImageWithAoK:1.0 shadowK:1.0 diffuseK:1.0];
     [self presentObject:object];
     

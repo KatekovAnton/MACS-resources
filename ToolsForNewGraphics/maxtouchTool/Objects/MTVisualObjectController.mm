@@ -314,6 +314,10 @@
             MTVisualObjectSpriteData *spriteData = _data.rotatedSpritesData[i];
             @autoreleasepool {
                 NSImage *shadowImage = [[NSImage alloc] initWithContentsOfFile:spriteData.inputShadow];
+                if (shadowImage == nil) {
+                    int a = 0;
+                    a++;
+                }
                 if (_shadowDisplacement > 0)
                 {
                     float angle = ((float)i * 45.0 + 20) * M_PI / 180.0;
