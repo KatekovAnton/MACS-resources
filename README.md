@@ -4,3 +4,5 @@ Graphic assets and processing tools for M.A.X. Touch new graphics. Compression, 
 
 ## Prerequisits
 MacOS, XCode
+
+![](http://deadbrains.io/ingym/resources/dark_frontier_small.jpg)
