@@ -4,6 +4,7 @@
 	"frameCount": 50,
 	"frameIndexStart": 17,
 	"framePattern": "thumb%04d.png",
+    "frameOutputPattern": "%04d.png",
     "frameStride": 4,
     "cutType": "contents"
 }

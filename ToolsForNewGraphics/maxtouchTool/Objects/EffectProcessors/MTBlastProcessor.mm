@@ -226,19 +226,21 @@
             int start = [settings[@"frameIndexStart"] intValue];
             int count = [settings[@"frameCount"] intValue];
             int stride = [settings[@"frameStride"] intValue];
+            NSString *outputPattern = settings[@"frameOutputPattern"];
             for (int i = 0; i < count; i++) {
                 NSString *imagePath = [NSString stringWithFormat:pattern, i * stride + start];
+                NSString *imageOutputPath = [NSString stringWithFormat:outputPattern, i];
                 
                 MTEffectProcessorTaskImage *item = [MTEffectProcessorTaskImage new];
                 item.inputPath = [_inputDirectoryPath stringByAppendingString:imagePath];
-                item.outputPath = [[_outputDirectoryPath stringByAppendingString:output] stringByAppendingString:imagePath];
+                item.outputPath = [[[_outputDirectoryPath stringByAppendingString:output] stringByAppendingPathComponent:@"body"] stringByAppendingPathComponent:imageOutputPath];
                 [images addObject:item];
             }
             if (images.count != 0) {
                 MTEffectProcessorTaskImage *task = images[0];
                 NSString *fullPath = task.outputPath;
                 fullPath = [fullPath stringByDeletingLastPathComponent];
-                
+                fullPath = [fullPath stringByAppendingString:@"/"];
                 if ([[NSFileManager defaultManager] fileExistsAtPath:fullPath]) {
                     [[NSFileManager defaultManager] removeItemAtPath:fullPath error:nil];
                 }
@@ -251,11 +253,22 @@
         }
     }
     
+    #define TEX_OUTPUT_SETTINGS    @"settings.json"
+    NSString *outputPath = [_outputDirectoryPath stringByAppendingPathComponent:settings[@"outputFolder"]];
+    NSString *outputSettingsPath = [outputPath stringByAppendingPathComponent:TEX_OUTPUT_SETTINGS];
+    NSMutableDictionary *outputSettings = [NSMutableDictionary dictionary];
+    
     NSArray *currentImagesArray = images;
     for (MTEffectProcessorStep *step in steps)
     {
         currentImagesArray = [step doWork:currentImagesArray];
     }
+    
+    outputSettings[@"_renderType"] = @(1);
+    outputSettings[@"_frameCount"] = settings[@"frameCount"];
+    
+    NSData *outputSettingsData = [NSJSONSerialization dataWithJSONObject:outputSettings options:NSJSONWritingPrettyPrinted error:nil];
+    [outputSettingsData writeToFile:outputSettingsPath atomically:YES];
     
 }
 
