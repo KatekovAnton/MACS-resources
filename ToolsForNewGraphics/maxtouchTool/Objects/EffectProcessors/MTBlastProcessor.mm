@@ -96,6 +96,7 @@
 
 - (NSArray *)doWork:(NSArray *)images
 {
+    NSString *outputPath = nil;
     for (MTEffectProcessorTaskImage *item in images)
     {
         for (MTEffectProcessorTask *task in self.tasks)
@@ -106,8 +107,34 @@
             }
             NSImage *cropped = [NSImage cropImage:image toRect:task.rectInside];
             [NSImage saveImage:cropped toPath:item.outputPath];
+            outputPath = item.outputPath;
         }
     }
+    
+    {
+        #define TEX_OUTPUT_SETTINGS    @"settings.json"
+        outputPath = [outputPath stringByDeletingLastPathComponent];
+        NSString *outputSettingsPath = [outputPath stringByAppendingPathComponent:TEX_OUTPUT_SETTINGS];
+        NSMutableDictionary *outputSettings = [NSMutableDictionary dictionary];
+        
+        outputSettings[@"cellSize"] = @(64);
+        outputSettings[@"frameCount"] = @(images.count);
+        if (self.tasks.count > 0) {
+            MTEffectProcessorTask *task = self.tasks[0];
+            NSMutableDictionary *d = [NSMutableDictionary new];
+            d[@"premultiplied"] = @(true);
+            d[@"sizeW"] = @(task.rectInside.size.width);
+            d[@"sizeH"] = @(task.rectInside.size.height);
+            d[@"offsetX"] = @(0);
+            d[@"offsetY"] = @(0);
+            d[@"anchorX"] = @(task.rectInside.size.width / 2);
+            d[@"anchorY"] = @(task.rectInside.size.height / 2);
+            outputSettings[@"diffuseTexture"] = d;
+        }
+        NSData *outputSettingsData = [NSJSONSerialization dataWithJSONObject:outputSettings options:NSJSONWritingPrettyPrinted error:nil];
+        [outputSettingsData writeToFile:outputSettingsPath atomically:YES];
+    }
+    
     return images;
 }
 
@@ -266,6 +293,9 @@
     
     outputSettings[@"_renderType"] = @(1);
     outputSettings[@"_frameCount"] = settings[@"frameCount"];
+    
+    NSArray *array = @[@"idle"];
+    outputSettings[@"_body"] = @{ @"_states" : array };
     
     NSData *outputSettingsData = [NSJSONSerialization dataWithJSONObject:outputSettings options:NSJSONWritingPrettyPrinted error:nil];
     [outputSettingsData writeToFile:outputSettingsPath atomically:YES];
