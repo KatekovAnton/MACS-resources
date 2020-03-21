@@ -8,6 +8,7 @@
 
 #include "Structures.h"
 #include <vector>
+#include <string>
 
 
 
@@ -23,7 +24,7 @@
 //
 //@end
 
-
+class BitmapTexture;
 
 class CPPITexture {
     
@@ -34,6 +35,25 @@ public:
     virtual int GetHeight() = 0;
     virtual Color GetColorAtPoint(GPoint2D point) = 0;
     virtual unsigned char *GetBitmapData() = 0;
+    
+};
+
+
+
+class CPPTextureImplPNGRep : public CPPITexture {
+public:
+    
+    BitmapTexture *_bitmap;
+    int _width;
+    int _heigth;
+    
+    CPPTextureImplPNGRep(const std::string &path);
+    virtual ~CPPTextureImplPNGRep();
+    
+    virtual int GetWidth() override;
+    virtual int GetHeight() override;
+    virtual Color GetColorAtPoint(GPoint2D point) override;
+    virtual unsigned char *GetBitmapData() override;
     
 };
 

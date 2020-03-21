@@ -6,8 +6,9 @@
 //  Copyright © 2016 katekovanton. All rights reserved.
 //
 
-#import "Texture.h"
-
+#include "Texture.h"
+#include "BitmapTexture.h"
+#include "ByteBuffer.h"
 
 
 //@implementation Texture
@@ -36,6 +37,40 @@
 
 CPPITexture::~CPPITexture()
 {}
+
+
+
+CPPTextureImplPNGRep::CPPTextureImplPNGRep(const std::string &path)
+{}
+
+CPPTextureImplPNGRep::~CPPTextureImplPNGRep()
+{}
+
+int CPPTextureImplPNGRep::GetWidth()
+{
+    return _bitmap->_info._textureSize.width;
+}
+
+int CPPTextureImplPNGRep::GetHeight()
+{
+    return _bitmap->_info._textureSize.height;
+}
+
+Color CPPTextureImplPNGRep::GetColorAtPoint(GPoint2D point)
+{
+    int colorIndex = point.y * _width + point.x;
+    int byteIndex = colorIndex * 4;
+    if (GetBitmapData()[byteIndex + 3] > 1) {
+        int a = 0;
+        a++;
+    }
+    return Color(GetBitmapData()[byteIndex], GetBitmapData()[byteIndex + 1], GetBitmapData()[byteIndex + 2], GetBitmapData()[byteIndex + 3]);
+}
+
+unsigned char *CPPTextureImplPNGRep::GetBitmapData()
+{
+    return _bitmap->GetBuffer()->getPointer();
+}
 
 
 //@implementation TextureClipping

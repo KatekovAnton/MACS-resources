@@ -13,12 +13,14 @@
 CPPTextureImplNSBitmapImageRep::CPPTextureImplNSBitmapImageRep(NSImage *image)
 {
     _imageRep = [[NSBitmapImageRep alloc] initWithData:[image TIFFRepresentation]];
-    _width = static_cast<int>([_imageRep pixelsWide]);
-    _heigth = static_cast<int>([_imageRep pixelsHigh]);
+    _width = static_cast<int>(_imageRep.pixelsWide);
+    _heigth = static_cast<int>(_imageRep.pixelsHigh);
 }
 
 CPPTextureImplNSBitmapImageRep::~CPPTextureImplNSBitmapImageRep()
-{}
+{
+
+}
 
 int CPPTextureImplNSBitmapImageRep::GetWidth()
 {
@@ -32,12 +34,10 @@ int CPPTextureImplNSBitmapImageRep::GetHeight()
 
 Color CPPTextureImplNSBitmapImageRep::GetColorAtPoint(GPoint2D point)
 {
-    NSUInteger values[4];
-    [_imageRep getPixel:values atX:point.x y:point.y];
-    return Color(static_cast<unsigned char>(values[0]),
-                 static_cast<unsigned char>(values[1]),
-                 static_cast<unsigned char>(values[2]),
-                 static_cast<unsigned char>(values[3]));
+    CGFloat components[4];
+    NSColor *color = [_imageRep colorAtX:point.x y:point.y];
+    [color getRed:components green:components + 1 blue:components + 2 alpha:components + 3];
+    return Color(components[0] * 255.0, components[1] * 255.0, components[2] * 255.0, components[3] * 255.0);
 }
 
 unsigned char *CPPTextureImplNSBitmapImageRep::GetBitmapData()

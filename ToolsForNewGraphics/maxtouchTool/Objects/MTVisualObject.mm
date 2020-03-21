@@ -140,6 +140,7 @@
 //            pureLight.g = pureLight.r;
 //            pureLight.b = pureLight.r;
             
+            composerDiffuse->setColor(_diffuseTexture->GetColorAtPoint(p), x, y);
             
             ColorF resultShadow = pureLight;
             resultShadow.a = diffuse.a;// * light.a * ao.a;
