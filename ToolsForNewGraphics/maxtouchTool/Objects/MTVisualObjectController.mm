@@ -34,10 +34,13 @@
 #define TEX_OUTPUT_DIFFUSE_BIN    @"diffuse.bin"
 #define TEX_OUTPUT_NORMALS    @"normals.png"
 #define TEX_OUTPUT_STRIPES    @"stripes.png"
-#define TEX_OUTPUT_SETTINGS    @"settings.json"
+#define TEX_OUTPUT_SETTINGS   @"settings.json"
 #define TEX_OUTPUT_SHADOW     @"shadow.bin"
 
 #define TEX_OUTPUT_LIGHT      @"light_%d.bin"
+#define TEX_PREVIEW_INDEX     1
+#define TEX_PREVIEW_SIZE      256
+
 //#define TEX_OUTPUT_SHADOW     @"shadow_%d.png"
 
 
@@ -305,7 +308,8 @@
         [settings setObject:diffuseInfo forKey:@"stripesTexture"];
     }
     
-    
+    CPPITexture *_shadowTexture = nullptr;
+
     // compress shadows to 1 texture
     @autoreleasepool {
         std::vector<CPPITexture *> shadowTextures;
@@ -358,7 +362,12 @@
         [settings setObject:shadowSettings forKey:@"shadowTexture"];
         
         for (int i = 0; i < 8; i++) {
-            delete shadowTextures[i];
+            if (i == TEX_PREVIEW_INDEX) {
+                _shadowTexture = shadowTextures[i];
+            }
+            else {
+                delete shadowTextures[i];
+            }
         }
         
     }
@@ -388,6 +397,14 @@
                                                                               aoTextre:textureAO];
                 [object buildShadowImageWithAoK:1 shadowK:1 diffuseK:1];
                 
+                if (i == TEX_PREVIEW_INDEX) {
+                    NSImage *previewImage = [object buildFullImageWithAoK:1 shadowK:1 diffuseK:1 shadow:_shadowTexture];
+                    previewImage = [NSImage resizeImage:previewImage size:NSMakeSize(TEX_PREVIEW_SIZE, TEX_PREVIEW_SIZE)];
+                    
+                    NSString* filename = @"preview.png";
+                    NSString* filepath = [[_data.outputLight stringByDeletingLastPathComponent] stringByAppendingPathComponent:filename];
+                    [self saveImage:previewImage toPath:filepath];
+                }
                 
                 NSImage *resultImage = object.resultShadowImage;
                 if (graphicsCellSize != gameCellSize) {
@@ -429,6 +446,8 @@
         }
         
     }
+
+    delete _shadowTexture;
     
     if (textureDiffuseAlpha != NULL) {
         delete textureDiffuseAlpha;
