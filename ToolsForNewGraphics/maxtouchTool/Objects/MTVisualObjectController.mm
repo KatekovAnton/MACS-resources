@@ -398,7 +398,7 @@
                 [object buildShadowImageWithAoK:1 shadowK:1 diffuseK:1];
                 
                 if (i == TEX_PREVIEW_INDEX) {
-                    NSImage *previewImage = [object buildFullImageWithAoK:1 shadowK:1 diffuseK:1 shadow:_shadowTexture];
+                    NSImage *previewImage = [object buildFullImageWithAoK:1.3 shadowK:1 diffuseK:1 shadow:_shadowTexture];
                     previewImage = [NSImage resizeImage:previewImage size:NSMakeSize(TEX_PREVIEW_SIZE, TEX_PREVIEW_SIZE)];
                     
                     NSString* filename = @"preview.png";

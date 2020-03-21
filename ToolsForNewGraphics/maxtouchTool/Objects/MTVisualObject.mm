@@ -223,8 +223,6 @@
 
 - (NSImage *)buildFullImageWithAoK:(float)aoK shadowK:(float)shadowK diffuseK:(float)diffuseK shadow:(CPPITexture *)shadow
 {
-//    BitmapComposer *composerDiffuse = new BitmapComposer(GSize2D(_diffuseTexture->GetWidth(), _diffuseTexture->GetHeight()));
-//    BitmapComposer *composerShadow = new BitmapComposer(GSize2D(_diffuseTexture->GetWidth(), _diffuseTexture->GetHeight()));
     BitmapComposer *composerResult = new BitmapComposer(GSize2D(_diffuseTexture->GetWidth(), _diffuseTexture->GetHeight()));
 
     
@@ -243,18 +241,10 @@
             ColorF ao = ColorF(_aoTexture->GetColorAtPoint(p));
             
             ColorF pureLight = ColorFSubstract(light, diffuse);
-            
-            
-//            ColorF diffuseWithAO = ColorFMultScalar(diffuse, (1.0 - (1.0 - ao.r) * aoK));
-//            float diffuseLum = (diffuse.r + diffuse.g + diffuse.b) / 3.0;
-//            float diffuseAOLum = (diffuseWithAO.r + diffuseWithAO.g + diffuseWithAO.b) / 3.0;
-            pureLight = ColorFAddScalar(pureLight, (ao.r - 1) * 0.3);
+            pureLight = ColorFAddScalar(pureLight, (ao.r - 1) * 0.7);
             pureLight = ColorFMultScalar(pureLight, 0.5);
             pureLight = ColorFAddScalar(pureLight, 0.5);
-            
-//            pureLight.g = pureLight.r;
-//            pureLight.b = pureLight.r;
-            
+        
             
             ColorF resultShadow = pureLight;
             resultShadow.a = diffuse.a;// * light.a * ao.a;
@@ -262,9 +252,8 @@
             resultShadow.r = value;
             resultShadow.g = value;
             resultShadow.b = value;
-//            composerShadow->setColor(resultShadow.getColor(), x, y);
             
-            ColorF resultDiffuse1 = ColorFMultScalar(diffuse, 1.0 - stripe.r);
+            ColorF resultDiffuse1 = ColorFMultScalar(diffuse, 1.08 - stripe.r);
             ColorF resultDiffuse2 = ColorFMultScalar(armyColor, stripe.r);
             ColorF resultDiffuseTotal = ColorFAdd(resultDiffuse1, resultDiffuse2);
             ColorF result = resultDiffuseTotal;//ColorFMultScalar(resultDiffuseTotal, diffuseK);
@@ -272,13 +261,11 @@
             shadow = ColorFAddScalar(shadow, -0.5);
             shadow = ColorFMultScalar(shadow, 2);
             shadow = ColorFAddScalar(shadow, -0.05);
-//            shadow = ColorFMultScalar(shadow, 2);
             
             shadow = ColorFMultScalar(shadow, shadowK);
             result = ColorFAddScalar(result, shadow.r);
             result = ColorFMultScalar(result, 0.8);
-//            result = ColorFMultScalar(result, 1.0 / diffuse.a);
-            result = ColorFAdd(result, ColorFMultScalar(__ColorF(244, 223, 0, 255), 0.1));
+            result = ColorFAdd(result, ColorFMultScalar(__ColorF(244, 223, 0, 255), 0.13));
             result.a = diffuse.a;// * light.a * ao.a;
             
             composerResult->setColor(result.getColor(), x, y);
