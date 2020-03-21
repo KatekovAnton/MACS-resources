@@ -39,7 +39,7 @@
 
 #define TEX_OUTPUT_LIGHT      @"light_%d.bin"
 #define TEX_PREVIEW_INDEX     1
-#define TEX_PREVIEW_SIZE      256
+#define TEX_PREVIEW_SIZE      128
 
 //#define TEX_OUTPUT_SHADOW     @"shadow_%d.png"
 
