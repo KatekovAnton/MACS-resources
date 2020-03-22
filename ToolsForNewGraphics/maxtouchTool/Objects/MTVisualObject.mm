@@ -226,13 +226,20 @@
 {
     BitmapComposer *composerResult = new BitmapComposer(GSize2D(_diffuseTexture->GetWidth(), _diffuseTexture->GetHeight()));
 
-    
+    float shadowOpacity = 0.5;
     ColorF armyColor = ColorF(0, 191, 255, 255.0);
     for (int x = 0; x < _diffuseTexture->GetWidth(); x++)
     {
         for (int y = 0; y < _diffuseTexture->GetHeight(); y++)
         {
             GPoint2D p(x, y);
+            Color sss = Color(0,0,0,0);
+            if (shadow) {
+                sss = shadow->GetColorAtPoint(p);
+                sss = Color(0, 0, 0, sss.r * shadowOpacity);
+            }
+            
+            
             ColorF diffuse = ColorF(_diffuseTexture->GetColorAtPoint(p));
             ColorF light = ColorF(_lightTexture->GetColorAtPoint(p));
             ColorF stripe;
@@ -266,8 +273,10 @@
             shadow = ColorFMultScalar(shadow, shadowK);
             result = ColorFAddScalar(result, shadow.r);
             result = ColorFMultScalar(result, 0.8);
-            result = ColorFAdd(result, ColorFMultScalar(__ColorF(244, 223, 0, 255), 0.13));
+            result = ColorFAdd(result, ColorFMultScalar(__ColorF(244, 223, 0, 255), 0.13 * result.a));
             result.a = diffuse.a;// * light.a * ao.a;
+            
+            result = ColorFAdd(ColorFMultScalar(ColorF(sss), 1.0 - result.a), result);
             
             composerResult->setColor(result.getColor(), x, y);
         }

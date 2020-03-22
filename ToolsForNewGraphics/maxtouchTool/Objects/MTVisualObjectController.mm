@@ -307,8 +307,6 @@
                                       @"offsetY" : @(0)};
         [settings setObject:diffuseInfo forKey:@"stripesTexture"];
     }
-    
-    CPPITexture *_shadowTexture = nullptr;
 
     // compress shadows to 1 texture
     @autoreleasepool {
@@ -318,10 +316,6 @@
             MTVisualObjectSpriteData *spriteData = _data.rotatedSpritesData[i];
             @autoreleasepool {
                 NSImage *shadowImage = [[NSImage alloc] initWithContentsOfFile:spriteData.inputShadow];
-                if (shadowImage == nil) {
-                    int a = 0;
-                    a++;
-                }
                 if (_shadowDisplacement > 0)
                 {
                     float angle = ((float)i * 45.0 + 20) * M_PI / 180.0;
@@ -362,12 +356,7 @@
         [settings setObject:shadowSettings forKey:@"shadowTexture"];
         
         for (int i = 0; i < 8; i++) {
-            if (i == TEX_PREVIEW_INDEX) {
-                _shadowTexture = shadowTextures[i];
-            }
-            else {
-                delete shadowTextures[i];
-            }
+            delete shadowTextures[i];
         }
         
     }
@@ -398,6 +387,15 @@
                 [object buildShadowImageWithAoK:1 shadowK:1 diffuseK:1];
                 
                 if (i == TEX_PREVIEW_INDEX) {
+                    
+                    
+                    CPPITexture *_shadowTexture = nullptr;
+                    NSImage *shadowImage = [[NSImage alloc] initWithContentsOfFile:spriteData.inputShadow];
+                    if (_shadowDisplacement == 0) {
+                        _shadowTexture = new CPPTextureImplNSBitmapImageRep(shadowImage);
+                    }
+
+                    
                     NSImage *previewImage = [object buildFullImageWithAoK:1.3 shadowK:1 diffuseK:1 shadow:_shadowTexture];
                     previewImage = [NSImage resizeImage:previewImage size:NSMakeSize(TEX_PREVIEW_SIZE, TEX_PREVIEW_SIZE)];
                     
@@ -446,8 +444,6 @@
         }
         
     }
-
-    delete _shadowTexture;
     
     if (textureDiffuseAlpha != NULL) {
         delete textureDiffuseAlpha;
