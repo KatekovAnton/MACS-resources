@@ -75,13 +75,28 @@
 {
     if (self = [super init]) {
         _inputDiffuseAlpha = [inputPath stringByAppendingString:[NSString stringWithFormat:TEX_INPUT_ALPHA, baseName]];
+        if (settings[@"alphaPattern"] != nil) {
+            _inputDiffuseAlpha = settings[@"basename"];
+            _inputDiffuseAlpha = [inputPath stringByAppendingString:[_inputDiffuseAlpha stringByAppendingString:settings[@"alphaPattern"]]];
+        }
+        
         _inputDiffuse = [inputPath stringByAppendingString:[NSString stringWithFormat:TEX_INPUT_DIFFUSE, baseName]];
+        if (settings[@"diffusePattern"] != nil) {
+            _inputDiffuse = settings[@"basename"];
+            _inputDiffuse = [inputPath stringByAppendingString:[_inputDiffuse stringByAppendingString:settings[@"diffusePattern"]]];
+        }
+        
         _inputAO = [inputPath stringByAppendingString:[NSString stringWithFormat:TEX_INPUT_AO, baseName]];
         if (settings[@"aoPattern"] != nil) {
             _inputAO = settings[@"basename"];
             _inputAO = [inputPath stringByAppendingString:[_inputAO stringByAppendingString:settings[@"aoPattern"]]];
         }
         _inputNormals = [inputPath stringByAppendingString:[NSString stringWithFormat:TEX_INPUT_NORMALS, baseName]];
+        if (settings[@"normalsPattern"] != nil) {
+            _inputNormals = settings[@"basename"];
+            _inputNormals = [inputPath stringByAppendingString:[_inputNormals stringByAppendingString:settings[@"normalsPattern"]]];
+        }
+        
         _inputStripes = [inputPath stringByAppendingString:TEX_INPUT_STRIPES];
         
         _outputDiffuse = [outputPath stringByAppendingString:TEX_OUTPUT_DIFFUSE_BIN];
