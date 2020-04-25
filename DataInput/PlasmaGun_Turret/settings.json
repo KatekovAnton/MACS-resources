@@ -7,6 +7,7 @@
 	"shadowPattern" : "_%d.Shadow.png",
 	"aoPattern" : "_0.ao.png",
 	"alphaPattern" : "_0.Alpha.png",
+    "normalsPattern" : "_0.normals.png",
 	"darken" : 0.9,
 	"childSlots": [
 		{
