@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		415D771B243997AD00874F28 /* maxtouchToolTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 415D771A243997AD00874F28 /* maxtouchToolTests.mm */; };
 		6B87EA422014AC0A003D5321 /* BitmapTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6B87EA3C2014AC09003D5321 /* BitmapTexture.cpp */; };
 		6B87EA432014AC0A003D5321 /* ZipWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6B87EA3D2014AC09003D5321 /* ZipWrapper.cpp */; };
 		6B87EA442014AC0A003D5321 /* ByteBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6B87EA3E2014AC09003D5321 /* ByteBuffer.cpp */; };
@@ -60,6 +61,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		415D771D243997AD00874F28 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6CC8563D1D5257890012DDB0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6CC856441D52578A0012DDB0;
+			remoteInfo = maxtouchTool;
+		};
 		6C833BF11D6223A2009ECC29 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6C833B611D6223A2009ECC29 /* libpng.xcodeproj */;
@@ -105,6 +113,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		415D7718243997AD00874F28 /* maxtouchToolTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = maxtouchToolTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		415D771A243997AD00874F28 /* maxtouchToolTests.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = maxtouchToolTests.mm; sourceTree = "<group>"; };
+		415D771C243997AD00874F28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		51BF73A41E44C9AA0041EE76 /* MTOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTOptions.h; sourceTree = "<group>"; };
 		6B87EA2D2014ABFA003D5321 /* Colors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Colors.h; sourceTree = "<group>"; };
 		6B87EA2E2014ABFA003D5321 /* Geometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Geometry.h; sourceTree = "<group>"; };
@@ -216,6 +227,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		415D7715243997AD00874F28 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6CC856421D52578A0012DDB0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -230,6 +248,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		415D7719243997AD00874F28 /* maxtouchToolTests */ = {
+			isa = PBXGroup;
+			children = (
+				415D771A243997AD00874F28 /* maxtouchToolTests.mm */,
+				415D771C243997AD00874F28 /* Info.plist */,
+			);
+			path = maxtouchToolTests;
+			sourceTree = "<group>";
+		};
 		6B87EA2C2014ABFA003D5321 /* MathKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -359,6 +386,7 @@
 			isa = PBXGroup;
 			children = (
 				6CC856471D52578A0012DDB0 /* maxtouchTool */,
+				415D7719243997AD00874F28 /* maxtouchToolTests */,
 				6CC856461D52578A0012DDB0 /* Products */,
 				6CD0CAC91E2C35CC000CBFC3 /* Frameworks */,
 			);
@@ -368,6 +396,7 @@
 			isa = PBXGroup;
 			children = (
 				6CC856451D52578A0012DDB0 /* maxtouchTool.app */,
+				415D7718243997AD00874F28 /* maxtouchToolTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -517,6 +546,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		415D7717243997AD00874F28 /* maxtouchToolTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 415D7723243997AD00874F28 /* Build configuration list for PBXNativeTarget "maxtouchToolTests" */;
+			buildPhases = (
+				415D7714243997AD00874F28 /* Sources */,
+				415D7715243997AD00874F28 /* Frameworks */,
+				415D7716243997AD00874F28 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				415D771E243997AD00874F28 /* PBXTargetDependency */,
+			);
+			name = maxtouchToolTests;
+			productName = maxtouchToolTests;
+			productReference = 415D7718243997AD00874F28 /* maxtouchToolTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		6CC856441D52578A0012DDB0 /* maxtouchTool */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6CC856561D52578A0012DDB0 /* Build configuration list for PBXNativeTarget "maxtouchTool" */;
@@ -545,6 +592,12 @@
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = katekovanton;
 				TargetAttributes = {
+					415D7717243997AD00874F28 = {
+						CreatedOnToolsVersion = 11.3.1;
+						DevelopmentTeam = C85PE3Z934;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 6CC856441D52578A0012DDB0;
+					};
 					6CC856441D52578A0012DDB0 = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
@@ -555,6 +608,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -570,6 +624,7 @@
 			projectRoot = "";
 			targets = (
 				6CC856441D52578A0012DDB0 /* maxtouchTool */,
+				415D7717243997AD00874F28 /* maxtouchToolTests */,
 			);
 		};
 /* End PBXProject section */
@@ -599,6 +654,13 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		415D7716243997AD00874F28 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6CC856431D52578A0012DDB0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -612,6 +674,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		415D7714243997AD00874F28 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				415D771B243997AD00874F28 /* maxtouchToolTests.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6CC856411D52578A0012DDB0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -664,6 +734,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		415D771E243997AD00874F28 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6CC856441D52578A0012DDB0 /* maxtouchTool */;
+			targetProxy = 415D771D243997AD00874F28 /* PBXContainerItemProxy */;
+		};
 		6C833C151D62243A009ECC29 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = libpngOSX;
@@ -683,6 +758,73 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		415D771F243997AD00874F28 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = C85PE3Z934;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = maxtouchToolTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.katekovanton.maxtouchToolTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/maxtouchTool.app/Contents/MacOS/maxtouchTool";
+			};
+			name = Debug;
+		};
+		415D7720243997AD00874F28 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = C85PE3Z934;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = maxtouchToolTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.katekovanton.maxtouchToolTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/maxtouchTool.app/Contents/MacOS/maxtouchTool";
+			};
+			name = Release;
+		};
 		6CC856541D52578A0012DDB0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -813,6 +955,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		415D7723243997AD00874F28 /* Build configuration list for PBXNativeTarget "maxtouchToolTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				415D771F243997AD00874F28 /* Debug */,
+				415D7720243997AD00874F28 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		6CC856401D5257890012DDB0 /* Build configuration list for PBXProject "maxtouchTool" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
