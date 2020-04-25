@@ -50,7 +50,9 @@
             Color colorDiffuse = _diffuseTexture->GetColorAtPoint(GPoint2D(cx, cy));
             {
                 ColorF colorDiffuseF(colorDiffuse);
-                colorDiffuseF = ColorFMultScalar(colorDiffuseF, multiplier);
+                float min = 1.0 - multiplier;
+                colorDiffuseF = ColorFAddScalar(colorDiffuseF, -min);
+//                colorDiffuseF = ColorFMultScalar(colorDiffuseF, multiplier);
                 colorDiffuse = colorDiffuseF.getColor();
             }
             Color colorDiffuseAlpha = _diffuseAlphaTexture->GetColorAtPoint(GPoint2D(cx, cy));
