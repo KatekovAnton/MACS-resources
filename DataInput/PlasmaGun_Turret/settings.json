@@ -1,0 +1,18 @@
+{
+	"basename" : "PG_Turret",
+	"outputFolder" : "plasm/head",
+	"cells" : 1,
+	"colorPattern" : "_%d.png",
+	"diffusePattern" : "_0.diffuse.png",
+	"shadowPattern" : "_%d.Shadow.png",
+	"aoPattern" : "_0.ao.png",
+	"alphaPattern" : "_0.Alpha.png",
+	"darken" : 0.9,
+	"childSlots": [
+		{
+			"type": "shot",
+			"offsetX": 0,
+			"offsetY": -30
+		}
+	]
+}

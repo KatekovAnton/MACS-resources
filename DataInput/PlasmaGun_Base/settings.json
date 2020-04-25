@@ -1,0 +1,19 @@
+{
+	"basename" : "PG",
+	"outputFolder" : "plasm/body",
+	"cells" : 1,
+	"colorPattern" : "_%d.png",
+	"diffusePattern" : "_0.diffuse.png",
+	"shadowPattern" : "_%d.Shadow.png",
+	"aoPattern" : "_0.ao.png",
+	"alphaPattern" : "_0.Alpha.png",
+    "normalsPattern" : "_0.normals.png",
+	"darken" : 0.9,
+	"childSlots": [
+		{
+			"type": "head",
+			"offsetX": 0,
+			"offsetY": 30
+		}
+	]
+}
