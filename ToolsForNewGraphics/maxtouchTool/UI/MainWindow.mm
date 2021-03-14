@@ -18,6 +18,7 @@
 #include "LibpngWrapper.h"
 #include "ByteBuffer.h"
 #include "MTProcessSettings.h"
+#import "MTVisualObject.h"
 
 
 
@@ -151,6 +152,52 @@
     
     [self processEffectDirectories:directories toOutputDirectory:settings.outputPath];
 }
+
+- (IBAction)onProcessSingleTexture:(id)sender
+{
+    MTProcessSettings *settings = [MTProcessSettings requestSettingsForType:@"texture"];
+    if (settings == nil) {
+        return;
+    }
+    
+    NSImage *frameImage = [[NSImage alloc] initWithContentsOfFile:[settings.inputPath stringByAppendingString:@"Moss_roughness.jpg"]];
+    CPPITexture *frame = new CPPTextureImplNSBitmapImageRep(frameImage);
+
+    BitmapComposer composer = BitmapComposer(GSize2D(frame->GetWidth(), frame->GetHeight()));
+
+    for (float x = 0; x < frame->GetWidth(); x++) {
+        for (float y = 0; y < frame->GetHeight(); y++) {
+            Color color = frame->GetColorAtPoint(GPoint2D(x, y));
+            color.b = 0;
+            color.g = 0;
+
+            composer.setColor(color, x, y);
+        }
+    }
+
+    NSImage *result = [MTVisualObject resultImageWithBitmapComposer:&composer];
+    [self saveImage:result toPath:[settings.outputPath stringByAppendingString:@"Moss_roughness_1.jpg"]];
+}
+
+
+- (void)saveImage:(NSImage*)image toPath:(NSString*)path
+{
+    @autoreleasepool {
+        NSData *imageData = [image TIFFRepresentation];
+        NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData:imageData];
+        
+        [self saveImageRep:imageRep toPath:path];
+    }
+}
+
+- (void)saveImageRep:(NSBitmapImageRep*)imageRep toPath:(NSString*)path
+{
+    NSDictionary *imageProps = [NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:0.7] forKey:NSImageCompressionFactor];
+    NSData *imageData = [imageRep representationUsingType:NSJPEGFileType properties:imageProps];
+    [imageData writeToFile:path atomically:NO];
+}
+
+
 
 - (void)processEffectDirectories:(NSArray*)directories toOutputDirectory:(NSString*)outputDirectory
 {
