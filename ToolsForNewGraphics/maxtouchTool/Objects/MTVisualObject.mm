@@ -70,7 +70,10 @@
                              aoFilePath:(NSString*)aoPath
 {
     if (self = [super init]) {
-        
+        assert([[NSFileManager defaultManager] fileExistsAtPath:diffuseAlphaPath]);
+        assert([[NSFileManager defaultManager] fileExistsAtPath:diffusePath]);
+        assert([[NSFileManager defaultManager] fileExistsAtPath:lightPath]);
+        assert([[NSFileManager defaultManager] fileExistsAtPath:aoPath]);
 //        _diffuseAlphaTexture = [[Texture alloc] initWithImage:[[NSImage alloc] initWithContentsOfFile:diffuseAlphaPath]];
 //        _diffuseTexture = [[Texture alloc] initWithImage:[[NSImage alloc] initWithContentsOfFile:diffusePath]];
 //        _lightTexture = [[Texture alloc] initWithImage:[[NSImage alloc] initWithContentsOfFile:lightPath]];
@@ -273,7 +276,7 @@
             shadow = ColorFMultScalar(shadow, shadowK);
             result = ColorFAddScalar(result, shadow.r);
             result = ColorFMultScalar(result, 0.8);
-            result = ColorFAdd(result, ColorFMultScalar(__ColorF(244, 223, 0, 255), 0.13 * diffuse.a));
+            result = ColorFAdd(result, ColorFMultScalar(__ColorF(244, 223, 0, 0), 0.13 * diffuse.a));
             result.a = diffuse.a;// * light.a * ao.a;
             
             result = ColorFAdd(ColorFMultScalar(ColorF(sss), 1.0 - result.a), result);

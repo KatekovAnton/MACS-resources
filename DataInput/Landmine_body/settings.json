@@ -1,0 +1,13 @@
+{
+	"basename" : "Mine",
+	"outputFolder" : "landmine/base",
+	"cells" : 1,
+	"colorPattern" : ".png",
+	"diffusePattern" : ".diffuse.png",
+	"shadowPattern" : ".matteShadow.png",
+	"aoPattern" : ".AO.png",
+	"alphaPattern" : ".Alpha.png",
+    "normalsPattern" : ".normals.png",
+	"darken" : 1.0,
+	"singleDirection" : true
+}

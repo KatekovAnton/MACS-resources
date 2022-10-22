@@ -1,0 +1,21 @@
+{
+	"basename" : "A1_Tank",
+	"outputFolder" : "eontank/body",
+	"cells" : 1,
+	"colorPattern" : "_s%d.png",
+	"diffusePattern" : "_s0.diffuse.png",
+	"shadowPattern" : "_s%d.Shadow.png",
+	"aoPattern" : "_s0.AO.png",
+	"alphaPattern" : "_s0.Alpha.png",
+    "normalsPattern" : "_s0.normals.png",
+	"darken" : 1.5,
+	"method" : 1,
+	"childSlots": [
+		{
+			"type": "head",
+			"offsetX": 0,
+			"offsetY": 0, 
+			"meaning": "vector in pixels from center"
+		}
+	]
+}

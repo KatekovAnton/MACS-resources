@@ -1,0 +1,20 @@
+{
+	"basename" : "A1_Tank_Turret",
+	"outputFolder" : "eontank/head",
+	"cells" : 1,
+	"colorPattern" : "_s%d.png",
+	"diffusePattern" : "_s0.diffuse.png",
+	"shadowPattern" : "_s%d.Shadow.png",
+	"aoPattern" : "_s0.AO.png",
+	"alphaPattern" : "_s0.Alpha.png",
+    "normalsPattern" : "_s0.normals.png",
+	"darken" : 1.1,
+	"method" : 1,
+	"childSlots": [
+		{
+			"type": "shot",
+			"offsetX": 0,
+			"offsetY": -300
+		}
+	]
+}

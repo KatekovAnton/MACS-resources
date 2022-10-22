@@ -7,6 +7,7 @@
 //
 
 #import "MTDiffuseComposer.h"
+#import "MTVisualObject.h"
 #include "Texture.h"
 #import "Utils.h"
 #include "BitmapComposer.hpp"
@@ -38,7 +39,7 @@
     return self;
 }
 
-- (void)buildDiffuseImageWithDarkenMultiplier:(float)multiplier
+- (NSImage *)buildDiffuseImageWithDarkenMultiplier:(float)multiplier method:(int)method save:(BOOL)save
 {
     CPPTextureClipping *clipping = new CPPTextureClipping(_diffuseAlphaTexture, false);
     BitmapComposer *composer = new BitmapComposer(clipping->_payloadFrame.size);
@@ -50,9 +51,26 @@
             Color colorDiffuse = _diffuseTexture->GetColorAtPoint(GPoint2D(cx, cy));
             {
                 ColorF colorDiffuseF(colorDiffuse);
-                float min = 1.0 - multiplier;
-                colorDiffuseF = ColorFAddScalar(colorDiffuseF, -min);
-//                colorDiffuseF = ColorFMultScalar(colorDiffuseF, multiplier);
+                if (method == 0) {
+                    float min = 1.0 - multiplier;
+                    colorDiffuseF = ColorFAddScalar(colorDiffuseF, -min);
+                }
+                else  {
+                    float gray = (colorDiffuseF.r + colorDiffuseF.g + colorDiffuseF.b) / 3.0;
+                    float notGray = fabs(gray - (fabsf(gray - colorDiffuseF.r) + fabsf(gray - colorDiffuseF.g) + fabsf(gray - colorDiffuseF.b)) / 3.0);
+                    float treshold = 0.2;
+                    if (notGray > treshold) {
+                        
+                        float diffr = (gray - colorDiffuseF.r);
+                        colorDiffuseF.r = multiplier * (gray - diffr * multiplier) * colorDiffuseF.a;
+                        
+                        float diffg = (gray - colorDiffuseF.g);
+                        colorDiffuseF.g = multiplier * (gray - diffg * multiplier) * colorDiffuseF.a;
+                        
+                        float diffb = (gray - colorDiffuseF.b);
+                        colorDiffuseF.b = multiplier * (gray - diffb * multiplier) * colorDiffuseF.a;
+                    }
+                }
                 colorDiffuse = colorDiffuseF.getColor();
             }
             Color colorDiffuseAlpha = _diffuseAlphaTexture->GetColorAtPoint(GPoint2D(cx, cy));
@@ -77,8 +95,15 @@
     int size = composer->getSize().width * composer->getSize().height * 4;
     ByteBuffer buffer;
     zip_compress((char *)composer->getColorBuffer(), size, &buffer);
+    
+    NSImage *result = nil;
+    if (save) {
+        result = [MTVisualObject resultImageWithBitmapComposer:composer];
+    }
+    
     delete composer;
     _resultImageData = [[NSData alloc] initWithBytes:buffer.getPointer() length:buffer.getDataSize()];
+    return result;
 }
 
 @end

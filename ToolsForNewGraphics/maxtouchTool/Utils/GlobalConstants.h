@@ -35,10 +35,10 @@
     #define ushort unsigned short
 #endif
 
-#ifdef TARGET_OS_LINUX
-    #include "CCGL.h" 
-    #include <memory>
-#endif
+//#ifdef TARGET_OS_LINUX
+//    #include "CCGL.h" 
+//    #include <memory>
+//#endif
 
 #define GCCHECK_GL_ERROR_DEBUG() \
         {GLenum __error = glGetError(); \

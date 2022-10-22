@@ -29,6 +29,8 @@
 @interface MTVisualObjectData : NSObject {
     
 }
+@property (nonatomic, readonly) int method;
+@property (nonatomic, readonly) BOOL is8Directions;
 @property (nonatomic, readonly) NSString *inputDiffuseAlpha;
 @property (nonatomic, readonly) NSString *inputDiffuse;
 @property (nonatomic, readonly) NSString *inputAO;
@@ -36,6 +38,7 @@
 @property (nonatomic, readonly) NSString *inputStripes;
 
 @property (nonatomic, readonly) NSString *outputDiffuse;
+@property (nonatomic, readonly) NSString *outputDiffusePNG;
 @property (nonatomic, readonly) NSString *outputNormals;
 @property (nonatomic, readonly) NSString *outputStripes;
 @property (nonatomic, readonly) NSString *outputSettings;

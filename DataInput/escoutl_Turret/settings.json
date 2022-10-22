@@ -1,0 +1,20 @@
+{
+	"basename" : "escoutl_turret",
+	"outputFolder" : "eonscoutl/head",
+	"cells" : 1,
+	"colorPattern" : "_%d.png",
+	"diffusePattern" : "_0.diffuse.png",
+	"shadowPattern" : "_%d.Shadow.png",
+	"aoPattern" : "_0.ao.png",
+	"alphaPattern" : "_0.Alpha.png",
+    "normalsPattern" : "_0.normals.png",
+	"darken" : 1.5,
+	"method" : 1,
+	"childSlots": [
+		{
+			"type": "shot",
+			"offsetX": 0,
+			"offsetY": -300
+		}
+	]
+}
