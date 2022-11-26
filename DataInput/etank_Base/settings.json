@@ -1,5 +1,5 @@
 {
-	"basename" : "A1_Tank",
+	"basename" : "A1_Tank_Base",
 	"outputFolder" : "eontank/body",
 	"cells" : 1,
 	"colorPattern" : "_s%d.png",
