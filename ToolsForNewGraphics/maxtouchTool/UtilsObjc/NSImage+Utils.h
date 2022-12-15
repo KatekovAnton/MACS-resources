@@ -13,6 +13,7 @@
 @interface NSImage (Utils)
 
 + (NSImage*)resizeImage:(NSImage*)sourceImage size:(NSSize)size;
++ (NSImage*)scaleImageContent:(NSImage*)sourceImage scale:(float)scale;
 + (NSImage*)offsetImage:(NSImage*)sourceImage delta:(NSPoint)delta backgroundColor:(NSColor *)color;
 
 + (NSImage*)cropImage:(NSImage*)sourceImage toRect:(NSRect)rect;

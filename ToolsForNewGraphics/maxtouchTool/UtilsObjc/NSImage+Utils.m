@@ -32,6 +32,32 @@
     return targetImage;
 }
 
++ (NSImage*)scaleImageContent:(NSImage*)sourceImage scale:(float)scale
+{
+    NSRect targetFrame1 = [[NSScreen mainScreen] convertRectFromBacking:NSMakeRect(0, 0, sourceImage.size.width, sourceImage.size.height)];
+    float scaleExtra = sourceImage.size.width / targetFrame1.size.width;   
+    float originalW = sourceImage.size.width * scaleExtra; 
+    float newW = originalW * scale;
+    float originalH = sourceImage.size.height * scaleExtra;
+    float newH = originalH * scale;
+    NSRect targetFrame = [[NSScreen mainScreen] convertRectFromBacking:NSMakeRect((originalW - newW) / 2.0, (originalH - newH) / 2.0, newW, newH)];
+    NSImage*  targetImage = [[NSImage alloc] initWithSize:sourceImage.size];
+    
+    [targetImage lockFocus];
+    
+    [sourceImage drawInRect:targetFrame
+                   fromRect:NSZeroRect       //portion of source image to draw
+                  operation:NSCompositeCopy  //compositing operation
+                   fraction:1.0              //alpha (transparency) value
+             respectFlipped:YES              //coordinate system
+                      hints:@{NSImageHintInterpolation:
+                                  [NSNumber numberWithInt:NSImageInterpolationHigh]}];
+    
+    [targetImage unlockFocus];
+    
+    return targetImage;
+}
+
 + (NSImage*)offsetImage:(NSImage*)sourceImage delta:(NSPoint)delta backgroundColor:(NSColor *)color
 {
     NSRect targetFrame = [[NSScreen mainScreen] convertRectFromBacking:NSMakeRect(0, 0, sourceImage.size.width, sourceImage.size.height)];

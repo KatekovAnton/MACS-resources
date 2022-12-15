@@ -174,7 +174,7 @@
 @end
 
 
-
+#define TMPSCALE 1.0
 @implementation MTVisualObjectController
 
 - (instancetype)initWithInputPath:(NSString*)inputPath
@@ -213,6 +213,17 @@
     return self;
 }
 
+- (NSImage *)imageWithPath:(NSString *)path scale:(float)scale
+{
+    NSImage *original = [[NSImage alloc] initWithContentsOfFile:path];
+//    return original;
+    NSImage *result = original;
+    if (fabs(scale - 1.0) > 0.01) {        
+        result = [NSImage scaleImageContent:original scale:scale];
+    }
+    return result;
+}
+
 - (void)dowork:(MTOptions)options
 {
     CPPITexture *textureDiffuseAlpha = NULL;
@@ -234,8 +245,8 @@
         assert([[NSFileManager defaultManager] fileExistsAtPath:_data.inputDiffuse]);
         assert([[NSFileManager defaultManager] fileExistsAtPath:_data.inputDiffuseAlpha]);
         
-        NSImage *diffuseImage = [[NSImage alloc] initWithContentsOfFile:_data.inputDiffuse];
-        NSImage *diffuseAlphaImage = [[NSImage alloc] initWithContentsOfFile:_data.inputDiffuseAlpha];
+        NSImage *diffuseImage = [self imageWithPath:_data.inputDiffuse scale:TMPSCALE];
+        NSImage *diffuseAlphaImage = [self imageWithPath:_data.inputDiffuseAlpha scale:TMPSCALE];
         
         graphicsCellSize = diffuseImage.size.width / _cells;
         float multiplier = 1.0;
@@ -282,8 +293,8 @@
         
         assert([[NSFileManager defaultManager] fileExistsAtPath:_data.inputDiffuse]);
         assert([[NSFileManager defaultManager] fileExistsAtPath:_data.inputDiffuseAlpha]);
-        diffuseImage = [[NSImage alloc] initWithContentsOfFile:_data.inputDiffuse];
-        diffuseAlphaImage = [[NSImage alloc] initWithContentsOfFile:_data.inputDiffuseAlpha];
+        diffuseImage = [self imageWithPath:_data.inputDiffuse scale:TMPSCALE];
+        diffuseAlphaImage = [self imageWithPath:_data.inputDiffuseAlpha scale:TMPSCALE];
         delete textureDiffuse;
         delete textureDiffuseAlpha;
         textureDiffuse = new CPPTextureImplNSBitmapImageRep(diffuseImage);
@@ -305,7 +316,7 @@
     
     @autoreleasepool {
         assert([[NSFileManager defaultManager] fileExistsAtPath:_data.inputAO]);
-        NSImage *aoImage = [[NSImage alloc] initWithContentsOfFile:_data.inputAO];
+        NSImage *aoImage = [self imageWithPath:_data.inputAO scale:TMPSCALE];
         textureAO = new CPPTextureImplNSBitmapImageRep(aoImage);
         
         if (graphicsCellSize != gameCellSize) {
@@ -315,7 +326,7 @@
     
     @autoreleasepool {
         assert([[NSFileManager defaultManager] fileExistsAtPath:_data.inputNormals]);
-        NSImage *normalsImage = [[NSImage alloc] initWithContentsOfFile:_data.inputNormals];
+        NSImage *normalsImage = [self imageWithPath:_data.inputNormals scale:TMPSCALE];
         
         if (normalsImage.size.width != gameCellSize) {
             normalsImage = [NSImage resizeImage:normalsImage size:NSMakeSize(gameCellSize, gameCellSize)];
@@ -330,19 +341,19 @@
         
         // TODO:
         // work throught TextureClipping object to clip transparent zones
-        
-        NSImage *stripesImage = [[NSImage alloc] initWithContentsOfFile:_data.inputStripes];
-        
-        if (stripesImage != nil) {
-            if (graphicsCellSize != gameCellSize) {
-                stripesImage = [NSImage resizeImage:stripesImage size:NSMakeSize(gameCellSize, gameCellSize)];
-                [self saveImage:stripesImage toPath:_data.outputStripes];
-            }
-            else {
-                [[NSFileManager defaultManager] copyItemAtPath:_data.inputStripes toPath:_data.outputStripes error:nil];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:_data.inputStripes]) {
+            NSImage *stripesImage = [self imageWithPath:_data.inputStripes scale:TMPSCALE];
+            
+            if (stripesImage != nil) {
+                if (graphicsCellSize != gameCellSize) {
+                    stripesImage = [NSImage resizeImage:stripesImage size:NSMakeSize(gameCellSize, gameCellSize)];
+                    [self saveImage:stripesImage toPath:_data.outputStripes];
+                }
+                else {
+                    [[NSFileManager defaultManager] copyItemAtPath:_data.inputStripes toPath:_data.outputStripes error:nil];
+                }
             }
         }
-        
         NSDictionary *diffuseInfo = @{@"sizeW" : @(gameCellSize),
                                       @"sizeH" : @(gameCellSize),
                                       @"offsetX" : @(0),
@@ -358,7 +369,7 @@
             MTVisualObjectSpriteData *spriteData = _data.rotatedSpritesData[i];
             @autoreleasepool {
                 assert([[NSFileManager defaultManager] fileExistsAtPath:spriteData.inputShadow]);
-                NSImage *shadowImage = [[NSImage alloc] initWithContentsOfFile:spriteData.inputShadow];
+                NSImage *shadowImage = [self imageWithPath:spriteData.inputShadow scale:TMPSCALE];
                 if (_shadowDisplacement > 0)
                 {
                     float angle = ((float)i * 45.0 + 20) * M_PI / 180.0;
@@ -415,7 +426,7 @@
             
             @autoreleasepool {
                 assert([[NSFileManager defaultManager] fileExistsAtPath:spriteData.inputLighting]);
-                NSImage *lightImage = [[NSImage alloc] initWithContentsOfFile:spriteData.inputLighting];
+                NSImage *lightImage = [self imageWithPath:spriteData.inputLighting scale:TMPSCALE];
                 textureLight = new CPPTextureImplNSBitmapImageRep(lightImage);
                 if (graphicsCellSize != gameCellSize) {
                     lightImage = [NSImage resizeImage:lightImage size:NSMakeSize(gameCellSize, gameCellSize)];
@@ -434,13 +445,13 @@
                     
                     NSImage *tmp_diffuseImage = [[NSImage alloc] initWithContentsOfFile:_data.outputDiffusePNG];
                     
-                    NSImage *tmp_diffuseAlphaImage = [[NSImage alloc] initWithContentsOfFile:_data.inputDiffuseAlpha];
+                    NSImage *tmp_diffuseAlphaImage = [self imageWithPath:_data.inputDiffuseAlpha scale:TMPSCALE];
                     tmp_diffuseAlphaImage = [NSImage resizeImage:tmp_diffuseAlphaImage size:NSMakeSize(gameCellSize, gameCellSize)];
                     
-                    NSImage *tmp_lightImage = [[NSImage alloc] initWithContentsOfFile:spriteData.inputLighting];
+                    NSImage *tmp_lightImage = [self imageWithPath:spriteData.inputLighting scale:TMPSCALE];
                     tmp_lightImage = [NSImage resizeImage:tmp_lightImage size:NSMakeSize(gameCellSize, gameCellSize)];
                     
-                    NSImage *tmp_aoImage = [[NSImage alloc] initWithContentsOfFile:_data.inputAO];
+                    NSImage *tmp_aoImage = [self imageWithPath:_data.inputAO scale:TMPSCALE];
                     tmp_aoImage = [NSImage resizeImage:tmp_aoImage size:NSMakeSize(gameCellSize, gameCellSize)];
                     
                     CPPITexture *tmp_textureDiffuse = new CPPTextureImplNSBitmapImageRep(tmp_diffuseImage);
@@ -454,7 +465,7 @@
                                                                                   aoTextre:tmp_textureAO];
                     
                     assert([[NSFileManager defaultManager] fileExistsAtPath:spriteData.inputShadow]);
-                    NSImage *tmp_shadowImage = [[NSImage alloc] initWithContentsOfFile:spriteData.inputShadow];
+                    NSImage *tmp_shadowImage = [self imageWithPath:spriteData.inputShadow scale:TMPSCALE];
                     tmp_shadowImage = [NSImage resizeImage:tmp_shadowImage size:NSMakeSize(gameCellSize, gameCellSize)];
                     CPPITexture *tmp_shadowTexture = new CPPTextureImplNSBitmapImageRep(tmp_shadowImage);
 
