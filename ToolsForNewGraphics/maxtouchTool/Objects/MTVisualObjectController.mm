@@ -173,7 +173,7 @@
 
 @end
 
-
+// etank - 1.3
 #define TMPSCALE 1.0
 @implementation MTVisualObjectController
 

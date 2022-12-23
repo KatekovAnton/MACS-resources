@@ -1,6 +1,6 @@
 {
 	"basename" : "Mine",
-	"outputFolder" : "landmine/base",
+	"outputFolder" : "landmine/body",
 	"cells" : 1,
 	"colorPattern" : ".png",
 	"diffusePattern" : ".diffuse.png",
