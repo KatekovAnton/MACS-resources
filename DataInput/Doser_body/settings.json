@@ -15,5 +15,12 @@
 			"offsetX": 0,
 			"offsetY": -300
 		}
+	],
+	"children" : [
+		{
+		  "object" : "lights",
+		  "slot" : "light1",
+		  "when" : "work"
+		}
 	]
 }

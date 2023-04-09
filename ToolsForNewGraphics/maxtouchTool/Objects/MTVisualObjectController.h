@@ -10,6 +10,14 @@
 #import "MTOptions.h"
 
 
+
+typedef NS_ENUM(NSUInteger, MTVisualObjectType) {
+    MTVisualObjectType_DefaultUnit,
+    MTVisualObjectType_SingleSprite,
+};
+
+
+
 @interface MTVisualObjectSpriteData : NSObject {
     
 }
@@ -29,6 +37,7 @@
 @interface MTVisualObjectData : NSObject {
     
 }
+@property (nonatomic, readonly) MTVisualObjectType objectType;
 @property (nonatomic, readonly) int method;
 @property (nonatomic, readonly) BOOL is8Directions;
 @property (nonatomic, readonly) NSString *inputDiffuseAlpha;

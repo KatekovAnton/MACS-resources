@@ -74,11 +74,16 @@
                          settings:(NSDictionary*)settings
 {
     if (self = [super init]) {
-        
+        _objectType = MTVisualObjectType_DefaultUnit;
         _method = 0;
         if ([settings valueForKey:@"method"] != nil) {
             _method = [[settings valueForKey:@"method"] intValue];
         }
+        
+//        if ([settings valueForKey:@"type"] != nil) {
+//            NSString *type = [[settings valueForKey:@"type"] stringValue];
+//            
+//        }
         
         _is8Directions = YES;
         if ([settings valueForKey:@"singleDirection"] != nil) {
@@ -277,6 +282,20 @@
                     [newChildSlots addObject:newChildSlot];
                 }
                 [settings setObject:newChildSlots forKey:@"childSlots"];
+            }
+        }
+        // copy children to the output
+        {
+            NSArray *children = _settings[@"children"];
+            if (children != nil)
+            {
+                NSMutableArray *newChildren = [NSMutableArray new];
+                for (NSDictionary *child in children)
+                {
+                    NSMutableDictionary *newChild = [child mutableCopy];
+                    [newChildren addObject:newChild];
+                }
+                [settings setObject:newChildren forKey:@"children"];
             }
         }
         
