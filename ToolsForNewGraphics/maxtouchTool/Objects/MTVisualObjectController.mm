@@ -221,7 +221,6 @@
 - (NSImage *)imageWithPath:(NSString *)path scale:(float)scale
 {
     NSImage *original = [[NSImage alloc] initWithContentsOfFile:path];
-//    return original;
     NSImage *result = original;
     if (fabs(scale - 1.0) > 0.01) {        
         result = [NSImage scaleImageContent:original scale:scale];

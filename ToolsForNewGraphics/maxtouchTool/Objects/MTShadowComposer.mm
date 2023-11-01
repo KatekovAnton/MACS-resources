@@ -44,7 +44,7 @@
 
 @implementation MTShadowComposer
 
-- (instancetype)initWithShadowTextures:(std::vector<CPPITexture *>)shadowTextures
+- (instancetype)initWithShadowTextures:(const std::vector<CPPITexture *> &)shadowTextures
 {
     if (self = [super init]) {
         assert(shadowTextures.size() == 8);

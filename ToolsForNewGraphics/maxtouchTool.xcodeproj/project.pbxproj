@@ -8,6 +8,30 @@
 
 /* Begin PBXBuildFile section */
 		415D771B243997AD00874F28 /* maxtouchToolTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 415D771A243997AD00874F28 /* maxtouchToolTests.mm */; };
+		41887E1A2A701A8A006D1845 /* MCShadowComposer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41887E182A701A8A006D1845 /* MCShadowComposer.cpp */; };
+		41887E1B2A701A8A006D1845 /* MCShadowComposer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41887E182A701A8A006D1845 /* MCShadowComposer.cpp */; };
+		41887E1E2A701AD5006D1845 /* MCImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41887E1C2A701AD5006D1845 /* MCImage.cpp */; };
+		41887E1F2A701AD5006D1845 /* MCImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41887E1C2A701AD5006D1845 /* MCImage.cpp */; };
+		41887E212A701F56006D1845 /* SCBase_s0.png in Resources */ = {isa = PBXBuildFile; fileRef = 41887E202A701F56006D1845 /* SCBase_s0.png */; };
+		41887E222A701F56006D1845 /* SCBase_s0.png in Resources */ = {isa = PBXBuildFile; fileRef = 41887E202A701F56006D1845 /* SCBase_s0.png */; };
+		41887E352A7020FB006D1845 /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41887E242A7020FB006D1845 /* json_writer.cpp */; };
+		41887E362A7020FB006D1845 /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41887E242A7020FB006D1845 /* json_writer.cpp */; };
+		41887E372A7020FB006D1845 /* json_internalmap.inl in Resources */ = {isa = PBXBuildFile; fileRef = 41887E252A7020FB006D1845 /* json_internalmap.inl */; };
+		41887E382A7020FB006D1845 /* json_internalmap.inl in Resources */ = {isa = PBXBuildFile; fileRef = 41887E252A7020FB006D1845 /* json_internalmap.inl */; };
+		41887E392A7020FB006D1845 /* json_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41887E262A7020FB006D1845 /* json_reader.cpp */; };
+		41887E3A2A7020FB006D1845 /* json_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41887E262A7020FB006D1845 /* json_reader.cpp */; };
+		41887E3B2A7020FB006D1845 /* sconscript in Resources */ = {isa = PBXBuildFile; fileRef = 41887E312A7020FB006D1845 /* sconscript */; };
+		41887E3C2A7020FB006D1845 /* sconscript in Resources */ = {isa = PBXBuildFile; fileRef = 41887E312A7020FB006D1845 /* sconscript */; };
+		41887E3D2A7020FB006D1845 /* json_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41887E322A7020FB006D1845 /* json_value.cpp */; };
+		41887E3E2A7020FB006D1845 /* json_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41887E322A7020FB006D1845 /* json_value.cpp */; };
+		41887E3F2A7020FB006D1845 /* json_valueiterator.inl in Resources */ = {isa = PBXBuildFile; fileRef = 41887E332A7020FB006D1845 /* json_valueiterator.inl */; };
+		41887E402A7020FB006D1845 /* json_valueiterator.inl in Resources */ = {isa = PBXBuildFile; fileRef = 41887E332A7020FB006D1845 /* json_valueiterator.inl */; };
+		41887E412A7020FB006D1845 /* json_internalarray.inl in Resources */ = {isa = PBXBuildFile; fileRef = 41887E342A7020FB006D1845 /* json_internalarray.inl */; };
+		41887E422A7020FB006D1845 /* json_internalarray.inl in Resources */ = {isa = PBXBuildFile; fileRef = 41887E342A7020FB006D1845 /* json_internalarray.inl */; };
+		41887E452A702289006D1845 /* MCLightComposer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41887E432A702289006D1845 /* MCLightComposer.cpp */; };
+		41887E462A702289006D1845 /* MCLightComposer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41887E432A702289006D1845 /* MCLightComposer.cpp */; };
+		41887E492A7023FD006D1845 /* MCDiffuseComposer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41887E472A7023FD006D1845 /* MCDiffuseComposer.cpp */; };
+		41887E4A2A7023FD006D1845 /* MCDiffuseComposer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41887E472A7023FD006D1845 /* MCDiffuseComposer.cpp */; };
 		6B87EA422014AC0A003D5321 /* BitmapTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6B87EA3C2014AC09003D5321 /* BitmapTexture.cpp */; };
 		6B87EA432014AC0A003D5321 /* ZipWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6B87EA3D2014AC09003D5321 /* ZipWrapper.cpp */; };
 		6B87EA442014AC0A003D5321 /* ByteBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6B87EA3E2014AC09003D5321 /* ByteBuffer.cpp */; };
@@ -116,6 +140,34 @@
 		415D7718243997AD00874F28 /* maxtouchToolTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = maxtouchToolTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		415D771A243997AD00874F28 /* maxtouchToolTests.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = maxtouchToolTests.mm; sourceTree = "<group>"; };
 		415D771C243997AD00874F28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		41887E132A6E98B8006D1845 /* stb_image_write.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image_write.h; sourceTree = "<group>"; };
+		41887E162A6E98B9006D1845 /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
+		41887E172A6E98D0006D1845 /* stb_image_defined.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stb_image_defined.h; sourceTree = "<group>"; };
+		41887E182A701A8A006D1845 /* MCShadowComposer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MCShadowComposer.cpp; sourceTree = "<group>"; };
+		41887E192A701A8A006D1845 /* MCShadowComposer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MCShadowComposer.hpp; sourceTree = "<group>"; };
+		41887E1C2A701AD5006D1845 /* MCImage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MCImage.cpp; sourceTree = "<group>"; };
+		41887E1D2A701AD5006D1845 /* MCImage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MCImage.hpp; sourceTree = "<group>"; };
+		41887E202A701F56006D1845 /* SCBase_s0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SCBase_s0.png; path = Assets.xcassets/Scout/SCBase_s0.imageset/SCBase_s0.png; sourceTree = "<group>"; };
+		41887E242A7020FB006D1845 /* json_writer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = json_writer.cpp; sourceTree = "<group>"; };
+		41887E252A7020FB006D1845 /* json_internalmap.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json_internalmap.inl; sourceTree = "<group>"; };
+		41887E262A7020FB006D1845 /* json_reader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = json_reader.cpp; sourceTree = "<group>"; };
+		41887E282A7020FB006D1845 /* reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = reader.h; sourceTree = "<group>"; };
+		41887E292A7020FB006D1845 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		41887E2A2A7020FB006D1845 /* value.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = value.h; sourceTree = "<group>"; };
+		41887E2B2A7020FB006D1845 /* autolink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = autolink.h; sourceTree = "<group>"; };
+		41887E2C2A7020FB006D1845 /* json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = json.h; sourceTree = "<group>"; };
+		41887E2D2A7020FB006D1845 /* jsonfeatures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jsonfeatures.h; sourceTree = "<group>"; };
+		41887E2E2A7020FB006D1845 /* writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = writer.h; sourceTree = "<group>"; };
+		41887E2F2A7020FB006D1845 /* forwards.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = forwards.h; sourceTree = "<group>"; };
+		41887E302A7020FB006D1845 /* json_batchallocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = json_batchallocator.h; sourceTree = "<group>"; };
+		41887E312A7020FB006D1845 /* sconscript */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sconscript; sourceTree = "<group>"; };
+		41887E322A7020FB006D1845 /* json_value.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = json_value.cpp; sourceTree = "<group>"; };
+		41887E332A7020FB006D1845 /* json_valueiterator.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json_valueiterator.inl; sourceTree = "<group>"; };
+		41887E342A7020FB006D1845 /* json_internalarray.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json_internalarray.inl; sourceTree = "<group>"; };
+		41887E432A702289006D1845 /* MCLightComposer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MCLightComposer.cpp; sourceTree = "<group>"; };
+		41887E442A702289006D1845 /* MCLightComposer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MCLightComposer.hpp; sourceTree = "<group>"; };
+		41887E472A7023FD006D1845 /* MCDiffuseComposer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MCDiffuseComposer.cpp; sourceTree = "<group>"; };
+		41887E482A7023FD006D1845 /* MCDiffuseComposer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MCDiffuseComposer.hpp; sourceTree = "<group>"; };
 		51BF73A41E44C9AA0041EE76 /* MTOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTOptions.h; sourceTree = "<group>"; };
 		6B87EA2D2014ABFA003D5321 /* Colors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Colors.h; sourceTree = "<group>"; };
 		6B87EA2E2014ABFA003D5321 /* Geometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Geometry.h; sourceTree = "<group>"; };
@@ -257,6 +309,37 @@
 			path = maxtouchToolTests;
 			sourceTree = "<group>";
 		};
+		41887E232A7020FB006D1845 /* libJSON */ = {
+			isa = PBXGroup;
+			children = (
+				41887E242A7020FB006D1845 /* json_writer.cpp */,
+				41887E252A7020FB006D1845 /* json_internalmap.inl */,
+				41887E262A7020FB006D1845 /* json_reader.cpp */,
+				41887E272A7020FB006D1845 /* json */,
+				41887E302A7020FB006D1845 /* json_batchallocator.h */,
+				41887E312A7020FB006D1845 /* sconscript */,
+				41887E322A7020FB006D1845 /* json_value.cpp */,
+				41887E332A7020FB006D1845 /* json_valueiterator.inl */,
+				41887E342A7020FB006D1845 /* json_internalarray.inl */,
+			);
+			path = libJSON;
+			sourceTree = "<group>";
+		};
+		41887E272A7020FB006D1845 /* json */ = {
+			isa = PBXGroup;
+			children = (
+				41887E282A7020FB006D1845 /* reader.h */,
+				41887E292A7020FB006D1845 /* config.h */,
+				41887E2A2A7020FB006D1845 /* value.h */,
+				41887E2B2A7020FB006D1845 /* autolink.h */,
+				41887E2C2A7020FB006D1845 /* json.h */,
+				41887E2D2A7020FB006D1845 /* jsonfeatures.h */,
+				41887E2E2A7020FB006D1845 /* writer.h */,
+				41887E2F2A7020FB006D1845 /* forwards.h */,
+			);
+			path = json;
+			sourceTree = "<group>";
+		};
 		6B87EA2C2014ABFA003D5321 /* MathKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -309,12 +392,20 @@
 				6C4D07EE1D526C2C00C055AC /* MTVisualObject.mm */,
 				6C3531B21DCFE19000A2F525 /* MTDiffuseComposer.h */,
 				6C3531B31DCFE19000A2F525 /* MTDiffuseComposer.mm */,
+				41887E482A7023FD006D1845 /* MCDiffuseComposer.hpp */,
+				41887E472A7023FD006D1845 /* MCDiffuseComposer.cpp */,
 				6C77ED4B1D65FDDC003FB5BC /* MTLightComposer.h */,
 				6C77ED4C1D65FDDC003FB5BC /* MTLightComposer.mm */,
+				41887E442A702289006D1845 /* MCLightComposer.hpp */,
+				41887E432A702289006D1845 /* MCLightComposer.cpp */,
 				6C833AB61D5F75EB009ECC29 /* MTShadowComposer.h */,
 				6C833AB71D5F75EB009ECC29 /* MTShadowComposer.mm */,
+				41887E192A701A8A006D1845 /* MCShadowComposer.hpp */,
+				41887E182A701A8A006D1845 /* MCShadowComposer.cpp */,
 				6C83C1E91D58F08300898B7E /* MTVisualObjectController.h */,
 				6C83C1EA1D58F08300898B7E /* MTVisualObjectController.mm */,
+				41887E1D2A701AD5006D1845 /* MCImage.hpp */,
+				41887E1C2A701AD5006D1845 /* MCImage.cpp */,
 				51BF73A41E44C9AA0041EE76 /* MTOptions.h */,
 			);
 			path = Objects;
@@ -414,6 +505,7 @@
 				6C079B2E2235187A00D4D736 /* ToolPrefix.h */,
 				6CC856481D52578A0012DDB0 /* AppDelegate.h */,
 				6CC856491D52578A0012DDB0 /* AppDelegate.mm */,
+				41887E202A701F56006D1845 /* SCBase_s0.png */,
 				6CC8564E1D52578A0012DDB0 /* Assets.xcassets */,
 				6CC856531D52578A0012DDB0 /* Info.plist */,
 				6CC8564B1D52578A0012DDB0 /* Supporting Files */,
@@ -436,6 +528,10 @@
 				6C833AC51D6223A2009ECC29 /* libpng */,
 				6B87EA2C2014ABFA003D5321 /* MathKit */,
 				6CC8565A1D5258880012DDB0 /* Texture */,
+				41887E232A7020FB006D1845 /* libJSON */,
+				41887E172A6E98D0006D1845 /* stb_image_defined.h */,
+				41887E132A6E98B8006D1845 /* stb_image_write.h */,
+				41887E162A6E98B9006D1845 /* stb_image.h */,
 				6B87EA3C2014AC09003D5321 /* BitmapTexture.cpp */,
 				6B87EA402014AC0A003D5321 /* BitmapTexture.h */,
 				6B87EA3E2014AC09003D5321 /* ByteBuffer.cpp */,
@@ -658,6 +754,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41887E3C2A7020FB006D1845 /* sconscript in Resources */,
+				41887E422A7020FB006D1845 /* json_internalarray.inl in Resources */,
+				41887E222A701F56006D1845 /* SCBase_s0.png in Resources */,
+				41887E382A7020FB006D1845 /* json_internalmap.inl in Resources */,
+				41887E402A7020FB006D1845 /* json_valueiterator.inl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -665,9 +766,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41887E3B2A7020FB006D1845 /* sconscript in Resources */,
+				41887E3F2A7020FB006D1845 /* json_valueiterator.inl in Resources */,
+				41887E372A7020FB006D1845 /* json_internalmap.inl in Resources */,
 				6CE8476722910666008EDD9D /* AssimpNodeView.xib in Resources */,
+				41887E412A7020FB006D1845 /* json_internalarray.inl in Resources */,
 				6CC8564F1D52578A0012DDB0 /* Assets.xcassets in Resources */,
 				6CC856521D52578A0012DDB0 /* MainMenu.xib in Resources */,
+				41887E212A701F56006D1845 /* SCBase_s0.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -678,7 +784,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41887E3A2A7020FB006D1845 /* json_reader.cpp in Sources */,
+				41887E3E2A7020FB006D1845 /* json_value.cpp in Sources */,
 				415D771B243997AD00874F28 /* maxtouchToolTests.mm in Sources */,
+				41887E1B2A701A8A006D1845 /* MCShadowComposer.cpp in Sources */,
+				41887E4A2A7023FD006D1845 /* MCDiffuseComposer.cpp in Sources */,
+				41887E362A7020FB006D1845 /* json_writer.cpp in Sources */,
+				41887E462A702289006D1845 /* MCLightComposer.cpp in Sources */,
+				41887E1F2A701AD5006D1845 /* MCImage.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -690,12 +803,14 @@
 				6CC8565D1D5258AF0012DDB0 /* Texture.cpp in Sources */,
 				6CE847632291061D008EDD9D /* AssimpNodeView.mm in Sources */,
 				6C833C431D62254D009ECC29 /* uncompr.c in Sources */,
+				41887E452A702289006D1845 /* MCLightComposer.cpp in Sources */,
 				6C833C3A1D62254D009ECC29 /* gzclose.c in Sources */,
 				6CCDA29B1DDD1E1A00B20A49 /* NSImage+Utils.m in Sources */,
 				6CE8470E22905542008EDD9D /* StringUtils.cpp in Sources */,
 				6B87EA442014AC0A003D5321 /* ByteBuffer.cpp in Sources */,
 				6CE8470A2290549A008EDD9D /* BinaryWriterMemory.cpp in Sources */,
 				6C833C421D62254D009ECC29 /* trees.c in Sources */,
+				41887E492A7023FD006D1845 /* MCDiffuseComposer.cpp in Sources */,
 				6CE8475C2290FC78008EDD9D /* AssimpView.mm in Sources */,
 				6C3531B41DCFE19000A2F525 /* MTDiffuseComposer.mm in Sources */,
 				6C833C3C1D62254D009ECC29 /* gzread.c in Sources */,
@@ -704,14 +819,19 @@
 				6CE847082290549A008EDD9D /* BinaryWriter.cpp in Sources */,
 				6C833AB81D5F75EB009ECC29 /* MTShadowComposer.mm in Sources */,
 				6CE8471022905613008EDD9D /* FileManager.cpp in Sources */,
+				41887E3D2A7020FB006D1845 /* json_value.cpp in Sources */,
 				6C833C371D62254D009ECC29 /* compress.c in Sources */,
+				41887E352A7020FB006D1845 /* json_writer.cpp in Sources */,
+				41887E1E2A701AD5006D1845 /* MCImage.cpp in Sources */,
 				6C833C3E1D62254D009ECC29 /* infback.c in Sources */,
 				6C833C381D62254D009ECC29 /* crc32.c in Sources */,
 				6C833C441D62254D009ECC29 /* zutil.c in Sources */,
 				6C4D07EF1D526C2C00C055AC /* MTVisualObject.mm in Sources */,
 				6C833C3F1D62254D009ECC29 /* inffast.c in Sources */,
+				41887E392A7020FB006D1845 /* json_reader.cpp in Sources */,
 				6CBE49151E1DE63000516F8A /* CPPTextureImplNSBitmapImageRep.mm in Sources */,
 				6C833C411D62254D009ECC29 /* inftrees.c in Sources */,
+				41887E1A2A701A8A006D1845 /* MCShadowComposer.cpp in Sources */,
 				6B87EA432014AC0A003D5321 /* ZipWrapper.cpp in Sources */,
 				6CE8476B229107B8008EDD9D /* MTProcessSettings.m in Sources */,
 				6CC8564D1D52578A0012DDB0 /* main.m in Sources */,

@@ -105,6 +105,16 @@ struct __GSize2D {
 typedef struct __GSize2D GSize2D;
 
 
+struct __GISize2D {
+    int height;
+    int width;
+    
+    __GISize2D() :width(0), height(0) {}
+    __GISize2D(int _w, int _h) :width(_w), height(_h) {}
+};
+
+typedef struct __GISize2D GISize2D;
+
 struct __GCircle2D {
     GPoint2D center;
     float radius;

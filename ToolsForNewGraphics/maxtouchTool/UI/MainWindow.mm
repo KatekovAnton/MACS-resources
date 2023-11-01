@@ -19,6 +19,7 @@
 #include "ByteBuffer.h"
 #include "MTProcessSettings.h"
 #import "MTVisualObject.h"
+#include "MCImage.hpp"
 
 
 
@@ -42,7 +43,11 @@
     [object buildResultImageWithAoK:1.0 shadowK:1.0 diffuseK:1.0];
     [self presentObject:object];
     
+    NSString *str = [[NSBundle mainBundle] pathForResource:@"SCBase_s0" ofType:@"png"];
+    str = str;
     
+    MCImage image(str.UTF8String);
+    int a = image._heigth;
 }
 
 - (void)presentObject:(MTVisualObject*)object
@@ -152,33 +157,6 @@
     
     [self processEffectDirectories:directories toOutputDirectory:settings.outputPath];
 }
-
-- (IBAction)onProcessSingleTexture:(id)sender
-{
-    MTProcessSettings *settings = [MTProcessSettings requestSettingsForType:@"texture"];
-    if (settings == nil) {
-        return;
-    }
-    
-    NSImage *frameImage = [[NSImage alloc] initWithContentsOfFile:[settings.inputPath stringByAppendingString:@"Moss_roughness.jpg"]];
-    CPPITexture *frame = new CPPTextureImplNSBitmapImageRep(frameImage);
-
-    BitmapComposer composer = BitmapComposer(GSize2D(frame->GetWidth(), frame->GetHeight()));
-
-    for (float x = 0; x < frame->GetWidth(); x++) {
-        for (float y = 0; y < frame->GetHeight(); y++) {
-            Color color = frame->GetColorAtPoint(GPoint2D(x, y));
-            color.b = 0;
-            color.g = 0;
-
-            composer.setColor(color, x, y);
-        }
-    }
-
-    NSImage *result = [MTVisualObject resultImageWithBitmapComposer:&composer];
-    [self saveImage:result toPath:[settings.outputPath stringByAppendingString:@"Moss_roughness_1.jpg"]];
-}
-
 
 - (void)saveImage:(NSImage*)image toPath:(NSString*)path
 {

@@ -19,6 +19,7 @@
     IBOutlet NSImageView *_imageDiffuse;
     IBOutlet NSImageView *_imageShadow;
     IBOutlet NSImageView *_imageResult;
+    IBOutlet NSImageView *_imageAlternative;
     IBOutlet NSTextField *_labelState;
     IBOutlet NSButton *_checkboxExportAdditionalPNGs;
 }
