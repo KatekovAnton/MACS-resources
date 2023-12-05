@@ -51,7 +51,7 @@
     {
         @autoreleasepool {
             NSImage *image = [[NSImage alloc] initWithContentsOfFile:item.inputPath];
-            image = [NSImage resizeImage:image size:NSMakeSize(1920 / self.decrease * [NSScreen mainScreen].backingScaleFactor, 1080 / self.decrease * [NSScreen mainScreen].backingScaleFactor)];
+            image = [NSImage resizeImage:image byScalingItToSize:NSMakeSize(1920 / self.decrease * [NSScreen mainScreen].backingScaleFactor, 1080 / self.decrease * [NSScreen mainScreen].backingScaleFactor)];
             
             MTEffectProcessorTaskImage *newItem = [MTEffectProcessorTaskImage new];
             newItem.image = image;

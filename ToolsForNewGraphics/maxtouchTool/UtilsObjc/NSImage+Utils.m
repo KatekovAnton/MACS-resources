@@ -12,7 +12,7 @@
 
 @implementation NSImage (Utils)
 
-+ (NSImage*)resizeImage:(NSImage*)sourceImage size:(NSSize)size
++ (NSImage*)resizeImage:(NSImage*)sourceImage byScalingItToSize:(NSSize)size
 {
     NSRect targetFrame = [[NSScreen mainScreen] convertRectFromBacking:NSMakeRect(0, 0, size.width, size.height)];
     NSImage*  targetImage = [[NSImage alloc] initWithSize:targetFrame.size];
@@ -20,6 +20,29 @@
     [targetImage lockFocus];
     
     [sourceImage drawInRect:targetFrame
+                   fromRect:NSZeroRect       //portion of source image to draw
+                  operation:NSCompositeCopy  //compositing operation
+                   fraction:1.0              //alpha (transparency) value
+             respectFlipped:YES              //coordinate system
+                      hints:@{NSImageHintInterpolation:
+                                  [NSNumber numberWithInt:NSImageInterpolationHigh]}];
+    
+    [targetImage unlockFocus];
+    
+    return targetImage;
+}
+
++ (NSImage*)resizeImage:(NSImage*)sourceImage byResizingCanvasFromCenterToSize:(NSSize)size
+{
+    NSRect targetFrame = [[NSScreen mainScreen] convertRectFromBacking:NSMakeRect(0, 0, size.width, size.height)];
+    NSImage*  targetImage = [[NSImage alloc] initWithSize:targetFrame.size];
+    
+    NSRect targetImageFrame = [[NSScreen mainScreen] convertRectFromBacking:NSMakeRect(0, 0, sourceImage.size.width, sourceImage.size.height)];
+    targetImageFrame.origin.x = (targetFrame.size.width - targetImageFrame.size.width) / 2.0;
+    targetImageFrame.origin.y = (targetFrame.size.height - targetImageFrame.size.height) / 2.0;
+    [targetImage lockFocus];
+    
+    [sourceImage drawInRect:targetImageFrame
                    fromRect:NSZeroRect       //portion of source image to draw
                   operation:NSCompositeCopy  //compositing operation
                    fraction:1.0              //alpha (transparency) value
@@ -131,7 +154,7 @@
     NSSize sz = img.size;
 //    sz.width /= [NSScreen mainScreen].backingScaleFactor;
 //    sz.height /= [NSScreen mainScreen].backingScaleFactor;
-    img = [self resizeImage:img size:sz];
+    img = [self resizeImage:img byScalingItToSize:sz];
     
     return img;
     

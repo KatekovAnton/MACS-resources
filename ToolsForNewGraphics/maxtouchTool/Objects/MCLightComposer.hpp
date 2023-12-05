@@ -55,6 +55,6 @@ public:
     MCLightComposer(const std::vector<CPPITexture *> &textures);
     
     void build();
-}
+};
 
 #endif /* MCLightComposer_hpp */
