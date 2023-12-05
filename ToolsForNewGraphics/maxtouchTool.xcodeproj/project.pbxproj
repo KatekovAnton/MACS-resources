@@ -32,6 +32,7 @@
 		41887E462A702289006D1845 /* MCLightComposer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41887E432A702289006D1845 /* MCLightComposer.cpp */; };
 		41887E492A7023FD006D1845 /* MCDiffuseComposer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41887E472A7023FD006D1845 /* MCDiffuseComposer.cpp */; };
 		41887E4A2A7023FD006D1845 /* MCDiffuseComposer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41887E472A7023FD006D1845 /* MCDiffuseComposer.cpp */; };
+		4195FCEA2B1F88610006D7B8 /* Structures.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4195FCE92B1F88610006D7B8 /* Structures.cpp */; };
 		6B87EA422014AC0A003D5321 /* BitmapTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6B87EA3C2014AC09003D5321 /* BitmapTexture.cpp */; };
 		6B87EA432014AC0A003D5321 /* ZipWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6B87EA3D2014AC09003D5321 /* ZipWrapper.cpp */; };
 		6B87EA442014AC0A003D5321 /* ByteBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6B87EA3E2014AC09003D5321 /* ByteBuffer.cpp */; };
@@ -168,6 +169,7 @@
 		41887E442A702289006D1845 /* MCLightComposer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MCLightComposer.hpp; sourceTree = "<group>"; };
 		41887E472A7023FD006D1845 /* MCDiffuseComposer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MCDiffuseComposer.cpp; sourceTree = "<group>"; };
 		41887E482A7023FD006D1845 /* MCDiffuseComposer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MCDiffuseComposer.hpp; sourceTree = "<group>"; };
+		4195FCE92B1F88610006D7B8 /* Structures.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Structures.cpp; sourceTree = "<group>"; };
 		51BF73A41E44C9AA0041EE76 /* MTOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTOptions.h; sourceTree = "<group>"; };
 		6B87EA2D2014ABFA003D5321 /* Colors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Colors.h; sourceTree = "<group>"; };
 		6B87EA2E2014ABFA003D5321 /* Geometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Geometry.h; sourceTree = "<group>"; };
@@ -549,6 +551,7 @@
 				6CE847052290549A008EDD9D /* BinaryWriterMemory.hpp */,
 				6CE8470C22905542008EDD9D /* StringUtils.cpp */,
 				6CE8470D22905542008EDD9D /* StringUtils.h */,
+				4195FCE92B1F88610006D7B8 /* Structures.cpp */,
 				6C4D07F41D5277E300C055AC /* Structures.h */,
 				6C4D07E41D5269F100C055AC /* Utils.h */,
 			);
@@ -836,6 +839,7 @@
 				6CE8476B229107B8008EDD9D /* MTProcessSettings.m in Sources */,
 				6CC8564D1D52578A0012DDB0 /* main.m in Sources */,
 				6CE84760229103B6008EDD9D /* AssimpScene.mm in Sources */,
+				4195FCEA2B1F88610006D7B8 /* Structures.cpp in Sources */,
 				6C833BEE1D6223A2009ECC29 /* LibpngWrapper.cpp in Sources */,
 				6CEC95771E2B053100DBD1AA /* MTSequenceFrameSubstractor.mm in Sources */,
 				6CE847092290549A008EDD9D /* BinaryReader.cpp in Sources */,

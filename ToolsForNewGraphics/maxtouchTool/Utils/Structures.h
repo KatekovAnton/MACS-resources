@@ -37,42 +37,10 @@ struct __Color
     
 } typedef Color;
 
-static unsigned char CharSubstract(unsigned char c1, unsigned char c2)
-{
-    if (c1 > c2)
-        return c1 - c2;
-    else
-        return 0;
-}
-
-static Color ColorSubstract(Color c1, Color c2) {
-    
-    Color result;
-    result.r = CharSubstract(c1.r, c2.r);
-    result.g = CharSubstract(c1.g, c2.g);
-    result.b = CharSubstract(c1.b, c2.b);
-    result.a = CharSubstract(c1.a, c2.a);
-    return result;
-}
-
-static unsigned char CharAdd(unsigned char c1, unsigned char c2)
-{
-    unsigned char result = c1 + c2;
-    if (result >= c1 && result >= c2)
-        return result;
-    else
-        return 255;
-}
-
-static Color ColorAdd(Color c1, Color c2) {
-    
-    Color result;
-    result.r = CharAdd(c1.r, c2.r);
-    result.g = CharAdd(c1.g, c2.g);
-    result.b = CharAdd(c1.b, c2.b);
-    result.a = CharAdd(c1.a, c2.a);
-    return result;
-}
+unsigned char CharSubstract(unsigned char c1, unsigned char c2);
+Color ColorSubstract(Color c1, Color c2);
+unsigned char CharAdd(unsigned char c1, unsigned char c2);
+Color ColorAdd(Color c1, Color c2);
 
 struct __ColorRGB
 {
@@ -161,69 +129,26 @@ struct __ColorF
     
 } typedef ColorF;
 
-static ColorF ColorFSubstract(ColorF c1, ColorF c2) {
+struct ColorHSV {
+    float h;        /* Hue degree between 0.0 and 360.0 */
+    float s;        /* Saturation between 0.0 (gray) and 1.0 */
+    float v;        /* Value between 0.0 (black) and 1.0 */
     
-    ColorF result;
-    result.r = c1.r - c2.r;
-    result.g = c1.g - c2.g;
-    result.b = c1.b - c2.b;
-    result.a = c1.a - c2.a;
-    return result;
-}
-
-static ColorF ColorFAdd(ColorF c1, ColorF c2) {
+    ColorHSV ()
+    :h(0), s(0), v(0)
+    {}
     
-    ColorF result;
-    result.r = c1.r + c2.r;
-    result.g = c1.g + c2.g;
-    result.b = c1.b + c2.b;
-    result.a = c1.a + c2.a;
-    return result;
-}
+    ColorHSV (float _h, float _s, float _v)
+    :h(_h), s(_s), v(_v)
+    {}
+};
 
-static ColorF ColorFMultScalar(ColorF c1, float c2) {
-    
-    ColorF result;
-    result.r = c1.r * c2;
-    result.g = c1.g * c2;
-    result.b = c1.b * c2;
-    result.a = c1.a * c2;
-    return result;
-}
-
-static ColorF ColorFAddScalar(ColorF c1, float c2) {
-    
-    ColorF result;
-    result.r = c1.r + c2;
-    result.g = c1.g + c2;
-    result.b = c1.b + c2;
-//    result.a = c1.a + c2;
-   
-    return result;
-}
-
-static ColorF ColorFClamp(ColorF c1) {
-    ColorF result = c1;
-    if (result.r < 0) {
-        result.r = 0;
-    }
-    if (result.r > 1) {
-        result.r = 1;
-    }
-    if (result.g < 0) {
-        result.g = 0;
-    }
-    if (result.g > 1) {
-        result.g = 1;
-    }
-    if (result.a < 0) {
-        result.a = 0;
-    }
-    if (result.a > 1) {
-        result.a = 1;
-    }
-    return result;
-}
-
+ColorF ColorFSubstract(ColorF c1, ColorF c2);
+ColorF ColorFAdd(ColorF c1, ColorF c2);
+ColorF ColorFMultScalar(ColorF c1, float c2);
+ColorF ColorFAddScalar(ColorF c1, float c2);
+ColorF ColorFClamp(ColorF c1);
+ColorHSV ColorF_To_ColorHSV(const ColorF &color);
+ColorF ColorHSV_To_ColorF(const ColorHSV &hsv);
 
 #endif /* Structures_h */
