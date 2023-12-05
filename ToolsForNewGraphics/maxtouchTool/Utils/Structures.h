@@ -134,6 +134,14 @@ struct __ColorF
     :r((float)_r/255.0f), g((float)_g/255.0f), b((float)_b/255.0f), a((float)_a/255.0f)
     {}
     
+    __ColorF (double _r, double _g, double _b)
+    :r((float)_r), g((float)_g), b((float)_b), a(1.0f)
+    {}
+    
+    __ColorF (float _r, float _g, float _b)
+    :r(_r), g(_g), b(_b), a(1.0f)
+    {}
+    
     __ColorF (Color color)
 //    :r((float)color.r/255.0f), g((float)color.g/255.0f), b((float)color.b/255.0f), a((float)color.a/255.0f)
     :__ColorF(color.r, color.g, color.b, color.a)

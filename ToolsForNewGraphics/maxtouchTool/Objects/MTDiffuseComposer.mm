@@ -18,6 +18,98 @@
 
 
 
+struct hsv_color {
+    double h;        /* Hue degree between 0.0 and 360.0 */
+    double s;        /* Saturation between 0.0 (gray) and 1.0 */
+    double v;        /* Value between 0.0 (black) and 1.0 */
+};
+
+hsv_color rgb2hsv(ColorF color)
+{
+    hsv_color   result;
+    double      min, max, delta;
+
+    min = color.r < color.g ? color.r : color.g;
+    min = min  < color.b ? min  : color.b;
+
+    max = color.r > color.g ? color.r : color.g;
+    max = max  > color.b ? max  : color.b;
+
+    result.v = max;                                // v
+    delta = max - min;
+    if (delta < 0.00001)
+    {
+        result.s = 0;
+        result.h = 0; // undefined, maybe nan?
+        return result;
+    }
+    if( max > 0.0 ) { // NOTE: if Max is == 0, this divide would cause a crash
+        result.s = (delta / max);                  // s
+    } else {
+        // if max is 0, then r = g = b = 0              
+        // s = 0, h is undefined
+        result.s = 0.0;
+        result.h = NAN;                            // its now undefined
+        return result;
+    }
+    if( color.r >= max )                           // > is bogus, just keeps compilor happy
+        result.h = ( color.g - color.b ) / delta;        // between yellow & magenta
+    else
+    if( color.g >= max )
+        result.h = 2.0 + ( color.b - color.r ) / delta;  // between cyan & yellow
+    else
+        result.h = 4.0 + ( color.r - color.g ) / delta;  // between magenta & cyan
+
+    result.h *= 60.0;                              // degrees
+
+    if( result.h < 0.0 )
+        result.h += 360.0;
+
+    return result;
+}
+
+ColorF hsv_to_rgb(struct hsv_color hsv) {
+    ColorF rgb;
+    rgb.a = 1.0;
+    double c = 0.0, m = 0.0, x = 0.0;
+ 
+    
+    c = hsv.v * hsv.s;
+    x = c * (1.0 - fabs(fmod(hsv.h / 60.0, 2) - 1.0));
+    m = hsv.v - c;
+    if (hsv.h >= 0.0 && hsv.h < 60.0)
+    {
+        rgb = ColorF(c + m, x + m, m);
+    }
+    else if (hsv.h >= 60.0 && hsv.h < 120.0)
+    {
+        rgb = ColorF(x + m, c + m, m);
+    }
+    else if (hsv.h >= 120.0 && hsv.h < 180.0)
+    {
+        rgb = ColorF(m, c + m, x + m);
+    }
+    else if (hsv.h >= 180.0 && hsv.h < 240.0)
+    {
+        rgb = ColorF(m, x + m, c + m);
+    }
+    else if (hsv.h >= 240.0 && hsv.h < 300.0)
+    {
+        rgb = ColorF(x + m, m, c + m);
+    }
+    else if (hsv.h >= 300.0 && hsv.h < 360.0)
+    {
+        rgb = ColorF(c + m, m, x + m);
+    }
+    else
+    {
+        rgb = ColorF(m, m, m);
+    }
+    return rgb;
+}
+
+
+
 @interface MTDiffuseComposer () {
     CPPITexture *_diffuseTexture;
     CPPITexture *_diffuseAlphaTexture;
@@ -55,7 +147,7 @@
                     float min = 1.0 - multiplier;
                     colorDiffuseF = ColorFAddScalar(colorDiffuseF, -min);
                 }
-                else  {
+                else if (method == 1) {
                     float gray = (colorDiffuseF.r + colorDiffuseF.g + colorDiffuseF.b) / 3.0;
                     float notGray = fabs(gray - (fabsf(gray - colorDiffuseF.r) + fabsf(gray - colorDiffuseF.g) + fabsf(gray - colorDiffuseF.b)) / 3.0);
                     float treshold = 0.2;
@@ -71,6 +163,15 @@
                         colorDiffuseF.b = multiplier * (gray - diffb * multiplier) * colorDiffuseF.a;
                     }
                 }
+//                else if (method == 2)
+//                {
+//                    // minelayer
+//                    // TODO: support hsv manipulations
+//                    hsv_color color = rgb2hsv(colorDiffuseF);
+//                    color.v *= multiplier;
+//                    color.s *= 1.35;
+//                    colorDiffuseF = hsv_to_rgb(color);
+//                }
                 colorDiffuse = colorDiffuseF.getColor();
             }
             Color colorDiffuseAlpha = _diffuseAlphaTexture->GetColorAtPoint(GPoint2D(cx, cy));
