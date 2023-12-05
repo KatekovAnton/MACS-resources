@@ -1,5 +1,5 @@
 {
-	"basename" : "MinerBase",
+	"basename" : "Miner",
 	"outputFolder" : "miner/body",
 	"cells" : 1,
 	"colorPattern" : "_s%d.png",
