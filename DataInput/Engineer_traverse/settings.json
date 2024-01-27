@@ -1,6 +1,6 @@
 {
 	"basename" : "escouth",
-	"outputFolder" : "eonscouth/body",
+	"outputFolder" : "engineer_traverse/body",
 	"cells" : 1,
 	"colorPattern" : "_%d.png",
 	"diffusePattern" : "_0.diffuse.png",
