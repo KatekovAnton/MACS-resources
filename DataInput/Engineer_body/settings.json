@@ -1,21 +1,40 @@
 {
-	"basename" : "escouth",
+	"basename" : "Engineer",
 	"outputFolder" : "engineer/body",
 	"cells" : 1,
-	"colorPattern" : "_%d.png",
-	"diffusePattern" : "_0.diffuse.png",
-	"shadowPattern" : "_%d.Shadow.png",
-	"aoPattern" : "_0.ao.png",
-	"alphaPattern" : "_0.Alpha.png",
-    "normalsPattern" : "_0.normals.png",
+	"colorPattern" : "_s%d.png",
+	"diffusePattern" : "_s0.diffuse.png",
+	"shadowPattern" : "_s%d.Shadow.png",
+	"aoPattern" : "_s0.AO.png",
+	"alphaPattern" : "_s0.Alpha.png",
+    "normalsPattern" : "_s0.normals.png",
 	"darken" : 1.5,
 	"method" : 1,
 	"childSlots": [
 		{
-			"type": "head",
+			"type": "rails",
 			"offsetX": 0,
 			"offsetY": 0, 
 			"meaning": "vector in pixels from center"
+		},
+		{
+			"type": "traverse",
+			"offsetX": 0,
+			"offsetY": 0, 
+			"meaning": "vector in pixels from center"
+		},
+		{
+			"type": "light1",
+			"offsetX": 0,
+			"offsetY": 0, 
+			"meaning": "vector in pixels from center"
+		}
+	],
+	"children" : [
+		{
+		  "object" : "lights",
+		  "slot" : "light1",
+		  "when" : "work"
 		}
 	]
 }
