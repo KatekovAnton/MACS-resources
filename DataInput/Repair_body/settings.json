@@ -1,14 +1,14 @@
 {
-	"basename" : "Engineer_Rails",
-	"outputFolder" : "engineer_rails/body",
+	"basename" : "Repair",
+	"outputFolder" : "repair/body",
 	"cells" : 1,
 	"colorPattern" : "_s%d.png",
 	"diffusePattern" : "_s0.diffuse.png",
 	"shadowPattern" : "_s%d.Shadow.png",
-	"aoPattern" : "_s0.AO.png",
+	"aoPattern" : "_s0.ao.png",
 	"alphaPattern" : "_s0.Alpha.png",
     "normalsPattern" : "_s0.normals.png",
-	"darken" : 0.8,
+	"darken" : 1.1,
 	"childSlots": [
 		{
 			"type": "head",
