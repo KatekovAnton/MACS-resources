@@ -1,0 +1,20 @@
+{
+	"basename" : "Radar",
+	"outputFolder" : "scanner/body",
+	"cells" : 1,
+	"colorPattern" : "_S%d.png",
+	"diffusePattern" : "_S0.diffuse.png",
+	"shadowPattern" : "_S%d.shadow.png",
+	"aoPattern" : "_S0.ao.png",
+	"alphaPattern" : "_S0.Alpha.png",
+    "normalsPattern" : "_S0.normals.png",
+	"darken" : 1.0,
+	"childSlots": [
+		{
+			"type": "head",
+			"offsetX": 0,
+			"offsetY": 0, 
+			"meaning": "vector in pixels from center"
+		}
+	]
+}
