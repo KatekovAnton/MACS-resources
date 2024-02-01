@@ -13,7 +13,7 @@
 		{
 			"type": "head",
 			"offsetX": 0,
-			"offsetY": 0, 
+			"offsetY": 50, 
 			"meaning": "vector in pixels from center"
 		}
 	]
