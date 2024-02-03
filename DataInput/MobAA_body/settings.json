@@ -11,9 +11,9 @@
 	"darken" : 0.8,
 	"childSlots": [
 		{
-			"type": "light1",
-			"offsetX": 100,
-			"offsetY": -300
+			"type": "head",
+			"offsetX": 0,
+			"offsetY": 50
 		}
 	]
 }
