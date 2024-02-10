@@ -265,6 +265,7 @@
             resultShadow.b = value;
             
             ColorF resultDiffuse1 = ColorFMultScalar(diffuse, 1.08 - stripe.r);
+            resultDiffuse1 = ColorFMultScalar(resultDiffuse1, diffuseK);
             ColorF resultDiffuse2 = ColorFMultScalar(armyColor, stripe.r);
             ColorF resultDiffuseTotal = ColorFAdd(resultDiffuse1, resultDiffuse2);
             ColorF result = resultDiffuseTotal;//ColorFMultScalar(resultDiffuseTotal, diffuseK);

@@ -57,7 +57,9 @@
 {
     if (self = [super init]) {
         _inputLighting = [inputPath stringByAppendingString:[NSString stringWithFormat:lightingPattern, baseName, rotation * 45]];
-        _inputShadow = [inputPath stringByAppendingString:[NSString stringWithFormat:shadowPattern, baseName, rotation * 45]];
+        if (shadowPattern.length > 0) {
+            _inputShadow = [inputPath stringByAppendingString:[NSString stringWithFormat:shadowPattern, baseName, rotation * 45]];
+        }
     }
     return self;
 }
@@ -134,7 +136,13 @@
             lightingPattern = [@"%@" stringByAppendingString:settings[@"colorPattern"]];
         }
         if (settings[@"shadowPattern"] != nil) {
-            shadowPattern = [@"%@" stringByAppendingString:settings[@"shadowPattern"]];
+            NSString *shadow = settings[@"shadowPattern"];
+            if (![shadow isEqualToString:@"NONE"]) {
+                shadowPattern = [@"%@" stringByAppendingString:shadow];
+            }
+            else {
+                shadowPattern = @"";
+            }
         }
         
         NSMutableArray *rotatedSpritesData = [NSMutableArray array];
@@ -241,6 +249,11 @@
     NSMutableDictionary *settings = [NSMutableDictionary dictionary];
     [settings setObject:@(gameCellSize) forKey:@"cellSize"];
     
+    float darkenMultiplier = 1.0;
+    if (_settings[@"darken"] != nil) {
+        darkenMultiplier = [_settings[@"darken"] floatValue];
+    }
+    
     @autoreleasepool {
         
         // TODO:
@@ -296,11 +309,6 @@
                 }
                 [settings setObject:newChildren forKey:@"children"];
             }
-        }
-        
-        float darkenMultiplier = 1.0;
-        if (_settings[@"darken"] != nil) {
-            darkenMultiplier = [_settings[@"darken"] floatValue];
         }
 //        [self saveImage:diffuseImage toPath:_data.outputDiffuse];
         MTDiffuseComposer *composer = [[MTDiffuseComposer alloc] initWithDiffuseTexture:textureDiffuse
@@ -382,9 +390,15 @@
     // compress shadows to 1 texture
     @autoreleasepool {
         std::vector<CPPITexture *> shadowTextures;
+        bool shadowsCreated = true;
         for (int i = 0; i < 8; i++)
         {
             MTVisualObjectSpriteData *spriteData = _data.rotatedSpritesData[i];
+            if (spriteData.inputShadow == nil) {
+                shadowsCreated = false;
+                assert(i == 0);
+                break;
+            }
             @autoreleasepool {
                 assert([[NSFileManager defaultManager] fileExistsAtPath:spriteData.inputShadow]);
                 NSImage *shadowImage = [self imageWithPath:spriteData.inputShadow scale:TMPSCALE];
@@ -410,25 +424,28 @@
             }
             
         }
-        MTShadowComposer *composer = [[MTShadowComposer alloc] initWithShadowTextures:shadowTextures];
-        [composer buildShadowImage];
-        [composer.resultImageData writeToFile:_data.outputShadow atomically:NO];
-        
-        
-        NSMutableDictionary *shadowSettings = [NSMutableDictionary dictionary];
-        [shadowSettings setObject:@(composer.resultImageSize.width) forKey:@"sizeW"];
-        [shadowSettings setObject:@(composer.resultImageSize.height) forKey:@"sizeH"];
-        
-        NSMutableArray *offsets = [NSMutableArray array];
-        for (int i = 0; i < composer.textureInfo.count; i++) {
-            NSDictionary *data =  [composer.textureInfo[i] serialize];
-            [offsets addObject:data];
-        }
-        [shadowSettings setObject:offsets forKey:@"channels"];
-        [settings setObject:shadowSettings forKey:@"shadowTexture"];
-        
-        for (int i = 0; i < 8; i++) {
-            delete shadowTextures[i];
+        if (shadowsCreated)
+        {
+            MTShadowComposer *composer = [[MTShadowComposer alloc] initWithShadowTextures:shadowTextures];
+            [composer buildShadowImage];
+            [composer.resultImageData writeToFile:_data.outputShadow atomically:NO];
+            
+            
+            NSMutableDictionary *shadowSettings = [NSMutableDictionary dictionary];
+            [shadowSettings setObject:@(composer.resultImageSize.width) forKey:@"sizeW"];
+            [shadowSettings setObject:@(composer.resultImageSize.height) forKey:@"sizeH"];
+            
+            NSMutableArray *offsets = [NSMutableArray array];
+            for (int i = 0; i < composer.textureInfo.count; i++) {
+                NSDictionary *data =  [composer.textureInfo[i] serialize];
+                [offsets addObject:data];
+            }
+            [shadowSettings setObject:offsets forKey:@"channels"];
+            [settings setObject:shadowSettings forKey:@"shadowTexture"];
+            
+            for (int i = 0; i < 8; i++) {
+                delete shadowTextures[i];
+            }
         }
         
     }
@@ -481,13 +498,14 @@
                                                                        duffuseAlphaTexture:tmp_textureDiffuseAlpha
                                                                               lightTexture:tmp_textureLight
                                                                                   aoTextre:tmp_textureAO];
-                    
-                    assert([[NSFileManager defaultManager] fileExistsAtPath:spriteData.inputShadow]);
-                    NSImage *tmp_shadowImage = [self imageWithPath:spriteData.inputShadow scale:TMPSCALE];
-                    tmp_shadowImage = [NSImage resizeImage:tmp_shadowImage byScalingItToSize:NSMakeSize(gameCellSize, gameCellSize)];
-                    CPPITexture *tmp_shadowTexture = new CPPTextureImplNSBitmapImageRep(tmp_shadowImage);
-
-                    NSImage *previewImage = [object buildFullImageWithAoK:1.3 shadowK:1 diffuseK:1 shadow:tmp_shadowTexture];
+                    CPPITexture *tmp_shadowTexture = nullptr;
+                    if (spriteData.inputShadow != nil) {
+                        assert([[NSFileManager defaultManager] fileExistsAtPath:spriteData.inputShadow]);
+                        NSImage *tmp_shadowImage = [self imageWithPath:spriteData.inputShadow scale:TMPSCALE];
+                        tmp_shadowImage = [NSImage resizeImage:tmp_shadowImage byScalingItToSize:NSMakeSize(gameCellSize, gameCellSize)];
+                        tmp_shadowTexture = new CPPTextureImplNSBitmapImageRep(tmp_shadowImage);
+                    }
+                    NSImage *previewImage = [object buildFullImageWithAoK:1.3 shadowK:1 diffuseK:darkenMultiplier shadow:tmp_shadowTexture];
                     previewImage = [NSImage resizeImage:previewImage byScalingItToSize:NSMakeSize(TEX_PREVIEW_SIZE, TEX_PREVIEW_SIZE)];
                     
                     NSString* filename = @"preview.png";
@@ -498,7 +516,9 @@
                     delete tmp_textureDiffuseAlpha;
                     delete tmp_textureLight;
                     delete tmp_textureAO;
-                    delete tmp_shadowTexture;
+                    if (tmp_shadowTexture) {
+                        delete tmp_shadowTexture;
+                    }
                 }
                 
                 NSImage *resultImage = object.resultShadowImage;
