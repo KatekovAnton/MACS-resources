@@ -1,0 +1,13 @@
+{
+	"basename" : "Plate_0",
+	"outputFolder" : "road/body",
+	"cells" : 1,
+	"colorPattern" : ".png",
+	"diffusePattern" : ".diffuse.png",
+	"shadowPattern" : ".matteShadow.png",
+	"aoPattern" : ".extraTex_VRayDirt2.png",
+	"alphaPattern" : ".Alpha.png",
+    "normalsPattern" : ".normals.png",
+	"darken" : 1.0,
+	"singleDirection" : true
+}
