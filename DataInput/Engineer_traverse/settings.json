@@ -8,7 +8,7 @@
 	"aoPattern" : "_s0.AO.png",
 	"alphaPattern" : "_s0.Alpha.png",
     "normalsPattern" : "_s0.normals.png",
-	"darken" : 0.8,
+	"darken" : 1,
 	"childSlots": [
 		{
 			"type": "head",
