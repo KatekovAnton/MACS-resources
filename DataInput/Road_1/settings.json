@@ -8,6 +8,6 @@
 	"aoPattern" : ".extraTex_VRayDirt2.png",
 	"alphaPattern" : ".Alpha.png",
     "normalsPattern" : ".normals.png",
-	"darken" : 0.8,
+	"darken" : 0.6,
 	"singleDirection" : true
 }
