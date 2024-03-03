@@ -193,6 +193,10 @@
             GPoint2D p(x, y);
             ColorF diffuse = ColorF(_diffuseTexture->GetColorAtPoint(p));
             ColorF light = ColorF(_lightTexture->GetColorAtPoint(p));
+            bool black = false;
+            if (diffuse.r > 0.05 && light.r < 0.05) {
+                black = true;
+            }
             ColorF ao = ColorF(_aoTexture->GetColorAtPoint(p));
             
             diffuse = ColorFMultScalar(diffuse, diffuse.a);
@@ -214,9 +218,13 @@
             ColorF resultShadow = pureLight;//ColorFMultScalar(pureLight, diffuse.a);
             resultShadow.a = 1.0;//diffuse.a * light.a;// * ao.a;
             float value = (resultShadow.r + resultShadow.g + resultShadow.b) / 3.0;
+            if (black) {
+                value += 0.19;
+            }
             resultShadow.r = value;
             resultShadow.g = value;
             resultShadow.b = value;
+            
             Color shadowColor = resultShadow.getColor();
             composerShadow->setColor(shadowColor, x, y);
         }
