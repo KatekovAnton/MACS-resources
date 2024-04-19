@@ -12,15 +12,17 @@
 	"childSlots": [
 		{
 			"type": "light1",
-			"offsetX": 0,
-			"offsetY": -300
+			"anim" : "rotation",
+			"offsetX": 40,
+			"offsetY": 82
 		}
 	],
 	"children" : [
 		{
 		  "object" : "lights",
 		  "slot" : "light1",
-		  "when" : "work"
+		  "when" : "work",
+		  "level" : 2
 		}
 	]
 }

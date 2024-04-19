@@ -208,7 +208,7 @@
 //            float diffuseLum = (diffuse.r + diffuse.g + diffuse.b) / 3.0;
 //            float diffuseAOLum = (diffuseWithAO.r + diffuseWithAO.g + diffuseWithAO.b) / 3.0;
 //            pureLight = ColorFAddScalar(pureLight, diffuseAOLum - diffuseLum);
-            pureLight = ColorFAddScalar(pureLight, (ao.r - 1) * 0.3 * diffuse.a);
+            pureLight = ColorFAddScalar(pureLight, -((1 - ao.r) * 0.3 * diffuse.a));
             pureLight = ColorFMultScalar(pureLight, 0.5);
             pureLight = ColorFAddScalar(pureLight, 0.5);
             
