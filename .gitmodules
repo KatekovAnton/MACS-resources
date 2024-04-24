@@ -1,3 +1,6 @@
 [submodule "ToolsForNewGraphics/Vendors/png"]
 	path = ToolsForNewGraphics/Vendors/png
 	url = https://github.com/KatekovAnton/libpng.git
+[submodule "ToolsForNewGraphics/Vendors/zlib"]
+	path = ToolsForNewGraphics/Vendors/zlib
+	url = https://github.com/madler/zlib.git
