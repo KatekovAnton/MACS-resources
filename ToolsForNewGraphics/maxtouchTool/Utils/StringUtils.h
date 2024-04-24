@@ -12,6 +12,7 @@
 #include <iostream>
 #include <map>
 #include <vector>
+#include <functional>
 
 std::vector<std::string> splitTest ( std::string input , std::string split_id );
 

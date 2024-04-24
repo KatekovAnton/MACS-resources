@@ -47,8 +47,8 @@ public:
     char* GetInternalBuffer() const {return _internalBuffer;}
     
 //    BinaryReader(std::string filename);
-    BinaryReader(char *buffer, long length);
-    BinaryReader(char *buffer, long length, bool shouldDeallocBuffer);
+    BinaryReader(const char *buffer, long length);
+    BinaryReader(const char *buffer, long length, bool shouldDeallocBuffer);
     ~ BinaryReader();
 	bool isValid() const { return !(!_file); };
     long GetPosition();

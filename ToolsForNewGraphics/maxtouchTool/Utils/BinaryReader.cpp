@@ -61,24 +61,24 @@ using namespace std;
 ////    _currentBuffer = static_cast<char*>(malloc(_filesize));
 //}
 
-BinaryReader::BinaryReader(char *buffer, long length):
+BinaryReader::BinaryReader(const char *buffer, long length):
 _position(0),
 _filesize(length),
 _file(NULL),
 _shouldDeallocBuffer(false)
 {
-    _internalBuffer = buffer;
+    _internalBuffer = const_cast<char *>(buffer);
     SetPosition(0);
 }
 
 
-BinaryReader::BinaryReader(char *buffer, long length, bool shouldDeallocBuffer)
+BinaryReader::BinaryReader(const char *buffer, long length, bool shouldDeallocBuffer)
 :_position(0),
 _filesize(length),
 _file(NULL),
 _shouldDeallocBuffer(shouldDeallocBuffer)
 {
-    _internalBuffer = buffer;
+    _internalBuffer = const_cast<char*>(buffer);
     SetPosition(0);
 }
 

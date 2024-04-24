@@ -24,8 +24,9 @@ public:
     ByteBuffer(size_t step);
     ~ByteBuffer();
     unsigned char* getPointer();
-    size_t getDataSize();
-    size_t getFullSize();
+    const unsigned char* getPointer() const;
+    size_t getDataSize() const;
+    size_t getFullSize() const;
     size_t getAvailableSize();
     void appendData(void* buffer, size_t size, size_t nitems);
     void increaseBuffer();

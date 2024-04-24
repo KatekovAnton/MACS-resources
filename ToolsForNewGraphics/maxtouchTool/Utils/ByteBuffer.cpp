@@ -39,12 +39,17 @@ unsigned char* ByteBuffer::getPointer()
     return _data;
 }
 
-size_t ByteBuffer::getDataSize()
+const unsigned char* ByteBuffer::getPointer() const
+{
+    return _data;
+}
+
+size_t ByteBuffer::getDataSize() const
 {
     return _size;
 }
 
-size_t ByteBuffer::getFullSize()
+size_t ByteBuffer::getFullSize() const
 {
     return _dataSize;
 }

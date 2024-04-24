@@ -19,10 +19,9 @@
 #if defined TARGET_OS_MAC && !defined TARGET_IPHONE_SIMULATOR
 #include <OpenGL/gl.h>
 #endif
-#ifdef TARGET_OS_WIN
+#if defined TARGET_OS_WIN || defined MAX_TARGET_OS_WIN
 	#include <windows.h>
-	#include "glew.h"
-	#include "glext.h"
+	
 	#include "wchar.h"
 	#include <GL/gl.h>
 	#include <GL/glu.h>
