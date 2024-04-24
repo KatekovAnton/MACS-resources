@@ -1,0 +1,3 @@
+[submodule "ToolsForNewGraphics/Vendors/png"]
+	path = ToolsForNewGraphics/Vendors/png
+	url = https://github.com/KatekovAnton/libpng.git
