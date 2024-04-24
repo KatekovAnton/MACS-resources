@@ -14,7 +14,7 @@
 #include <map>
 #include <string>
 #include <cstring>
-#include "USimpleContainer.h"
+#include "SimpleContainer.h"
 
 
 
@@ -53,7 +53,7 @@ class BinaryPack {
     std::string _filename;
     
     unsigned int _numberOfItems;
-    Utils::USimpleContainer<BinaryPackItemHeader> _items;
+    Utils::SimpleContainer<BinaryPackItemHeader> _items;
     std::map<std::string, BinaryPackItemHeader*> _itemsHash;
     
     void ClearItems();

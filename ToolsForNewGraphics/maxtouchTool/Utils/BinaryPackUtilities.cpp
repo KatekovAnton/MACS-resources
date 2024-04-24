@@ -55,13 +55,6 @@ void BinaryPackUtilities::ReadItemJson(BinaryPackReader *reader, const std::stri
     {
         Json::Reader reader;
         reader.parse(content, destination);
-        auto e = reader.getFormatedErrorMessages();
-        if (e.size() > 0) {
-            FileManager::SharedManager()->SaveFile("error_content.json", content.c_str(), content.length(), true);
-            if (FileManager::SharedManager()->StorageSupported(FileManagerStorageType::FileManagerStorageType_External)) {
-                FileManager::SharedManager()->SaveFile("error_content.json", content.c_str(), content.length(), true, FileManagerStorageType::FileManagerStorageType_External);
-            }
-        }
     }
 }
 

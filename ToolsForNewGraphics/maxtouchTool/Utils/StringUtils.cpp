@@ -10,6 +10,7 @@
 #include <time.h>
 #include <stdio.h>
 #include <sstream>
+#include <algorithm>
 using namespace std;
 
 std::vector<std::string> &split(const std::string &s, char delim, std::vector<std::string> &elems)

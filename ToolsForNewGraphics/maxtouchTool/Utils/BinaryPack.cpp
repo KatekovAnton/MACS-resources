@@ -7,14 +7,13 @@
 //
 
 #include "BinaryPack.hpp"
-#include "FileManger.h"
 #include "ByteBuffer.h"
 
 
+#include <iostream>
 #include <memory.h>
 
 #include "BinaryReader.h"
-#include "Sys.h"
 
 
 
@@ -74,7 +73,7 @@ void BinaryPack::AddItem(const BinaryPackItemHeader &item)
 {
 #if !defined NDEBUG
     if (Item(item._name) != NULL) {
-        ULog("BinaryPackReader: Item with same name already esists %s", item._name);
+        std::cout << "BinaryPackReader: Item with same name already esists " << item._name << std::endl;
      //   throw "Item with same name already esists!";
     }
 #endif
@@ -115,64 +114,29 @@ const BinaryPackItemHeader *BinaryPack::ItemAtIndex(unsigned int index) const
 BinaryPackReader::BinaryPackReader(BinaryPack *binaryPack)
 :_binaryPack(binaryPack)
 {
-#if !defined NDEBUG
-    if (_logPacks) {
-        ULog("BinaryPackReader: Reading from file %s", _binaryPack->_filename.c_str());
-    }
-#endif
-    
+    /*
 	auto file = FileManager::SharedManager()->LoadFile(_binaryPack->_filename);
 	if (file == nullptr) {
 		file = FileManager::SharedManager()->CreateNewFile(_binaryPack->_filename, true);
 		file = FileManager::SharedManager()->LoadFile(_binaryPack->_filename);
 	}
-	_reader = file->CreateBinaryReader();
+	_reader = file->CreateBinaryReader();*/
     Reload();
-    
-#if !defined NDEBUG
-    if (_logPacks) {
-        ULog("BinaryPackReader: Finish reading from file");
-    }
-#endif
 }
 
 BinaryPackReader::BinaryPackReader(BinaryPack *binaryPack, const ByteBuffer *source)
 :_binaryPack(binaryPack)
 {
-#if !defined NDEBUG
-    if (_logPacks) {
-        ULog("\n\nBinaryPackReader: Reading from buffer %lu bytes", (unsigned long)source->getDataSize());
-    }
-#endif
-    
-    _reader = std::shared_ptr<IBinaryReader>(new BinaryReader(reinterpret_cast<char *>(source->getPointer()),
+    _reader = std::shared_ptr<IBinaryReader>(new BinaryReader(reinterpret_cast<const char *>(source->getPointer()),
                                                          static_cast<long>(source->getDataSize())));
     Reload();
-    
-#if !defined NDEBUG
-    if (_logPacks) {
-        ULog("BinaryPackReader: Finish reading from buffer\n\n");
-    }
-#endif
 }
 
 BinaryPackReader::BinaryPackReader(BinaryPack *binaryPack, std::shared_ptr<IBinaryReader> reader)
 :_binaryPack(binaryPack)
 ,_reader(reader)
 {
-#if !defined NDEBUG
-    if (_logPacks) {
-        ULog("\n\nBinaryPackReader: Reading from reader");
-    }
-#endif
-    
     Reload();
-    
-#if !defined NDEBUG
-    if (_logPacks) {
-        ULog("BinaryPackReader: Finish reading from reader\n\n");
-    }
-#endif
 }
 
 void BinaryPackReader::Reload()
@@ -197,12 +161,6 @@ void BinaryPackReader::Reload()
         }
         
         header._offset = _reader->ReaderGetPosition();
-        
-#if !defined NDEBUG
-        if (_logPacks) {
-            ULog("BinaryPackReader: Found item %s, size %lu", header._name, (unsigned long)header._size);
-        }
-#endif
         
         position = position + BINARY_PACK_HEADER_SIZE + header._size;
         _reader->ReaderSetPosition(position);
@@ -233,12 +191,14 @@ void BinaryPackReader::ReadItemContent(BinaryPackItemHeader *item, ByteBuffer *b
 BinaryPackWriter::BinaryPackWriter(BinaryPack *binaryPack)
 :_binaryPack(binaryPack)
 {
+    /*
     std::shared_ptr<IFile> file = FileManager::SharedManager()->LoadFile(_binaryPack->_filename);
     if (!file) {
         file = FileManager::SharedManager()->CreateNewFile(_binaryPack->_filename, false);
     }
     
     _writer = file->CreateBinaryWriter();
+    */
 }
 
 BinaryPackWriter::BinaryPackWriter(BinaryPack *binaryPack, std::shared_ptr<IBinaryWriter> writer)
@@ -248,7 +208,7 @@ BinaryPackWriter::BinaryPackWriter(BinaryPack *binaryPack, std::shared_ptr<IBina
 
 void BinaryPackWriter::RemoveLastItems(unsigned int countToRemove)
 {
-    unsigned int count = ____min(countToRemove, _binaryPack->_numberOfItems);
+    unsigned int count = std::min(countToRemove, _binaryPack->_numberOfItems);
     if (count == 0) {
         return;
     }
