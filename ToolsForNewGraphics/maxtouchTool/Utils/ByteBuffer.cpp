@@ -13,7 +13,7 @@
 
 ByteBuffer::ByteBuffer()
 :_step(1024)
-,_data(NULL)
+,_data(nullptr)
 {
     _size = 0;
     _dataSize = 0;
@@ -21,7 +21,7 @@ ByteBuffer::ByteBuffer()
 
 ByteBuffer::ByteBuffer(size_t step)
 :_step(step)
-,_data(NULL)
+,_data(nullptr)
 {
     _size = 0;
     _dataSize = 0;
@@ -29,9 +29,19 @@ ByteBuffer::ByteBuffer(size_t step)
 
 ByteBuffer::~ByteBuffer()
 {
-    if (_data != NULL) {
+    if (_data != nullptr) {
         free(_data);
     }
+}
+
+void ByteBuffer::clear()
+{
+    if (_data != nullptr) {
+        free(_data);
+        _data = nullptr;
+    }
+    _dataSize = 0;
+    _size = 0;
 }
 
 unsigned char* ByteBuffer::getPointer()

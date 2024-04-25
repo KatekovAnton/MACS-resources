@@ -1,13 +1,6 @@
-//
-//  BinaryReader.h
-//  TerminalExtraction
-//
-//  Created by Mister Pattern on 11/19/12.
-//
-//
 
-#ifndef __TerminalExtraction__BinaryReader__
-#define __TerminalExtraction__BinaryReader__
+#ifndef __BinaryReader__
+#define __BinaryReader__
 
 #include <iostream>
 #include <istream>
@@ -82,4 +75,4 @@ public:
     
 };
 
-#endif /* defined(__TerminalExtraction__BinaryReader__) */
+#endif /* defined(__BinaryReader__) */

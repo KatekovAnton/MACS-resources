@@ -1,39 +1,17 @@
 //
 //  MathKit.h
-//  TerminalExtraction
+//  MAX
 //
 //  Created by Katekov Anton on 10/30/12.
 //
 //
 
-#ifndef TerminalExtraction_MathKit_h
-#define TerminalExtraction_MathKit_h
+#ifndef MAX_MathKit_h
+#define MAX_MathKit_h
 
 #include "GlobalConstants.h"
-
-#if defined TARGET_OS_MAC || defined TARGET_OS_IPHONE
-typedef unsigned int uint;
-#endif
-#include "math.h"
-
-
-template <typename T> static __inline__
-T ____min(T a, T b)
-{
-    return a<b?a:b;
-}
-
-template <typename T> static __inline__
-T ____max(T a, T b)
-{
-    return a>b?a:b;
-}
-
-template <typename T> static __inline__
-T ____abs(T a)
-{
-    return a>0?a:-a;
-}
+#include "GLKMath.h"
+#include <algorithm>
 
 
 struct __GPoint2D {
@@ -52,37 +30,37 @@ struct __GPoint2D {
 
 typedef struct __GPoint2D GPoint2D;
 
-static __inline__ GPoint2D
+static GPoint2D
 GPoint2DMult(const GPoint2D& v, const float s)
 {
     return GPoint2D(v.x*s, v.y*s);
 }
 
-static __inline__ GPoint2D
+static GPoint2D
 GPoint2DAdd(const GPoint2D& v1, const GPoint2D& v2)
 {
     return GPoint2D(v1.x + v2.x, v1.y + v2.y);
 }
 
-static __inline__ GPoint2D
+static GPoint2D
 GPoint2DSub(const GPoint2D& v1, const GPoint2D& v2)
 {
     return GPoint2D(v1.x - v2.x, v1.y - v2.y);
 }
 
-static __inline__ float
+static float
 GPoint2DDot(const GPoint2D& v1, const GPoint2D& v2)
 {
     return v1.x*v2.x + v1.y*v2.y;
 }
 
-static __inline__ float
+static float
 GPoint2DLengthSQ(const GPoint2D& v)
 {
     return GPoint2DDot(v, v);
 }
 
-static __inline__ float
+static float
 GPoint2DLength(const GPoint2D& v)
 {
     return sqrtf(GPoint2DLengthSQ(v));
@@ -157,7 +135,7 @@ typedef struct __GRect2D GRect2D;
 
 
 
-static __inline__ GRect2D GRect2DMake(float x, float y, float width, float height) {
+static GRect2D GRect2DMake(float x, float y, float width, float height) {
     GRect2D rect;
     rect.origin.x = x;
     rect.origin.y = y;
@@ -167,8 +145,6 @@ static __inline__ GRect2D GRect2DMake(float x, float y, float width, float heigh
 };
 
 
-#include "MyMath.h"
-#include "GLKMath.h"
 
 struct __BoundingBox {
     GLKVector2 min;
@@ -179,10 +155,10 @@ struct __BoundingBox {
     
     void AddBoundingBox(__BoundingBox bb)
     {
-        min.x = ____min(min.x, bb.min.x);
-        min.y = ____min(min.y, bb.min.y);
-        max.x = ____max(max.x, bb.max.x);
-        max.y = ____max(max.y, bb.max.y);
+        min.x = std::min(min.x, bb.min.x);
+        min.y = std::min(min.y, bb.min.y);
+        max.x = std::max(max.x, bb.max.x);
+        max.y = std::max(max.y, bb.max.y);
     }
     
 };
