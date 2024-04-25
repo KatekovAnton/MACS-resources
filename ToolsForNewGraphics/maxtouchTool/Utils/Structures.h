@@ -27,7 +27,7 @@ struct __Color
     
     bool IsNear(unsigned char a1, unsigned char a2) const
     {
-        return ____max(a1, a2) - ____min(a1, a2)<3;
+        return std::max(a1, a2) - std::min(a1, a2)<3;
     }
     
     inline bool operator == (const __Color &color) const
@@ -63,7 +63,7 @@ struct __ColorRGB
     
     bool IsNear(unsigned char a1, unsigned char a2) const
     {
-        return ____max(a1, a2) - ____min(a1, a2)<3;
+        return std::max(a1, a2) - std::min(a1, a2)<3;
     }
     
     inline bool operator == (const __Color &color) const
@@ -79,7 +79,7 @@ struct __ColorAlpha
     
     bool IsNear(unsigned char a1, unsigned char a2) const
     {
-        return ____max(a1, a2) - ____min(a1, a2)<3;
+        return std::max(a1, a2) - std::min(a1, a2)<3;
     }
     
     inline bool operator == (const __Color &color) const

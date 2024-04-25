@@ -1,43 +1,20 @@
-//
-//  GlobalConstants.h
-//  TerminalExtraction
-//
-//  Created by Katekov Anton on 10/20/12.
-//
-//
 
-#ifndef TerminalExtraction_GlobalConstants_h
-#define TerminalExtraction_GlobalConstants_h
+#ifndef _GlobalConstants_h
+#define _GlobalConstants_h
 
 #include <cstddef>
 
-#if defined  TARGET_OS_IPHONE && !defined TARGET_OS_MAC
-    #define GLES2    <OpenGLES/ES2/gl.h>
-    #define Glext    <OpenGLES/ES2/glext.h>
-	#include GLES2
-#endif
-#if defined TARGET_OS_MAC && !defined TARGET_IPHONE_SIMULATOR
+#if defined MAX_TARGET_OS_MAC
 #include <OpenGL/gl.h>
 #endif
-#if defined TARGET_OS_WIN || defined MAX_TARGET_OS_WIN
+#if defined MAX_TARGET_OS_WIN
+    #define NOMINMAX
 	#include <windows.h>
 	
 	#include "wchar.h"
 	#include <GL/gl.h>
 	#include <GL/glu.h>
-
-	#define __inline__ inline
 #endif
-#ifdef ANDROID
-    #include <GLES2/gl2.h>
-    #include <memory>
-    #define ushort unsigned short
-#endif
-
-//#ifdef TARGET_OS_LINUX
-//    #include "CCGL.h" 
-//    #include <memory>
-//#endif
 
 #define GCCHECK_GL_ERROR_DEBUG() \
         {GLenum __error = glGetError(); \

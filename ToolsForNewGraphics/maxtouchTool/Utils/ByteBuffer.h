@@ -23,6 +23,7 @@ public:
     ByteBuffer();
     ByteBuffer(size_t step);
     ~ByteBuffer();
+    void clear();
     unsigned char* getPointer();
     const unsigned char* getPointer() const;
     size_t getDataSize() const;

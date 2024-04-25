@@ -4,3 +4,6 @@
 [submodule "ToolsForNewGraphics/Vendors/zlib"]
 	path = ToolsForNewGraphics/Vendors/zlib
 	url = https://github.com/madler/zlib.git
+[submodule "ToolsForNewGraphics/Vendors/AnyOption"]
+	path = ToolsForNewGraphics/Vendors/AnyOption
+	url = https://github.com/KatekovAnton/AnyOption.git

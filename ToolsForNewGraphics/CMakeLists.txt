@@ -53,6 +53,9 @@ endif()
 ###############################################################################
 # Common libs
 
+# any option
+add_subdirectory(Vendors/AnyOption)
+
 # zlib
 add_subdirectory(Vendors/zlib)
 
@@ -102,11 +105,18 @@ if (PROJECT_OS_WIN32 OR PROJECT_OS_LINUX)
     include_directories(${libfreetype_SOURCE_DIR}/include)
 endif()
 
+
+
+add_library(basis_universal STATIC
+Vendors/basis_universal/zstd/zstddeclib.c
+Vendors/basis_universal/transcoder/basisu_transcoder.cpp
+)
+
+
+
 ###############################################################################
-#
-#	4. подготовка таргета
-#
-#
+# Prepare targets
+
 set(SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src")
 
 set(SOURCE_DIRS
@@ -115,6 +125,7 @@ Utils
 Utils/libJSON
 Utils/MathKit
 Utils/Texture
+MAX
 )
 
 foreach(DIR ${SOURCE_DIRS})
@@ -159,12 +170,17 @@ else()
 endif()
 
 
-target_include_directories(${PROJECT_NAME} PRIVATE maxtouchTool ${ZLIB_INCLUDE_DIR})
+include_directories(${PROJECT_NAME} PRIVATE ${ZLIB_INCLUDE_DIR})
+include_directories(${PROJECT_NAME} PRIVATE Vendors/AnyOption)
+include_directories(${PROJECT_NAME} PRIVATE Vendors/basis_universal)
+
 
 
 set(MAX_LIBRARIES 
     zlibstatic
     png_static
+    anyoption
+    basis_universal
 )
 target_link_libraries (${PROJECT_NAME} ${MAX_LIBRARIES})
 
@@ -252,19 +268,8 @@ endmacro()
 
 
 if (ENABLE_data_copy)
-    copy_files(${PROJECT_NAME}_copy_data ${CMAKE_CURRENT_SOURCE_DIR}/Resources ${CMAKE_BINARY_DIR}/Resources)
+    copy_files(${PROJECT_NAME}_copy_data ${CMAKE_CURRENT_SOURCE_DIR}/maxtouchTool/Resources ${CMAKE_BINARY_DIR}/Resources)
     add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}_copy_data)
-
-    if (PROJECT_OS_IOS)
-        # target_sources(${PROJECT_NAME} PUBLIC ${CMAKE_BINARY_DIR}/Resources/)
-        # set_source_files_properties(${CMAKE_BINARY_DIR}/Resources/ PROPERTIES MACOSX_PACKAGE_LOCATION ".")
-        add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-            COMMAND 
-                ${CMAKE_COMMAND} -E copy_directory 
-                    "${CMAKE_BINARY_DIR}/Resources"
-                    "$<TARGET_FILE_DIR:${PROJECT_NAME}>"
-        )
-    endif()
 endif()
 
 
@@ -300,7 +305,7 @@ if (ENABLE_BUILD_TEST)
 
     target_include_directories(${PROJECT_NAME}Tests PRIVATE maxtouchTool)
     target_include_directories(${PROJECT_NAME}Tests PRIVATE maxtouchToolTests)
-    target_include_directories(${PROJECT_NAME}Tests PRIVATE ${ALL_INCLUDES} ${ZLIB_INCLUDE_DIR})
+    target_include_directories(${PROJECT_NAME}Tests PRIVATE ${ALL_INCLUDES})
     target_compile_definitions(${PROJECT_NAME}Tests PRIVATE MAX_TESTS)
     target_compile_definitions(${PROJECT_NAME}Tests PRIVATE MAX_TARGET_OS_${BUILD_PLATFORM} )
     target_compile_definitions(${PROJECT_NAME}Tests PRIVATE ${BUILD_PLATFORM} )
