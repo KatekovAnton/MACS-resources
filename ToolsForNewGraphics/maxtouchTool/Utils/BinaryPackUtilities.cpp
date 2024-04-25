@@ -14,17 +14,13 @@
 
 
 
-using namespace std;
-
-
-
-string BinaryPackUtilities::ReadItemString(BinaryPackReader *reader, const string &name, bool *exist)
+std::string BinaryPackUtilities::ReadItemString(BinaryPackReader *reader, const std::string &name, bool *exist)
 {
     BinaryPackItemHeader *item = reader->_binaryPack->Item(name);
     *exist = item != NULL;
     if (item)
     {
-        string content = "";
+        std::string content = "";
         BinaryPackFlags flags = static_cast<BinaryPackFlags>(item->_flags);
         if (flags & BinaryPackFlags::Compressed)
         {
@@ -33,13 +29,13 @@ string BinaryPackUtilities::ReadItemString(BinaryPackReader *reader, const strin
             ByteBuffer uncompressedBuffer;
             zip_decompress(reinterpret_cast<char*>(buffer->getPointer()), buffer->getDataSize(), &uncompressedBuffer);
             delete buffer;
-            content = string(reinterpret_cast<char*>(uncompressedBuffer.getPointer()), uncompressedBuffer.getDataSize());
+            content = std::string(reinterpret_cast<char*>(uncompressedBuffer.getPointer()), uncompressedBuffer.getDataSize());
         }
         else
         {
             ByteBuffer buffer;
             reader->ReadItemContent(item, &buffer);
-            content = string(reinterpret_cast<char*>(buffer.getPointer()), buffer.getDataSize());
+            content = std::string(reinterpret_cast<char*>(buffer.getPointer()), buffer.getDataSize());
         }
         return content;
     }
@@ -49,7 +45,7 @@ string BinaryPackUtilities::ReadItemString(BinaryPackReader *reader, const strin
 
 void BinaryPackUtilities::ReadItemJson(BinaryPackReader *reader, const std::string &name, Json::Value &destination, bool *exist)
 {
-    string content = ReadItemString(reader, name, exist);
+    std::string content = ReadItemString(reader, name, exist);
     
     if (*exist)
     {
@@ -109,7 +105,7 @@ BinaryPackItemHeader BinaryPackUtilities::WriteItemString(BinaryPackWriter *writ
 
 BinaryPackItemHeader BinaryPackUtilities::WriteItemJson(BinaryPackWriter *writer, const std::string &name, bool compress, const Json::Value &root)
 {
-    string str;
+    std::string str;
     {
         Json::FastWriter jsonwriter;
         str = jsonwriter.write(root);
@@ -119,7 +115,7 @@ BinaryPackItemHeader BinaryPackUtilities::WriteItemJson(BinaryPackWriter *writer
 
 BinaryPackItemHeader BinaryPackUtilities::WriteItemJson(BinaryPackWriter *writer, const std::string &name, bool compress, Json::Value &root, bool memorySaving)
 {
-    string str;
+    std::string str;
     {
         Json::FastWriter jsonwriter;
         str = jsonwriter.write(root);
@@ -161,7 +157,7 @@ void BinaryPackUtilities::WriteItemStringToBuffer(ByteBuffer *destination, const
 
 void BinaryPackUtilities::WriteItemJsonToBuffer(ByteBuffer *destination, const std::string &name, bool compress, Json::Value &root, bool memorySaving)
 {
-    string str;
+    std::string str;
     {
         Json::FastWriter jsonwriter;
         str = jsonwriter.write(root);

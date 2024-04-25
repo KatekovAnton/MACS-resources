@@ -14,7 +14,6 @@
 
 
 
-using namespace std;
 
 BinaryWriter::BinaryWriter(const std::string &filename)
 :_filename(filename)

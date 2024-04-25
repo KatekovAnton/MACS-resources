@@ -19,6 +19,7 @@
 
 
 class BinaryReader;
+class BinaryPackReader;
 class IBinaryReader;
 class IBinaryWriter;
 class Texture;
@@ -73,22 +74,19 @@ class MAXContentMap {
     
 public:
     
-    std::string filename;
-    std::string name;
+    int w = 0;
+    int h = 0;
     
-    int w;
-    int h;
-    
-    char* groundType;//0-ground 1-water 2-coast 3-unpassable
+    char* groundType = nullptr;//0-ground 1-water 2-coast 3-unpassable
     
     
-    MAXContentMapTexture *_miniMap;
-    MAXContentMapTexture *_blendMap;
-    MAXContentMapTexture *_waterColorMap;
-    MAXContentMapTexture *_channel1;
-    MAXContentMapTexture *_channel2;
-    MAXContentMapTexture *_channel3;
-    MAXContentMapTexture *_channel4;
+    MAXContentMapTexture *_miniMap = nullptr;
+    MAXContentMapTexture *_blendMap = nullptr;
+    MAXContentMapTexture *_waterColorMap = nullptr;
+    MAXContentMapTexture *_channel1 = nullptr;
+    MAXContentMapTexture *_channel2 = nullptr;
+    MAXContentMapTexture *_channel3 = nullptr;
+    MAXContentMapTexture *_channel4 = nullptr;
     
     MAXContentMap();
     ~MAXContentMap();
@@ -99,15 +97,11 @@ public:
     void InitializeNew(int w, int h, bool loadDefaultMaps, bool loadShort);
     
     void Read(std::shared_ptr<IBinaryReader> reader, bool loadShort);
+    void Read(BinaryPackReader &reader, bool loadShort);
     void Write(const std::string &file);
     
     void GetGroundType(char *destination) const;
     void SetGroundType(char *ground);
-
-    std::string GetMapId()
-    {
-        return filename;
-    }
 };
 
 #endif /* defined(__MAX__MAXContentMap__) */

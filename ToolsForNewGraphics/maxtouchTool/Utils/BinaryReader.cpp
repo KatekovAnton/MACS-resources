@@ -20,7 +20,7 @@ void fread(void* buffer, size_t size, size_t num, AAsset* asset) {
 
 #endif
 
-using namespace std;
+
 
 //BinaryReader::BinaryReader(std::string filename):
 //_position(0),
@@ -225,17 +225,17 @@ void BinaryReader::ReadBuffer(long length, char *buf)
     return;
 }
 
-string BinaryReader::ReadBadString()
+std::string BinaryReader:: ReadBadString()
 {
     int length = ReadInt();
     char *data = (char*) malloc (sizeof(char)*length+1);
     ReadBuffer(length+1, data);
-    string str = string(data);
+    std::string str = std::string(data);
     free(data);
     return str;
 }
 
-string BinaryReader::ReadString()
+std::string BinaryReader::ReadString()
 {
     int length = ReadInt();
     char *data = (char*) malloc (sizeof(char)*length+1);
@@ -249,7 +249,7 @@ string BinaryReader::ReadString()
         data[length+1]='\0';
         free(dataold);
     }
-    string str = string(data);
+    std::string str = std::string(data);
     free(data);
     return str;
 }
@@ -278,7 +278,7 @@ std::string BinaryReader::ReadFullAsString()
     ReadBuffer(length, data);
     data[length] = '\0';
     data[length+1] = '\0';
-    std::string result = string(data);
+    std::string result = std::string(data);
     free(data);
 	//removeBadCharacters(result);
     return result;
