@@ -17,8 +17,6 @@
 
 
 
-using namespace std;
-
 const int pal_size = 0x300;
 
 
@@ -27,10 +25,6 @@ const int pal_size = 0x300;
 #define ITEM_WATERCOLORMAP  "WATERCOLORMAP"
 #define ITEM_MINIMAP        "MINIMAP"
 #define ITEM_GROUNDS        "GROUNDS"
-
-
-
-using namespace std;
 
 
 
@@ -287,6 +281,9 @@ void MAXContentMap::InitializeNew(int width, int heigth, bool loadDefaultMaps, b
 
 void MAXContentMap::LoadSharedData()
 {
+    // load defaults textures - game will take them from bundle
+    // but the location should really need to be set in the header
+    // so we should be able to ship textures inside of the map file
     /*
     _channel1 = ContentMapTextureFromFile("Maps/DefaultTextures/sand1.png");
     _channel2 = ContentMapTextureFromFile("Maps/DefaultTextures/sand2.png");
@@ -299,8 +296,12 @@ void MAXContentMap::Read(std::shared_ptr<IBinaryReader> binaryReader, bool loadS
 {
     BinaryPack p;
     BinaryPackReader reader(&p, binaryReader);
-    
-    
+    Read(reader, loadShort);
+}
+
+void MAXContentMap::Read(BinaryPackReader& reader, bool loadShort)
+{
+
     {
         bool exists = false;
         Json::Value value;
@@ -419,7 +420,7 @@ void MAXContentMap::Write(const std::string &file)
         data.h = _miniMap->GetHeigth();
         data.comp_num = 4;
         data.data = reinterpret_cast<uint8_t*>(_miniMap->GetData());
-        save_png_file_by_full_path(filename + ".png", data);
+        save_png_file_by_full_path(file + ".png", data);
     }
 }
 
