@@ -1,0 +1,13 @@
+{
+	"basename" : "Mine_s0",
+	"outputFolder" : "MiningStation/body",
+	"cells" : 2,
+	"colorPattern" : ".png",
+	"diffusePattern" : ".diffuse.png",
+	"shadowPattern" : ".shadow.png",
+	"aoPattern" : ".ao.png",
+	"alphaPattern" : ".Alpha.png",
+    "normalsPattern" : ".normals.png",
+	"darken" : 0.6,
+	"singleDirection" : true
+}

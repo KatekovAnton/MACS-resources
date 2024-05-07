@@ -1,0 +1,13 @@
+{
+	"basename" : "Plate_Mine_s0",
+	"outputFolder" : "foundation2/body",
+	"cells" : 1,
+	"colorPattern" : ".png",
+	"diffusePattern" : ".diffuse.png",
+	"shadowPattern" : "NONE",
+	"aoPattern" : ".ao.png",
+	"alphaPattern" : ".Alpha.png",
+    "normalsPattern" : ".normals.png",
+	"darken" : 0.6,
+	"singleDirection" : true
+}

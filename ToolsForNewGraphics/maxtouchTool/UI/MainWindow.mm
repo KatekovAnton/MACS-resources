@@ -121,6 +121,9 @@
             MTVisualObjectController *controller = [[MTVisualObjectController alloc] initWithInputPath:path outputPath:outputDirectory];
             [controller dowork:options];
         }
+        
+//        NSURL *url = [NSURL URLWithString:@"outputDirectory"];
+//        [[NSWorkspace sharedWorkspace] activateFileViewerSelectingURLs:@[ url ]];
     });
 }
 
