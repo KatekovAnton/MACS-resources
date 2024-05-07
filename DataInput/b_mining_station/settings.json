@@ -1,6 +1,6 @@
 {
 	"basename" : "Mine_s0",
-	"outputFolder" : "MiningStation/body",
+	"outputFolder" : "c_b_miningStation/body",
 	"cells" : 2,
 	"colorPattern" : ".png",
 	"diffusePattern" : ".diffuse.png",

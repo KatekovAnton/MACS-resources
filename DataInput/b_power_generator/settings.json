@@ -1,6 +1,6 @@
 {
 	"basename" : "Generator_s0",
-	"outputFolder" : "b_generator/body",
+	"outputFolder" : "c_b_generator/body",
 	"cells" : 1,
 	"colorPattern" : ".png",
 	"diffusePattern" : ".diffuse.png",
