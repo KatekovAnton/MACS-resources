@@ -51,7 +51,7 @@ class BitmapComposer;
 
 - (NSImage *)buildFullImageWithAoK:(float)aoK shadowK:(float)shadowK diffuseK:(float)diffuseK shadow:(CPPITexture *)shadow;
 - (void)buildResultImageWithAoK:(float)aoK shadowK:(float)shadowK diffuseK:(float)diffuseK;
-- (void)buildShadowImageWithAoK:(float)aoK shadowK:(float)shadowK diffuseK:(float)diffuseK;
+- (void)buildShadowImageWithAoK:(float)aoK shadowK:(float)shadowK diffuseK:(float)diffuseK cutShadow:(BOOL)cutShadow;
 
 + (NSImage *)resultImageWithBitmapComposer:(BitmapComposer *)composer;
 

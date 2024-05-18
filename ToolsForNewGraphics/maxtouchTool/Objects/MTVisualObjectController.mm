@@ -177,6 +177,7 @@
     NSString *_inputDirectoryPath;
     NSString *_baseName;
     int _cells;
+    bool _cutShadow;
     float _shadowDisplacement;
     NSString *_outputFolderName;
     NSString *_outputFolderPath;
@@ -195,6 +196,7 @@
 {
     if (self = [super init]) {
         
+        _cutShadow = false;
         _textureCache = [NSMutableDictionary dictionary];
         _inputDirectoryPath = inputPath;
         
@@ -204,6 +206,9 @@
         _baseName = _settings[@"basename"];
         _outputFolderName = _settings[@"outputFolder"];
         _cells = [_settings[@"cells"] intValue];
+        if ([_settings valueForKey:@"cutShadow"] != nil) {
+            _cutShadow = [[_settings valueForKey:@"cutShadow"] boolValue];
+        }
         _shadowDisplacement = [_settings[@"shadowDisplacement"] floatValue];
         _outputFolderPath = [outputPath stringByAppendingString:_outputFolderName];
         _outputFolderPath = [_outputFolderPath stringByAppendingString:@"/"];
@@ -243,11 +248,12 @@
     CPPITexture *textureAO = NULL;
     
     
-    CGFloat gameCellSize = _cells * SINGLE_CELL_RESOLUTION;
+    CGFloat neededGraphicsSize = _cells * SINGLE_CELL_RESOLUTION;
     CGFloat graphicsCellSize = 0;
+    bool rescale = false;
     
     NSMutableDictionary *settings = [NSMutableDictionary dictionary];
-    [settings setObject:@(gameCellSize) forKey:@"cellSize"];
+    [settings setObject:@(SINGLE_CELL_RESOLUTION) forKey:@"cellSize"];
     
     float darkenMultiplier = 1.0;
     if (_settings[@"darken"] != nil) {
@@ -266,11 +272,12 @@
         NSImage *diffuseAlphaImage = [self imageWithPath:_data.inputDiffuseAlpha scale:TMPSCALE];
         
         graphicsCellSize = diffuseImage.size.width / _cells;
+        rescale = graphicsCellSize != SINGLE_CELL_RESOLUTION;
         float multiplier = 1.0;
-        if (graphicsCellSize != gameCellSize) {
-            diffuseImage = [NSImage resizeImage:diffuseImage byScalingItToSize:NSMakeSize(gameCellSize, gameCellSize)];
-            diffuseAlphaImage = [NSImage resizeImage:diffuseAlphaImage byScalingItToSize:NSMakeSize(gameCellSize, gameCellSize)];
-            multiplier = graphicsCellSize / gameCellSize;
+        if (rescale) {
+            diffuseImage = [NSImage resizeImage:diffuseImage byScalingItToSize:NSMakeSize(neededGraphicsSize, neededGraphicsSize)];
+            diffuseAlphaImage = [NSImage resizeImage:diffuseAlphaImage byScalingItToSize:NSMakeSize(neededGraphicsSize, neededGraphicsSize)];
+            multiplier = graphicsCellSize / neededGraphicsSize;
         }
         textureDiffuse = new CPPTextureImplNSBitmapImageRep(diffuseImage);
         textureDiffuseAlpha = new CPPTextureImplNSBitmapImageRep(diffuseAlphaImage);
@@ -328,12 +335,12 @@
         
         
         {
-            NSDictionary *diffuseInfo = @{@"sizeW" : @(gameCellSize),
-                                          @"sizeH" : @(gameCellSize),
+            NSDictionary *diffuseInfo = @{@"sizeW" : @(neededGraphicsSize),
+                                          @"sizeH" : @(neededGraphicsSize),
                                           @"offsetX" : @(0),
                                           @"offsetY" : @(0),
-                                          @"anchorX" : @(gameCellSize/2),
-                                          @"anchorY" : @(gameCellSize/2),
+                                          @"anchorX" : @(neededGraphicsSize/2),
+                                          @"anchorY" : @(neededGraphicsSize/2),
                                           @"premultiplied" : @(NO)
                                           };
             [settings setObject:diffuseInfo forKey:@"diffuseTexture"];
@@ -345,8 +352,8 @@
         NSImage *aoImage = [self imageWithPath:_data.inputAO scale:TMPSCALE];
         textureAO = new CPPTextureImplNSBitmapImageRep(aoImage);
         
-        if (graphicsCellSize != gameCellSize) {
-            aoImage = [NSImage resizeImage:aoImage byScalingItToSize:NSMakeSize(gameCellSize, gameCellSize)];
+        if (rescale) {
+            aoImage = [NSImage resizeImage:aoImage byScalingItToSize:NSMakeSize(neededGraphicsSize, neededGraphicsSize)];
         }
     }
     
@@ -354,8 +361,8 @@
         assert([[NSFileManager defaultManager] fileExistsAtPath:_data.inputNormals]);
         NSImage *normalsImage = [self imageWithPath:_data.inputNormals scale:TMPSCALE];
         
-        if (normalsImage.size.width != gameCellSize) {
-            normalsImage = [NSImage resizeImage:normalsImage byScalingItToSize:NSMakeSize(gameCellSize, gameCellSize)];
+        if (rescale) {
+            normalsImage = [NSImage resizeImage:normalsImage byScalingItToSize:NSMakeSize(neededGraphicsSize, neededGraphicsSize)];
             [self saveImage:normalsImage toPath:_data.outputNormals];
         }
         else {
@@ -371,8 +378,8 @@
             NSImage *stripesImage = [self imageWithPath:_data.inputStripes scale:TMPSCALE];
             
             if (stripesImage != nil) {
-                if (graphicsCellSize != gameCellSize) {
-                    stripesImage = [NSImage resizeImage:stripesImage byScalingItToSize:NSMakeSize(gameCellSize, gameCellSize)];
+                if (rescale) {
+                    stripesImage = [NSImage resizeImage:stripesImage byScalingItToSize:NSMakeSize(neededGraphicsSize, neededGraphicsSize)];
                     [self saveImage:stripesImage toPath:_data.outputStripes];
                 }
                 else {
@@ -380,8 +387,8 @@
                 }
             }
         }
-        NSDictionary *diffuseInfo = @{@"sizeW" : @(gameCellSize),
-                                      @"sizeH" : @(gameCellSize),
+        NSDictionary *diffuseInfo = @{@"sizeW" : @(neededGraphicsSize),
+                                      @"sizeH" : @(neededGraphicsSize),
                                       @"offsetX" : @(0),
                                       @"offsetY" : @(0)};
         [settings setObject:diffuseInfo forKey:@"stripesTexture"];
@@ -408,8 +415,8 @@
                     NSPoint displacement = NSMakePoint(-sin(angle) * _shadowDisplacement, -cos(angle) * _shadowDisplacement);
                     shadowImage = [NSImage offsetImage:shadowImage delta:displacement backgroundColor:[NSColor blackColor]];
                 }
-                if (graphicsCellSize != gameCellSize) {
-                    shadowImage = [NSImage resizeImage:shadowImage byScalingItToSize:NSMakeSize(gameCellSize, gameCellSize)];
+                if (rescale) {
+                    shadowImage = [NSImage resizeImage:shadowImage byScalingItToSize:NSMakeSize(neededGraphicsSize, neededGraphicsSize)];
                 }
                 
                 if (options.storeAdditionalPNG)
@@ -463,8 +470,8 @@
                 assert([[NSFileManager defaultManager] fileExistsAtPath:spriteData.inputLighting]);
                 NSImage *lightImage = [self imageWithPath:spriteData.inputLighting scale:TMPSCALE];
                 textureLight = new CPPTextureImplNSBitmapImageRep(lightImage);
-                if (graphicsCellSize != gameCellSize) {
-                    lightImage = [NSImage resizeImage:lightImage byScalingItToSize:NSMakeSize(gameCellSize, gameCellSize)];
+                if (rescale) {
+                    lightImage = [NSImage resizeImage:lightImage byScalingItToSize:NSMakeSize(neededGraphicsSize, neededGraphicsSize)];
                 }
                 
             }
@@ -474,20 +481,20 @@
                                                                    duffuseAlphaTexture:textureDiffuseAlpha
                                                                           lightTexture:textureLight
                                                                               aoTextre:textureAO];
-                [object buildShadowImageWithAoK:1 shadowK:1 diffuseK:1];
+                [object buildShadowImageWithAoK:1 shadowK:1 diffuseK:1 cutShadow:_cutShadow];
                 
                 if (i == TEX_PREVIEW_INDEX) {
                     
                     NSImage *tmp_diffuseImage = [[NSImage alloc] initWithContentsOfFile:_data.outputDiffusePNG];
                     
                     NSImage *tmp_diffuseAlphaImage = [self imageWithPath:_data.inputDiffuseAlpha scale:TMPSCALE];
-                    tmp_diffuseAlphaImage = [NSImage resizeImage:tmp_diffuseAlphaImage byScalingItToSize:NSMakeSize(gameCellSize, gameCellSize)];
+                    tmp_diffuseAlphaImage = [NSImage resizeImage:tmp_diffuseAlphaImage byScalingItToSize:NSMakeSize(neededGraphicsSize, neededGraphicsSize)];
                     
                     NSImage *tmp_lightImage = [self imageWithPath:spriteData.inputLighting scale:TMPSCALE];
-                    tmp_lightImage = [NSImage resizeImage:tmp_lightImage byScalingItToSize:NSMakeSize(gameCellSize, gameCellSize)];
+                    tmp_lightImage = [NSImage resizeImage:tmp_lightImage byScalingItToSize:NSMakeSize(neededGraphicsSize, neededGraphicsSize)];
                     
                     NSImage *tmp_aoImage = [self imageWithPath:_data.inputAO scale:TMPSCALE];
-                    tmp_aoImage = [NSImage resizeImage:tmp_aoImage byScalingItToSize:NSMakeSize(gameCellSize, gameCellSize)];
+                    tmp_aoImage = [NSImage resizeImage:tmp_aoImage byScalingItToSize:NSMakeSize(neededGraphicsSize, neededGraphicsSize)];
                     
                     CPPITexture *tmp_textureDiffuse = new CPPTextureImplNSBitmapImageRep(tmp_diffuseImage);
                     CPPITexture *tmp_textureDiffuseAlpha = new CPPTextureImplNSBitmapImageRep(tmp_diffuseAlphaImage);
@@ -502,7 +509,7 @@
                     if (spriteData.inputShadow != nil) {
                         assert([[NSFileManager defaultManager] fileExistsAtPath:spriteData.inputShadow]);
                         NSImage *tmp_shadowImage = [self imageWithPath:spriteData.inputShadow scale:TMPSCALE];
-                        tmp_shadowImage = [NSImage resizeImage:tmp_shadowImage byScalingItToSize:NSMakeSize(gameCellSize, gameCellSize)];
+                        tmp_shadowImage = [NSImage resizeImage:tmp_shadowImage byScalingItToSize:NSMakeSize(neededGraphicsSize, neededGraphicsSize)];
                         tmp_shadowTexture = new CPPTextureImplNSBitmapImageRep(tmp_shadowImage);
                     }
                     NSImage *previewImage = [object buildFullImageWithAoK:1.3 shadowK:1 diffuseK:darkenMultiplier shadow:tmp_shadowTexture];
@@ -522,8 +529,8 @@
                 }
                 
                 NSImage *resultImage = object.resultShadowImage;
-                if (graphicsCellSize != gameCellSize) {
-                    resultImage = [NSImage resizeImage:resultImage byScalingItToSize:NSMakeSize(gameCellSize, gameCellSize)];
+                if (rescale) {
+                    resultImage = [NSImage resizeImage:resultImage byScalingItToSize:NSMakeSize(neededGraphicsSize, neededGraphicsSize)];
                 }
                 
                 if (options.storeAdditionalPNG)
