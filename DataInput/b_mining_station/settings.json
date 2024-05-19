@@ -8,6 +8,7 @@
 	"aoPattern" : ".ao.png",
 	"alphaPattern" : ".Alpha.png",
     "normalsPattern" : ".normals.png",
+	"cutShadow" : true,
 	"darken" : 0.6,
 	"singleDirection" : true
 }
