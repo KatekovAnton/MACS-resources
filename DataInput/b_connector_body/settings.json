@@ -1,0 +1,14 @@
+{
+	"basename" : "PipeCenter",
+	"outputFolder" : "c_b_connector/body",
+	"cells" : 1,
+	"colorPattern" : "_s%d.png",
+	"diffusePattern" : "_s315.diffuse.png",
+	"shadowPattern" : "_s%d.shadow.png",
+	"aoPattern" : "_s315.ao.png",
+	"alphaPattern" : "_s315.Alpha.png",
+    "normalsPattern" : "_s315.normals.png",
+	"darken" : 0.6,
+	"singleDirection" : true,
+	"rotationOffset" : 1
+}
