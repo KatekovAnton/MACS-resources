@@ -87,10 +87,12 @@
 //            
 //        }
         
-        _is8Directions = YES;
+        _singleDirection = NO;
+        _singleDirectionFrame = 0;
         if ([settings valueForKey:@"singleDirection"] != nil) {
-            _is8Directions = ![[settings valueForKey:@"singleDirection"] boolValue];
-            if (!_is8Directions) {
+            _singleDirection = [[settings valueForKey:@"singleDirection"] boolValue];
+            _singleDirectionFrame = [[settings valueForKey:@"singleDirectionFrame"] integerValue];
+            if (_singleDirection) {
                 int a = 0;
                 a++;
             }
@@ -145,8 +147,14 @@
             }
         }
         
+        int startFrame = 0;
+        int endFrame = 8;
+        if (_singleDirection) {
+            startFrame = _singleDirectionFrame;
+            endFrame = _singleDirectionFrame + 1; 
+        }
         NSMutableArray *rotatedSpritesData = [NSMutableArray array];
-        for (int i = 0; i < 8; i++)
+        for (int i = startFrame; i < endFrame; i++)
         {
             MTVisualObjectSpriteData *spriteData =
             [[MTVisualObjectSpriteData alloc] initWithInputPath:inputPath
@@ -252,8 +260,16 @@
     CGFloat graphicsCellSize = 0;
     bool rescale = false;
     
+    int startFrame = 0;
+    int endFrame = 8;
+    if (_data.singleDirection) {
+        startFrame = _data.singleDirectionFrame;
+        endFrame = _data.singleDirectionFrame + 1; 
+    }
+    
     NSMutableDictionary *settings = [NSMutableDictionary dictionary];
     [settings setObject:@(SINGLE_CELL_RESOLUTION) forKey:@"cellSize"];
+    [settings setObject:@(_data.singleDirection) forKey:@"singleDirection"];
     
     float darkenMultiplier = 1.0;
     if (_settings[@"darken"] != nil) {
@@ -398,12 +414,11 @@
     @autoreleasepool {
         std::vector<CPPITexture *> shadowTextures;
         bool shadowsCreated = true;
-        for (int i = 0; i < 8; i++)
+        for (int i = startFrame; i < endFrame; i++)
         {
-            MTVisualObjectSpriteData *spriteData = _data.rotatedSpritesData[i];
+            MTVisualObjectSpriteData *spriteData = _data.rotatedSpritesData[i - startFrame];
             if (spriteData.inputShadow == nil) {
                 shadowsCreated = false;
-                assert(i == 0);
                 break;
             }
             @autoreleasepool {
@@ -450,7 +465,7 @@
             [shadowSettings setObject:offsets forKey:@"channels"];
             [settings setObject:shadowSettings forKey:@"shadowTexture"];
             
-            for (int i = 0; i < 8; i++) {
+            for (int i = 0; i < shadowTextures.size(); i++) {
                 delete shadowTextures[i];
             }
         }
@@ -461,9 +476,9 @@
     @autoreleasepool {
         
         std::vector<CPPITexture *>textures;
-        for (int i = 0; i < 8; i++)
+        for (int i = startFrame; i < endFrame; i++)
         {
-            MTVisualObjectSpriteData *spriteData = _data.rotatedSpritesData[i];
+            MTVisualObjectSpriteData *spriteData = _data.rotatedSpritesData[i - startFrame];
             CPPITexture *textureLight = NULL;
             
             @autoreleasepool {
@@ -483,7 +498,7 @@
                                                                               aoTextre:textureAO];
                 [object buildShadowImageWithAoK:1 shadowK:1 diffuseK:1 cutShadow:_cutShadow];
                 
-                if (i == TEX_PREVIEW_INDEX) {
+                if (i == TEX_PREVIEW_INDEX || _data.singleDirection) {
                     
                     NSImage *tmp_diffuseImage = [[NSImage alloc] initWithContentsOfFile:_data.outputDiffusePNG];
                     
@@ -560,10 +575,14 @@
         
         [settings setObject:lightTextureSettings forKey:@"lightTexture"];
         
-        [lightComposer.resultImage1Data writeToFile:[NSString stringWithFormat:_data.outputLight, 0] atomically:NO];
-        [lightComposer.resultImage2Data writeToFile:[NSString stringWithFormat:_data.outputLight, 1] atomically:NO];
+        if (lightComposer.resultImage1Data != nil) {
+            [lightComposer.resultImage1Data writeToFile:[NSString stringWithFormat:_data.outputLight, 0] atomically:NO];
+        }
+        if (lightComposer.resultImage2Data != nil) {
+            [lightComposer.resultImage2Data writeToFile:[NSString stringWithFormat:_data.outputLight, 1] atomically:NO];
+        }
         
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < textures.size(); i++) {
             delete textures[i];
         }
         

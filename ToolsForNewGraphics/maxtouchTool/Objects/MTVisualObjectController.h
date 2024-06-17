@@ -39,7 +39,8 @@ typedef NS_ENUM(NSUInteger, MTVisualObjectType) {
 }
 @property (nonatomic, readonly) MTVisualObjectType objectType;
 @property (nonatomic, readonly) int method;
-@property (nonatomic, readonly) BOOL is8Directions;
+@property (nonatomic, readonly) BOOL singleDirection;
+@property (nonatomic, readonly) int singleDirectionFrame;
 @property (nonatomic, readonly) NSString *inputDiffuseAlpha;
 @property (nonatomic, readonly) NSString *inputDiffuse;
 @property (nonatomic, readonly) NSString *inputAO;

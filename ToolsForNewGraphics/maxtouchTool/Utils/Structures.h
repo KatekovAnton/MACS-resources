@@ -35,6 +35,19 @@ struct __Color
         return color.r == r && color.b == b && color.g == g && color.a == a; //IsNear(r, color.r) && IsNear(g, color.g) && IsNear(b, color.b) && IsNear(a, color.a);
     }
     
+    inline unsigned char &operator[] (int index) {
+        if (index == 0) {
+            return r;
+        }
+        if (index == 1) {
+            return g;
+        }
+        if (index == 2) {
+            return b;
+        }
+        return a;
+    }
+    
 } typedef Color;
 
 unsigned char CharSubstract(unsigned char c1, unsigned char c2);

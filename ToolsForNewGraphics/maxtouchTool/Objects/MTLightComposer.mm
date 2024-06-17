@@ -64,7 +64,6 @@
 - (instancetype)initWithTextures:(const std::vector<CPPITexture *> &)textures;
 {
     if (self = [super init]) {
-        assert(textures.size() == 8);
         _textures = textures;
     }
     return self;
@@ -73,15 +72,21 @@
 - (void)build
 {
     BitmapComposer *composers[2] = {NULL, NULL};
+    bool singleFrame = _textures.size() == 1;
+    int compoersSize = singleFrame ? 1 : 2;
     
     std::vector<CPPTextureClippingArray*> clippingArrays;
     {
-        std::vector<CPPITexture *> textures = {_textures[0], _textures[1], _textures[2], _textures[3]};
+        std::vector<CPPITexture *> textures = {_textures[0]};
+        if (!singleFrame) {
+            textures = {_textures[0], _textures[1], _textures[2], _textures[3]};
+        }
         
         CPPTextureClippingArray *clipping = new CPPTextureClippingArray(textures);
         clippingArrays.push_back(clipping);
         composers[0] = new BitmapComposer(clippingArrays[0]->_inclusiveRect.size);
     }
+    if (!singleFrame)
     {
         std::vector<CPPITexture *> textures = {_textures[4], _textures[5], _textures[6], _textures[7]};
         
@@ -149,7 +154,7 @@
         }
     }
     
-    for (int i = 0; i < 2; i++)
+    for (int i = 0; i < compoersSize; i++)
     {
         int size = composers[i]->getSize().width * composers[i]->getSize().height * 4;
         ByteBuffer buffer;

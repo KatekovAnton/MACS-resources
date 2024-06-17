@@ -47,7 +47,6 @@
 - (instancetype)initWithShadowTextures:(const std::vector<CPPITexture *> &)shadowTextures
 {
     if (self = [super init]) {
-        assert(shadowTextures.size() == 8);
         _shadowTextures = shadowTextures;
     }
     return self;
@@ -80,46 +79,28 @@
         for (int y = 0; y < clippings->_inclusiveRect.size.height; y++) {
             
             Color resultColor = Color(0,0,0,0);
-            
-            {
-                CPPTextureClipping *c1 = clippings->_textureClippings[0];
-                CPPTextureClipping *c2 = clippings->_textureClippings[1];
-                
-                unsigned char result = [self compressValue1:c1->_texture->GetColorAtPoint(GPoint2D(x+c1->_payloadFrame.origin.x,
-                                                                                                   y+c1->_payloadFrame.origin.y)).r
-                                                     value2:c2->_texture->GetColorAtPoint(GPoint2D(x+c2->_payloadFrame.origin.x,
-                                                                                                   y+c2->_payloadFrame.origin.y)).r];
-                resultColor.r = result;
+            int tcc = clippings->_textureClippings.size();
+            tcc = tcc/2;
+            if (tcc == 0) {
+                tcc = 1;
             }
-            {
-                CPPTextureClipping *c1 = clippings->_textureClippings[2];
-                CPPTextureClipping *c2 = clippings->_textureClippings[3];
+            for (int i = 0; i < tcc; i++) {
                 
-                unsigned char result = [self compressValue1:c1->_texture->GetColorAtPoint(GPoint2D(x+c1->_payloadFrame.origin.x,
-                                                                                                   y+c1->_payloadFrame.origin.y)).r
-                                                     value2:c2->_texture->GetColorAtPoint(GPoint2D(x+c2->_payloadFrame.origin.x,
-                                                                                                   y+c2->_payloadFrame.origin.y)).r];
-                resultColor.g = result;
-            }
-            {
-                CPPTextureClipping *c1 = clippings->_textureClippings[4];
-                CPPTextureClipping *c2 = clippings->_textureClippings[5];
+                unsigned char r1 = 0;                
+                unsigned char r2 = 0;
+                CPPTextureClipping *c1 = nullptr;
+                CPPTextureClipping *c2 = nullptr;
+                c1 = clippings->_textureClippings[i * 2];
+                r1 = c1->_texture->GetColorAtPoint(GPoint2D(x+c1->_payloadFrame.origin.x, y+c1->_payloadFrame.origin.y)).r;
+                if (clippings->_textureClippings.size() > i * 2 + 1) {
+                    c2 = clippings->_textureClippings[i * 2 + 1];
+                    r2 = c2->_texture->GetColorAtPoint(GPoint2D(x+c2->_payloadFrame.origin.x, y+c2->_payloadFrame.origin.y)).r;
+                }
                 
-                unsigned char result = [self compressValue1:c1->_texture->GetColorAtPoint(GPoint2D(x+c1->_payloadFrame.origin.x,
-                                                                                                   y+c1->_payloadFrame.origin.y)).r
-                                                     value2:c2->_texture->GetColorAtPoint(GPoint2D(x+c2->_payloadFrame.origin.x,
-                                                                                                   y+c2->_payloadFrame.origin.y)).r];
-                resultColor.b = result;
-            }
-            {
-                CPPTextureClipping *c1 = clippings->_textureClippings[6];
-                CPPTextureClipping *c2 = clippings->_textureClippings[7];
+                unsigned char result = 0;
+                result = [self compressValue1:r1 value2:r2];
+                resultColor[i] = result;
                 
-                unsigned char result = [self compressValue1:c1->_texture->GetColorAtPoint(GPoint2D(x+c1->_payloadFrame.origin.x,
-                                                                                                   y+c1->_payloadFrame.origin.y)).r
-                                                     value2:c2->_texture->GetColorAtPoint(GPoint2D(x+c2->_payloadFrame.origin.x,
-                                                                                                   y+c2->_payloadFrame.origin.y)).r];
-                resultColor.a = result;
             }
             composer->setColor(resultColor, x, y);
         }
