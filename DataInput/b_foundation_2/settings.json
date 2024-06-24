@@ -8,7 +8,7 @@
 	"aoPattern" : ".ao.png",
 	"alphaPattern" : ".Alpha.png",
     "normalsPattern" : ".normals.png",
-	"darken" : 0.6,
+	"darken" : 0.8,
 	"singleDirection" : true,
 	"singleDirectionFrame" : 7
 }
