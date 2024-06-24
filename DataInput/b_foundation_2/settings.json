@@ -1,5 +1,5 @@
 {
-	"basename" : "Plate_Mine_s0",
+	"basename" : "Mine_s315",
 	"outputFolder" : "c_b_foundation2/body",
 	"cells" : 1,
 	"colorPattern" : ".png",
@@ -9,5 +9,6 @@
 	"alphaPattern" : ".Alpha.png",
     "normalsPattern" : ".normals.png",
 	"darken" : 0.6,
-	"singleDirection" : true
+	"singleDirection" : true,
+	"singleDirectionFrame" : 7
 }
