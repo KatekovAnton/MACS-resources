@@ -1,0 +1,28 @@
+{
+    "type": "animatedFrames",
+	"outputFolder": "explosionDust%d",
+	"frameCount": 50,
+	"frameIndexStart": 0,
+	"framePattern": "output%03d.png",
+    "frameOutputPattern": "%d.png",
+    "frameStride": 4,
+    "cutType": "contents",
+    "parts": [
+        {
+            "frame": {
+                "x": 180,
+                "y": 164,
+                "w": 800,
+                "h": 800
+            }
+        },
+        {
+            "frame": {
+                "x": 950,
+                "y": 164,
+                "w": 800,
+                "h": 800
+            }
+        }
+    ]
+}

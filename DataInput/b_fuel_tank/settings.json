@@ -1,0 +1,15 @@
+{
+	"basename" : "Tank_Fuel_s315",
+	"outputFolder" : "c_b_fueltank/body",
+	"cells" : 1,
+	"colorPattern" : ".png",
+	"diffusePattern" : ".diffuse.png",
+	"shadowPattern" : ".shadow.png",
+	"aoPattern" : ".ao.png",
+	"alphaPattern" : ".Alpha.png",
+    "normalsPattern" : ".normals.png",
+	"darken" : 1.0,
+	"cutShadow" : true,
+	"singleDirection" : true,
+	"singleDirectionFrame" : 7
+}
