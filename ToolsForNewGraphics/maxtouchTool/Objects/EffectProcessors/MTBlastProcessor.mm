@@ -65,6 +65,29 @@
 
 @end
 
+@implementation MTEffectProcessorStep_Resize
+
+- (NSArray *)doWork:(NSArray *)images
+{
+    NSMutableArray *newImages = [NSMutableArray array];
+    for (MTEffectProcessorTaskImage *item in images)
+    {
+        @autoreleasepool {
+            NSImage *image = item.image;
+            image = [NSImage resizeImage:image byScalingItToSize:NSMakeSize(_targetSize.width, _targetSize.height)];
+            
+            MTEffectProcessorTaskImage *newItem = [MTEffectProcessorTaskImage new];
+            newItem.image = image;
+            newItem.outputPath = item.outputPath;
+            [newImages addObject:newItem];
+        }
+        
+    }
+    return newImages;
+}
+
+@end
+
 @implementation MTEffectProcessorStep_CalculateCropRectangle
 
 - (NSArray *)doWork:(NSArray *)images
@@ -92,23 +115,65 @@
 
 
 
-@implementation MTEffectProcessorStep_ProcessImages
+@implementation MTEffectProcessorStep_CropImages
 
 - (NSArray *)doWork:(NSArray *)images
 {
     NSString *outputPath = nil;
     for (MTEffectProcessorTaskImage *item in images)
     {
-        for (MTEffectProcessorTask *task in self.tasks)
-        {
-            NSImage *image = item.image;
-            if (image == nil) {
-                image = [[NSImage alloc] initWithContentsOfFile:item.inputPath];
-            }
-            NSImage *cropped = [NSImage cropImage:image toRect:task.rectInside];
-            [NSImage saveImage:cropped toPath:item.outputPath];
-            outputPath = item.outputPath;
+        NSImage *image = item.image;
+        if (image == nil) {
+            image = [[NSImage alloc] initWithContentsOfFile:item.inputPath];
         }
+        NSImage *cropped = [NSImage cropImage:image toRect:self.rectInside];
+        [NSImage saveImage:cropped toPath:item.outputPath];
+        item.image = cropped;
+        outputPath = item.outputPath;
+        
+    }
+    
+    {
+        #define TEX_OUTPUT_SETTINGS    @"settings.json"
+        outputPath = [outputPath stringByDeletingLastPathComponent];
+        NSString *outputSettingsPath = [outputPath stringByAppendingPathComponent:TEX_OUTPUT_SETTINGS];
+        NSMutableDictionary *outputSettings = [NSMutableDictionary dictionary];
+        
+        outputSettings[@"cellSize"] = @(64);
+        outputSettings[@"frameCount"] = @(images.count);
+        if (self.tasks.count > 0) {
+            MTEffectProcessorTask *task = self.tasks[0];
+            NSMutableDictionary *d = [NSMutableDictionary new];
+            d[@"premultiplied"] = @(true);
+            d[@"sizeW"] = @(task.rectInside.size.width);
+            d[@"sizeH"] = @(task.rectInside.size.height);
+            d[@"offsetX"] = @(0);
+            d[@"offsetY"] = @(0);
+            d[@"anchorX"] = @(task.rectInside.size.width / 2);
+            d[@"anchorY"] = @(task.rectInside.size.height / 2);
+            outputSettings[@"diffuseTexture"] = d;
+        }
+        NSData *outputSettingsData = [NSJSONSerialization dataWithJSONObject:outputSettings options:NSJSONWritingPrettyPrinted error:nil];
+        [outputSettingsData writeToFile:outputSettingsPath atomically:YES];
+    }
+    
+    return images;
+}
+
+@end
+
+
+
+@implementation MTEffectProcessorStep_SaveImages
+
+- (NSArray *)doWork:(NSArray *)images
+{
+    NSString *outputPath = nil;
+    for (MTEffectProcessorTaskImage *item in images)
+    {
+        NSImage *image = item.image;
+        [NSImage saveImage:image toPath:item.outputPath];
+        outputPath = item.outputPath;
     }
     
     {
@@ -178,7 +243,7 @@
                     CGRect result;
                     NSDictionary *cutRectangleDict = settings[@"cutRectangle"];
                     result.origin.x = [cutRectangleDict[@"x"] floatValue];
-                    result.origin.y = [cutRectangleDict[@"x"] floatValue];
+                    result.origin.y = [cutRectangleDict[@"y"] floatValue];
                     result.size.width = [cutRectangleDict[@"w"] floatValue];
                     result.size.height = [cutRectangleDict[@"h"] floatValue];
                     result;
@@ -193,8 +258,27 @@
                                              cutRectangle.size.height);
                 [tasks addObject:task];
                 
-                MTEffectProcessorStep *step = [MTEffectProcessorStep_ProcessImages new];
+                MTEffectProcessorStep *step = [MTEffectProcessorStep_CropImages new];
                 step.tasks = tasks;
+            }
+            else if ([cutType isEqualToString:@"frame"])
+            {
+                CGRect cutRectangle = ({
+                    CGRect result;
+                    NSDictionary *cutRectangleDict = settings[@"cutRectangle"];
+                    result.origin.x = [cutRectangleDict[@"x"] floatValue];
+                    result.origin.y = [cutRectangleDict[@"y"] floatValue];
+                    result.size.width = [cutRectangleDict[@"w"] floatValue];
+                    result.size.height = [cutRectangleDict[@"h"] floatValue];
+                    result;
+                });
+                
+                {
+                    MTEffectProcessorStep_CropImages *step = [MTEffectProcessorStep_CropImages new];
+                    step.rectInside = cutRectangle;   
+                    [steps addObject:step];
+                }
+                
             }
             else if ([cutType isEqualToString:@"contents"])
             {
@@ -224,7 +308,7 @@
                 task2.type = MTEffectProcessorTaskType_CutRectangle;
                 [tasks2 addObject:task2];
                 
-                MTEffectProcessorStep_ProcessImages *step2 = [MTEffectProcessorStep_ProcessImages new];
+                MTEffectProcessorStep_CropImages *step2 = [MTEffectProcessorStep_CropImages new];
                 step2.tasks = tasks2;
                 
                 WEAK(task2);
@@ -238,6 +322,21 @@
                 [steps addObject:step1];
                 [steps addObject:step2];
             }
+        }
+        
+        if ([settings valueForKey:@"targetSizeW"] != nil && [settings valueForKey:@"targetSizeH"] != nil)
+        {
+            int targetSizeW = [settings[@"targetSizeW"] intValue];
+            int targetSizeH = [settings[@"targetSizeH"] intValue];
+            
+            MTEffectProcessorStep_Resize *taskResize = [MTEffectProcessorStep_Resize new];
+            taskResize.targetSize = CGSizeMake(targetSizeW, targetSizeH);
+            [steps addObject:taskResize];
+        }
+        
+        {
+            MTEffectProcessorStep_SaveImages *step = [MTEffectProcessorStep_SaveImages new];
+            [steps addObject:step];
         }
     }
     
@@ -258,8 +357,15 @@
                 NSString *imagePath = [NSString stringWithFormat:pattern, i * stride + start];
                 NSString *imageOutputPath = [NSString stringWithFormat:outputPattern, i];
                 
+                NSString *fullImagePath = [_inputDirectoryPath stringByAppendingString:imagePath];
+                {
+                    NSURL *url1 = [NSURL fileURLWithPath: fullImagePath];
+                    NSURL *url2 = [url1 URLByResolvingSymlinksInPath];
+                    fullImagePath = [[url2 absoluteString] substringFromIndex:7];
+                }
+                
                 MTEffectProcessorTaskImage *item = [MTEffectProcessorTaskImage new];
-                item.inputPath = [_inputDirectoryPath stringByAppendingString:imagePath];
+                item.inputPath = fullImagePath;
                 item.outputPath = [[[_outputDirectoryPath stringByAppendingString:output] stringByAppendingPathComponent:@"body"] stringByAppendingPathComponent:imageOutputPath];
                 [images addObject:item];
             }

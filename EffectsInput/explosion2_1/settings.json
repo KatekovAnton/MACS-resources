@@ -1,14 +1,14 @@
 {
     "type": "animatedFrames",
-	"outputFolder": "explosionDust1",
+	"outputFolder": "explosionDust2",
 	"frameCount": 46,
 	"frameIndexStart": 3,
 	"framePattern": "output%03d.png",
     "frameOutputPattern": "%d.png",
-    "frameStride": 3,
+    "frameStride": 4,
     "cutType": "frame",
     "cutRectangle": {
-		"x": 180,
+		"x": 950,
         "y": 164,
         "w": 800,
         "h": 800

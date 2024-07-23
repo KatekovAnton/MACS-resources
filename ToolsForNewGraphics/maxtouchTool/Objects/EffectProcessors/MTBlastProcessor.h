@@ -42,6 +42,13 @@ typedef NS_ENUM(NSUInteger, MTEffectProcessorTaskType) {
 
 @end
 
+// Resampling all images to "decrease" times smaller
+@interface MTEffectProcessorStep_Resize : MTEffectProcessorStep
+
+@property (nonatomic) CGSize targetSize;
+
+@end
+
 // Calculating shared crop rectangle
 @interface MTEffectProcessorStep_CalculateCropRectangle : MTEffectProcessorStep
 
@@ -49,10 +56,18 @@ typedef NS_ENUM(NSUInteger, MTEffectProcessorTaskType) {
 
 @end
 
-// Processing images
-@interface MTEffectProcessorStep_ProcessImages : MTEffectProcessorStep
+// Crop images
+@interface MTEffectProcessorStep_CropImages : MTEffectProcessorStep
+
+@property (nonatomic) CGRect rectInside;
 
 @end
+
+// Save
+@interface MTEffectProcessorStep_SaveImages : MTEffectProcessorStep
+
+@end
+
 
 
 
