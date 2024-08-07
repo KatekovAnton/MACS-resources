@@ -9,6 +9,7 @@
 	"alphaPattern" : "_s0.Alpha.png",
     "normalsPattern" : "_s0.normals.png",
 	"darken" : 1.0,
+	"cutShadow" : true,
 	"childSlots": [
 		{
 			"type": "head",
