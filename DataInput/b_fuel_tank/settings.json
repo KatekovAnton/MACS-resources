@@ -1,5 +1,5 @@
 {
-	"basename" : "Tank_Fuel_s315",
+	"basename" : "Storage_s315",
 	"outputFolder" : "c_b_fueltank/body",
 	"cells" : 1,
 	"colorPattern" : ".png",
