@@ -1,5 +1,5 @@
 {
-	"basename" : "Generator_base_s315",
+	"basename" : "BasePlate_s315",
 	"outputFolder" : "c_b_foundation1/body",
 	"cells" : 1,
 	"colorPattern" : ".png",
@@ -9,7 +9,7 @@
 	"alphaPattern" : ".Alpha.png",
     "normalsPattern" : ".normals.png",
 	"cutShadow" : true,
-	"darken" : 0.8,
+	"darken" : 1.0,
 	"singleDirection" : true,
 	"singleDirectionFrame" : 7
 }

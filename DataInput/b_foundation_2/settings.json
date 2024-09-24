@@ -1,5 +1,5 @@
 {
-	"basename" : "Mine_s315",
+	"basename" : "BigPlate_s315",
 	"outputFolder" : "c_b_foundation2/body",
 	"cells" : 1,
 	"colorPattern" : ".png",
@@ -8,7 +8,8 @@
 	"aoPattern" : ".ao.png",
 	"alphaPattern" : ".Alpha.png",
     "normalsPattern" : ".normals.png",
-	"darken" : 0.8,
+	"cutShadow" : true,
+	"darken" : 1.0,
 	"singleDirection" : true,
 	"singleDirectionFrame" : 7
 }
