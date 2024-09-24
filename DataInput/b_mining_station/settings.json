@@ -1,5 +1,5 @@
 {
-	"basename" : "Big_Mine_s315",
+	"basename" : "Mine_s315",
 	"outputFolder" : "c_b_miningStation/body",
 	"cells" : 2,
 	"colorPattern" : ".png",
@@ -9,7 +9,7 @@
 	"alphaPattern" : ".Alpha.png",
     "normalsPattern" : ".normals.png",
 	"cutShadow" : true,
-	"darken" : 0.8,
+	"darken" : 1.0,
 	"singleDirection" : true,
 	"singleDirectionFrame" : 7
 }
