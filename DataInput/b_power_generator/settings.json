@@ -1,5 +1,5 @@
 {
-	"basename" : "generator_s0",
+	"basename" : "Generator_s315",
 	"outputFolder" : "c_b_generator/body",
 	"cells" : 1,
 	"colorPattern" : ".png",
@@ -9,7 +9,8 @@
 	"alphaPattern" : ".Alpha.png",
     "normalsPattern" : ".normals.png",
 	"cutShadow" : true,
-	"darken" : 1.0,
+	"darken" : 0.8,
 	"singleDirection" : true,
-	"singleDirectionFrame" : 7
+	"singleDirectionFrame" : 7,
+	"scale": 1.25
 }
