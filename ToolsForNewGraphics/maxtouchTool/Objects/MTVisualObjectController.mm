@@ -122,6 +122,10 @@
             _inputNormals = [inputPath stringByAppendingString:[_inputNormals stringByAppendingString:settings[@"normalsPattern"]]];
         }
         
+        _scale = 1.0f;
+        if (settings[@"scale"] != nil) {
+            _scale = [settings[@"scale"] floatValue];
+        }
         _inputStripes = [inputPath stringByAppendingString:TEX_INPUT_STRIPES];
         
         _outputDiffuse = [outputPath stringByAppendingString:TEX_OUTPUT_DIFFUSE_BIN];
@@ -196,7 +200,7 @@
 @end
 
 // etank - 1.3
-#define TMPSCALE 1.0
+//#define TMPSCALE 1.0
 @implementation MTVisualObjectController
 
 - (instancetype)initWithInputPath:(NSString*)inputPath
@@ -284,8 +288,8 @@
         assert([[NSFileManager defaultManager] fileExistsAtPath:_data.inputDiffuse]);
         assert([[NSFileManager defaultManager] fileExistsAtPath:_data.inputDiffuseAlpha]);
         
-        NSImage *diffuseImage = [self imageWithPath:_data.inputDiffuse scale:TMPSCALE];
-        NSImage *diffuseAlphaImage = [self imageWithPath:_data.inputDiffuseAlpha scale:TMPSCALE];
+        NSImage *diffuseImage = [self imageWithPath:_data.inputDiffuse scale:_data.scale];
+        NSImage *diffuseAlphaImage = [self imageWithPath:_data.inputDiffuseAlpha scale:_data.scale];
         
         graphicsCellSize = diffuseImage.size.width / _cells;
         rescale = graphicsCellSize != SINGLE_CELL_RESOLUTION;
@@ -342,8 +346,8 @@
         
         assert([[NSFileManager defaultManager] fileExistsAtPath:_data.inputDiffuse]);
         assert([[NSFileManager defaultManager] fileExistsAtPath:_data.inputDiffuseAlpha]);
-        diffuseImage = [self imageWithPath:_data.inputDiffuse scale:TMPSCALE];
-        diffuseAlphaImage = [self imageWithPath:_data.inputDiffuseAlpha scale:TMPSCALE];
+        diffuseImage = [self imageWithPath:_data.inputDiffuse scale:_data.scale];
+        diffuseAlphaImage = [self imageWithPath:_data.inputDiffuseAlpha scale:_data.scale];
         delete textureDiffuse;
         delete textureDiffuseAlpha;
         textureDiffuse = new CPPTextureImplNSBitmapImageRep(diffuseImage);
@@ -365,7 +369,7 @@
     
     @autoreleasepool {
         assert([[NSFileManager defaultManager] fileExistsAtPath:_data.inputAO]);
-        NSImage *aoImage = [self imageWithPath:_data.inputAO scale:TMPSCALE];
+        NSImage *aoImage = [self imageWithPath:_data.inputAO scale:_data.scale];
         textureAO = new CPPTextureImplNSBitmapImageRep(aoImage);
         
         if (rescale) {
@@ -375,7 +379,7 @@
     
     @autoreleasepool {
         assert([[NSFileManager defaultManager] fileExistsAtPath:_data.inputNormals]);
-        NSImage *normalsImage = [self imageWithPath:_data.inputNormals scale:TMPSCALE];
+        NSImage *normalsImage = [self imageWithPath:_data.inputNormals scale:_data.scale];
         
         if (rescale) {
             normalsImage = [NSImage resizeImage:normalsImage byScalingItToSize:NSMakeSize(neededGraphicsSize, neededGraphicsSize)];
@@ -391,7 +395,7 @@
         // TODO:
         // work throught TextureClipping object to clip transparent zones
         if ([[NSFileManager defaultManager] fileExistsAtPath:_data.inputStripes]) {
-            NSImage *stripesImage = [self imageWithPath:_data.inputStripes scale:TMPSCALE];
+            NSImage *stripesImage = [self imageWithPath:_data.inputStripes scale:_data.scale];
             
             if (stripesImage != nil) {
                 if (rescale) {
@@ -423,7 +427,7 @@
             }
             @autoreleasepool {
                 assert([[NSFileManager defaultManager] fileExistsAtPath:spriteData.inputShadow]);
-                NSImage *shadowImage = [self imageWithPath:spriteData.inputShadow scale:TMPSCALE];
+                NSImage *shadowImage = [self imageWithPath:spriteData.inputShadow scale:_data.scale];
                 if (_shadowDisplacement > 0)
                 {
                     float angle = ((float)i * 45.0 + 20) * M_PI / 180.0;
@@ -483,7 +487,7 @@
             
             @autoreleasepool {
                 assert([[NSFileManager defaultManager] fileExistsAtPath:spriteData.inputLighting]);
-                NSImage *lightImage = [self imageWithPath:spriteData.inputLighting scale:TMPSCALE];
+                NSImage *lightImage = [self imageWithPath:spriteData.inputLighting scale:_data.scale];
                 textureLight = new CPPTextureImplNSBitmapImageRep(lightImage);
                 if (rescale) {
                     lightImage = [NSImage resizeImage:lightImage byScalingItToSize:NSMakeSize(neededGraphicsSize, neededGraphicsSize)];
@@ -502,13 +506,13 @@
                     
                     NSImage *tmp_diffuseImage = [[NSImage alloc] initWithContentsOfFile:_data.outputDiffusePNG];
                     
-                    NSImage *tmp_diffuseAlphaImage = [self imageWithPath:_data.inputDiffuseAlpha scale:TMPSCALE];
+                    NSImage *tmp_diffuseAlphaImage = [self imageWithPath:_data.inputDiffuseAlpha scale:_data.scale];
                     tmp_diffuseAlphaImage = [NSImage resizeImage:tmp_diffuseAlphaImage byScalingItToSize:NSMakeSize(neededGraphicsSize, neededGraphicsSize)];
                     
-                    NSImage *tmp_lightImage = [self imageWithPath:spriteData.inputLighting scale:TMPSCALE];
+                    NSImage *tmp_lightImage = [self imageWithPath:spriteData.inputLighting scale:_data.scale];
                     tmp_lightImage = [NSImage resizeImage:tmp_lightImage byScalingItToSize:NSMakeSize(neededGraphicsSize, neededGraphicsSize)];
                     
-                    NSImage *tmp_aoImage = [self imageWithPath:_data.inputAO scale:TMPSCALE];
+                    NSImage *tmp_aoImage = [self imageWithPath:_data.inputAO scale:_data.scale];
                     tmp_aoImage = [NSImage resizeImage:tmp_aoImage byScalingItToSize:NSMakeSize(neededGraphicsSize, neededGraphicsSize)];
                     
                     CPPITexture *tmp_textureDiffuse = new CPPTextureImplNSBitmapImageRep(tmp_diffuseImage);
@@ -523,7 +527,7 @@
                     CPPITexture *tmp_shadowTexture = nullptr;
                     if (spriteData.inputShadow != nil) {
                         assert([[NSFileManager defaultManager] fileExistsAtPath:spriteData.inputShadow]);
-                        NSImage *tmp_shadowImage = [self imageWithPath:spriteData.inputShadow scale:TMPSCALE];
+                        NSImage *tmp_shadowImage = [self imageWithPath:spriteData.inputShadow scale:_data.scale];
                         tmp_shadowImage = [NSImage resizeImage:tmp_shadowImage byScalingItToSize:NSMakeSize(neededGraphicsSize, neededGraphicsSize)];
                         tmp_shadowTexture = new CPPTextureImplNSBitmapImageRep(tmp_shadowImage);
                     }

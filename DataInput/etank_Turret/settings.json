@@ -10,6 +10,7 @@
     "normalsPattern" : "_S0.normals.png",
 	"darken" : 0.8,
 	"method" : 1,
+	"scale" : 1.3,
 	"childSlots": [
 		{
 			"type": "shot",

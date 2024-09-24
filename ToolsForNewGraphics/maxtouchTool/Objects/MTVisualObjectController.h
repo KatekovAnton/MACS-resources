@@ -41,6 +41,8 @@ typedef NS_ENUM(NSUInteger, MTVisualObjectType) {
 @property (nonatomic, readonly) int method;
 @property (nonatomic, readonly) BOOL singleDirection;
 @property (nonatomic, readonly) int singleDirectionFrame;
+@property (nonatomic, readonly) float scale;
+
 @property (nonatomic, readonly) NSString *inputDiffuseAlpha;
 @property (nonatomic, readonly) NSString *inputDiffuse;
 @property (nonatomic, readonly) NSString *inputAO;
