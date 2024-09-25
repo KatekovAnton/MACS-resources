@@ -1,0 +1,15 @@
+{
+	"basename" : "Plate_GreY_315_var4",
+	"outputFolder" : "c_b_foundation1_3/body",
+	"cells" : 1,
+	"colorPattern" : ".png",
+	"diffusePattern" : ".diffuse.png",
+	"shadowPattern" : "NONE",
+	"aoPattern" : ".ao.png",
+	"alphaPattern" : ".Alpha.png",
+    "normalsPattern" : ".normals.png",
+	"cutShadow" : true,
+	"darken" : 0.9,
+	"singleDirection" : true,
+	"singleDirectionFrame" : 7
+}
