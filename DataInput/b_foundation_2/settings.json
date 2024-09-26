@@ -1,7 +1,7 @@
 {
-	"basename" : "BigPlate_s315",
+	"basename" : "BIg_Plate_2var",
 	"outputFolder" : "c_b_foundation2/body",
-	"cells" : 1,
+	"cells" : 2,
 	"colorPattern" : ".png",
 	"diffusePattern" : ".diffuse.png",
 	"shadowPattern" : "NONE",
@@ -9,7 +9,7 @@
 	"alphaPattern" : ".Alpha.png",
     "normalsPattern" : ".normals.png",
 	"cutShadow" : true,
-	"darken" : 1.0,
+	"darken" : 0.83,
 	"singleDirection" : true,
 	"singleDirectionFrame" : 7
 }
