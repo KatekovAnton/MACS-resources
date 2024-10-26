@@ -9,7 +9,7 @@
 	"alphaPattern" : ".Alpha.png",
     "normalsPattern" : ".normals.png",
 	"cutShadow" : true,
-	"darken" : 0.71,
+	"darken" : 0.66,
 	"singleDirection" : true,
 	"singleDirectionFrame" : 7
 }
