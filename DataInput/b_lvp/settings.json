@@ -1,0 +1,15 @@
+{
+	"basename" : "Factory_Light",
+	"outputFolder" : "c_b_lvp/body",
+	"cells" : 2,
+	"colorPattern" : ".png",
+	"diffusePattern" : ".diffuse.png",
+	"shadowPattern" : ".shadow.png",
+	"aoPattern" : ".ao.png",
+	"alphaPattern" : ".Alpha.png",
+    "normalsPattern" : ".normals.png",
+	"cutShadow" : true,
+	"darken" : 1.0,
+	"singleDirection" : true,
+	"singleDirectionFrame" : 7
+}
