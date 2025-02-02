@@ -190,6 +190,7 @@
     NSString *_baseName;
     int _cells;
     bool _cutShadow;
+    bool _cutShadowThreshold;
     float _shadowDisplacement;
     NSString *_outputFolderName;
     NSString *_outputFolderPath;
@@ -209,6 +210,7 @@
     if (self = [super init]) {
         
         _cutShadow = false;
+        _cutShadowThreshold = 0.4f;
         _textureCache = [NSMutableDictionary dictionary];
         _inputDirectoryPath = inputPath;
         
@@ -220,6 +222,9 @@
         _cells = [_settings[@"cells"] intValue];
         if ([_settings valueForKey:@"cutShadow"] != nil) {
             _cutShadow = [[_settings valueForKey:@"cutShadow"] boolValue];
+        }
+        if ([_settings valueForKey:@"cutShadowThreshold"] != nil) {
+            _cutShadowThreshold = [[_settings valueForKey:@"cutShadowThreshold"] floatValue];
         }
         _shadowDisplacement = [_settings[@"shadowDisplacement"] floatValue];
         _outputFolderPath = [outputPath stringByAppendingString:_outputFolderName];
@@ -500,7 +505,7 @@
                                                                    duffuseAlphaTexture:textureDiffuseAlpha
                                                                           lightTexture:textureLight
                                                                               aoTextre:textureAO];
-                [object buildShadowImageWithAoK:1 shadowK:1 diffuseK:1 cutShadow:_cutShadow];
+                [object buildShadowImageWithAoK:1 shadowK:1 diffuseK:1 cutShadow:_cutShadow cutShadowThreshold:_cutShadowThreshold];
                 
                 if (i == TEX_PREVIEW_INDEX || _data.singleDirection) {
                     

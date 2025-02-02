@@ -182,7 +182,7 @@
     delete composerResult;
 }
 
-- (void)buildShadowImageWithAoK:(float)aoK shadowK:(float)shadowK diffuseK:(float)diffuseK cutShadow:(BOOL)cutShadow
+- (void)buildShadowImageWithAoK:(float)aoK shadowK:(float)shadowK diffuseK:(float)diffuseK cutShadow:(BOOL)cutShadow cutShadowThreshold:(float)cutShadowThreshold
 {
     BitmapComposer *composerShadow = new BitmapComposer(GSize2D(_diffuseTexture->GetWidth(), _diffuseTexture->GetHeight()));
     
@@ -221,8 +221,8 @@
 //            if (black) {
 //                value += 0.19;
 //            }
-            if (cutShadow && value < 0.4) {
-                value = 0.4;
+            if (cutShadow && value < cutShadowThreshold) {
+                value = cutShadowThreshold;
             }
             resultShadow.r = value;
             resultShadow.g = value;

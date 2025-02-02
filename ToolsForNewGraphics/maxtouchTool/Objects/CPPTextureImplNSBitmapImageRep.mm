@@ -35,7 +35,8 @@ int CPPTextureImplNSBitmapImageRep::GetHeight()
 Color CPPTextureImplNSBitmapImageRep::GetColorAtPoint(GPoint2D point)
 {
     CGFloat components[4];
-    NSColor *color = [_imageRep colorAtX:point.x y:point.y];
+    NSColor *color = [[_imageRep colorAtX:point.x y:point.y] colorUsingColorSpace:[NSColorSpace genericRGBColorSpace]];
+    
     [color getRed:components green:components + 1 blue:components + 2 alpha:components + 3];
     return Color(components[0] * 255.0, components[1] * 255.0, components[2] * 255.0, components[3] * 255.0);
 }
