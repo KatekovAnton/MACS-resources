@@ -1,17 +1,15 @@
 {
-	"basename" : "Generator_s315",
-	"outputFolder" : "c_b_generator/body",
-	"cells" : 1,
+	"basename" : "Big_Plate_s315",
+	"outputFolder" : "c_b_foundation3/body",
+	"cells" : 2,
 	"colorPattern" : ".png",
 	"diffusePattern" : ".diffuse.png",
-	"shadowPattern" : ".shadow.png",
+	"shadowPattern" : "NONE",
 	"aoPattern" : ".ao.png",
 	"alphaPattern" : ".Alpha.png",
     "normalsPattern" : ".normals.png",
 	"cutShadow" : true,
-	"darken" : 0.8,
-	"method" : 1,
+	"darken" : 1,
 	"singleDirection" : true,
-	"singleDirectionFrame" : 7,
-	"scale": 1.25
+	"singleDirectionFrame" : 7
 }

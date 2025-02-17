@@ -190,7 +190,7 @@
     NSString *_baseName;
     int _cells;
     bool _cutShadow;
-    bool _cutShadowThreshold;
+    float _cutShadowThreshold;
     float _shadowDisplacement;
     NSString *_outputFolderName;
     NSString *_outputFolderPath;
@@ -614,8 +614,15 @@
 - (void)saveImage:(NSImage*)image toPath:(NSString*)path
 {
     @autoreleasepool {
-        NSData *imageData = [image TIFFRepresentation];
-        NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData:imageData];
+//        [image lockFocus];
+//        NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithFocusedViewRect:NSMakeRect(0.0, 0.0, image.size.width, image.size.height)];
+//        [image unlockFocus];
+        
+//        NSData *imageData = [image TIFFRepresentation];
+//        NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData:imageData];
+        
+        CGImageRef cgRef = [image CGImageForProposedRect:NULL context:nil hints:nil];
+        NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithCGImage:cgRef];
         
         [self saveImageRep:imageRep toPath:path];
     }

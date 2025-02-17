@@ -35,6 +35,12 @@
                                                              stripesName:@"TankBase_p0.ARMY"
                                                                   aoName:@"SCBase_s0.extraTex_VRayDirt2"];
     
+//    MTVisualObject *object = [[MTVisualObject alloc] initWithDiffuseName:@"Generator_s315.diffuse"
+//                                                        duffuseAlphaName:@"Generator_s315.Alpha"
+//                                                               lightName:@"Generator_s315"
+//                                                             stripesName:@"TankBase_p0.ARMY"
+//                                                                  aoName:@"Generator_s315.ao"];
+    
 //    MTVisualObject *object = [[MTVisualObject alloc] initWithDiffuseName:@"Turret_p0.diffuse"
 //                                                        duffuseAlphaName:@"Turret_s0.Alpha"
 //                                                               lightName:@"Turret_ALL_s0"
