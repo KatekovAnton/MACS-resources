@@ -1,0 +1,15 @@
+{
+	"basename" : "Big_Plate_s315",
+	"outputFolder" : "c_b_foundation4/body",
+	"cells" : 2,
+	"colorPattern" : ".png",
+	"diffusePattern" : ".diffuse.png",
+	"shadowPattern" : "NONE",
+	"aoPattern" : ".ao.png",
+	"alphaPattern" : ".Alpha.png",
+    "normalsPattern" : ".normals.png",
+	"cutShadow" : true,
+	"darken" : 1,
+	"singleDirection" : true,
+	"singleDirectionFrame" : 7
+}
