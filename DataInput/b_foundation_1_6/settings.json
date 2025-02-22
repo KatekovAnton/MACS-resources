@@ -1,0 +1,16 @@
+{
+	"basename" : "Small_Plate_s315",
+	"outputFolder" : "c_b_foundation1_6/body",
+	"cells" : 1,
+	"colorPattern" : ".png",
+	"diffusePattern" : ".diffuse.png",
+	"shadowPattern" : "NONE",
+	"aoPattern" : ".ao.png",
+	"alphaPattern" : ".Alpha.png",
+    "normalsPattern" : ".normals.png",
+	"cutShadow" : true,
+	"darken" : 0.7,
+	"singleDirection" : true,
+	"singleDirectionFrame" : 7,
+	"scale": 0.99
+}
