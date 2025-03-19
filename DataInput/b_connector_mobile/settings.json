@@ -1,0 +1,14 @@
+{
+	"basename" : "PowerCableSup_",
+	"outputFolder" : "c_b_connector_mobile/body",
+	"cells" : 1,
+	"colorPattern" : "s%d.png",
+	"diffusePattern" : "s0.diffuse.png",
+	"shadowPattern" : "s%d.shadow.png",
+	"aoPattern" : "s0.ao.png",
+	"alphaPattern" : "s0.Alpha.png",
+    "normalsPattern" : "s0.normals.png",
+	"cutShadow" : true,
+	"darken" : 1.0,
+	"singleDirection" : false
+}
