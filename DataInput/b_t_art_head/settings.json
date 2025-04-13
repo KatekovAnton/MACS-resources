@@ -1,0 +1,13 @@
+{
+	"basename" : "Railgun_Turret",
+	"outputFolder" : "c_b_t_art/head",
+	"cells" : 1,
+	"colorPattern" : "_s%d.png",
+	"diffusePattern" : "_s0.diffuse.png",
+	"shadowPattern" : "_s%d.shadow.png",
+	"aoPattern" : "_s0.ao.png",
+	"alphaPattern" : "_s0.Alpha.png",
+    "normalsPattern" : "_s0.normals.png",
+	"cutShadow" : true,
+	"darken" : 1.0
+}
