@@ -1,0 +1,15 @@
+{
+	"basename" : "Torpedo_Base_s315",
+	"outputFolder" : "c_b_t_torp/body",
+	"cells" : 1,
+	"colorPattern" : ".png",
+	"diffusePattern" : ".diffuse.png",
+	"shadowPattern" : ".shadow.png",
+	"aoPattern" : ".ao.png",
+	"alphaPattern" : ".Alpha.png",
+    "normalsPattern" : ".normals.png",
+	"cutShadow" : true,
+	"darken" : 0.8,
+	"singleDirection" : true,
+	"singleDirectionFrame" : 7
+}
