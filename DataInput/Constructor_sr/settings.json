@@ -1,0 +1,12 @@
+{
+	"basename" : "BDoser_j_r",
+	"outputFolder" : "constructor_side_r/body",
+	"cells" : 1,
+	"colorPattern" : "_s%d.png",
+	"diffusePattern" : "_s0.diffuse.png",
+	"shadowPattern" : "_s%d.shadow.png",
+	"aoPattern" : "_s0.ao.png",
+	"alphaPattern" : "_s0.Alpha.png",
+    "normalsPattern" : "_s0.normals.png",
+	"darken" : 0.8
+}

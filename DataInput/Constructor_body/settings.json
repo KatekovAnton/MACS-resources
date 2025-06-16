@@ -1,0 +1,87 @@
+{
+	"basename" : "BDoser_all",
+	"outputFolder" : "constructor/body",
+	"cells" : 1,
+	"colorPattern" : "_s%d.png",
+	"diffusePattern" : "_s0.diffuse.png",
+	"shadowPattern" : "_s%d.shadow.png",
+	"aoPattern" : "_s0.AO.png",
+	"alphaPattern" : "_s0.Alpha.png",
+    "normalsPattern" : "_s0.normals.png",
+	"darken" : 0.8,
+	"childSlots": [
+		{
+			"type": "rail_l",
+			"offsetX": 0,
+			"offsetY": 0, 
+			"meaning": "vector in pixels from center"
+		},
+		{
+			"type": "rail_r",
+			"offsetX": 0,
+			"offsetY": 0, 
+			"meaning": "vector in pixels from center"
+		},
+		{
+			"type": "traverse_c",
+			"offsetX": 0,
+			"offsetY": 0, 
+			"meaning": "vector in pixels from center"
+		},
+		{
+			"type": "traverse_o",
+			"offsetX": 0,
+			"offsetY": 0, 
+			"meaning": "vector in pixels from center"
+		},
+		{
+			"type": "jig_l_c",
+			"offsetX": 0,
+			"offsetY": 0, 
+			"meaning": "vector in pixels from center"
+		},
+		{
+			"type": "jig_r_c",
+			"offsetX": 0,
+			"offsetY": 0, 
+			"meaning": "vector in pixels from center"
+		},
+		{
+			"type": "jig_l_o",
+			"offsetX": 0,
+			"offsetY": 0, 
+			"meaning": "vector in pixels from center"
+		},
+		{
+			"type": "jig_r_o",
+			"offsetX": 0,
+			"offsetY": 0, 
+			"meaning": "vector in pixels from center"
+		},
+		{
+			"type": "jig_li_o",
+			"offsetX": 0,
+			"offsetY": 0, 
+			"meaning": "vector in pixels from center"
+		},
+		{
+			"type": "jig_ri_o",
+			"offsetX": 0,
+			"offsetY": 0, 
+			"meaning": "vector in pixels from center"
+		},
+		{
+			"type": "light1",
+			"offsetX": 0,
+			"offsetY": 0, 
+			"meaning": "vector in pixels from center"
+		}
+	],
+	"children" : [
+		{
+		  "object" : "lights",
+		  "slot" : "light1",
+		  "when" : "work"
+		}
+	]
+}
