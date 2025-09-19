@@ -1,0 +1,16 @@
+{
+	"basename" : "Energo_s315",
+	"outputFolder" : "c_b_powerstation/body",
+	"cells" : 2,
+	"colorPattern" : ".png",
+	"diffusePattern" : ".diffuse.png",
+	"shadowPattern" : ".shadow.png",
+	"aoPattern" : ".ao.png",
+	"alphaPattern" : ".Alpha.png",
+    "normalsPattern" : ".normals.png",
+	"cutShadow" : true,
+    "cutShadowThreshold" : 0.35,
+	"darken" : 1,
+	"singleDirection" : true,
+	"singleDirectionFrame" : 7
+}
