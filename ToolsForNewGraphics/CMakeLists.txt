@@ -1,5 +1,5 @@
-cmake_minimum_required(VERSION 3.14.0)
-set(CMAKE_CXX_STANDARD 17)
+cmake_minimum_required(VERSION 3.20.0...3.31.0)
+set(CMAKE_CXX_STANDARD 20)
 
 project(MACS_TOOL
     VERSION 18.1.0
@@ -126,6 +126,7 @@ Utils/libJSON
 Utils/MathKit
 Utils/Texture
 MAX
+ProcessUnits
 )
 
 foreach(DIR ${SOURCE_DIRS})
