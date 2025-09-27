@@ -9,6 +9,7 @@ include(FetchContent)
 include(CTest)
 
 set(PROJECT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/maxtouchTool")
+set(CMAKE_XCODE_GENERATE_TOP_LEVEL_PROJECT_ONLY ON)
 
 if(APPLE)
     SET(PROJECT_OS_MACOS TRUE BOOL INTERNAL)
@@ -336,6 +337,14 @@ if (ENABLE_BUILD_TEST)
 
     if (PROJECT_OS_MACOS)
         target_link_libraries(${PROJECT_NAME}Tests ${MAX_LIBRARIES})
+        set_target_properties(${PROJECT_NAME}Tests PROPERTIES 
+            # MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/MAXNewOSX/MAXNewOSX-Info.plist
+            # XCODE_ATTRIBUTE_ASSETCATALOG_COMPILER_APPICON_NAME "AppIcon"
+            XCODE_ATTRIBUTE_SKIP_INSTALL NO
+            XCODE_ATTRIBUTE_INSTALL_PATH "$(LOCAL_APPS_DIR)"
+            XCODE_ATTRIBUTE_ONLY_ACTIVE_ARCH[variant=Debug] "YES"
+            XCODE_GENERATE_SCHEME ON
+        )
     endif()
     if (PROJECT_OS_LINUX)
         target_link_libraries(${PROJECT_NAME}Tests ${LIBS} ${MAX_LIBRARIES} ${CMAKE_DL_LIBS})
