@@ -96,10 +96,10 @@ Color ColorInTexture(CPPITexture *texture, float x, float y, Color baseColor)
                 continue;
             }
             
-            double pixelDifference = ____max(____abs(cf.r - cs.r),
-                                     ____max(____abs(cf.g - cs.g),
-                                     ____max(____abs(cf.b - cs.b),
-                                     ____abs(cf.a - cs.a))));
+            double pixelDifference = std::max(std::abs(cf.r - cs.r),
+                                              std::max(std::abs(cf.g - cs.g),
+                                                       std::max(std::abs(cf.b - cs.b),
+                                                                std::abs(cf.a - cs.a))));
             
             difference += pixelDifference;
             count ++;

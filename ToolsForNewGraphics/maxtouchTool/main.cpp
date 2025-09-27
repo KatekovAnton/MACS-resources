@@ -26,18 +26,33 @@ int main(const int argc, char** argv) {
 
 	opt.processCommandArgs(argc, argv);
 
-	std::string_view flagA = opt.getValue('a');
+    char *flagAC = opt.getValue('a');
+    if (!flagAC) {
+        std::cerr << "Action is not specified" << std::endl;
+        return 1;
+    }
+    std::string_view flagA = flagAC;
 	if (flagA.empty()) {
 		std::cerr << "Action is not specified" << std::endl;
 		return 1;
 	}
-
-	std::string_view flagI = opt.getValue('i');
+    
+    char *flagIC = opt.getValue('i');
+    if (!flagIC) {
+        std::cerr << "Input folder -i=\"...\" is not specified" << std::endl;
+        return 1;
+    }
+	std::string_view flagI = flagIC;
 	if (flagI.empty()) {
 		std::cerr << "Input folder -i=\"...\" is not specified" << std::endl;
 		return 1;
 	}
 
+    char *flagOC = opt.getValue('o');
+    if (!flagOC) {
+        std::cerr << "Output folder -o=\"...\" is not specified" << std::endl;
+        return 1;
+    }
 	std::string_view flagO = opt.getValue('o');
 	if (flagO.empty()) {
 		std::cerr << "Output folder -o=\"...\" is not specified" << std::endl;

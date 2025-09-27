@@ -70,7 +70,6 @@ set(PMP_BUILD_VIS OFF CACHE BOOL "Build the PMP visualization tools." FORCE)
 set(PNG_SHARED OFF CACHE BOOL "Build shared lib" FORCE)
 set(PNG_TESTS OFF CACHE BOOL "Build libpng tests" FORCE)
 set(PNG_ARM_NEON off CACHE BOOL "Enable ARM NEON optimizations" FORCE)
-set(PNG_BUILD_ZLIB ON CACHE BOOL "Custom zlib Location, else find_package is used" FORCE)
 set(SKIP_INSTALL_ALL 1)
 set(ZLIB_INCLUDE_DIR ${zlib_SOURCE_DIR} ${zlib_BINARY_DIR})
 set(ZLIB_LIBRARY zlibstatic)
@@ -156,7 +155,7 @@ file(GLOB_RECURSE RESOURCE_FILES
 )
 
 
-if (PROJECT_OS_WIN32 OR PROJECT_OS_LINUX) 
+if (PROJECT_OS_WIN32 OR PROJECT_OS_LINUX OR PROJECT_OS_MACOS) 
     list(APPEND ALL_SOURCES
     ${PROJECT_DIR}/main.cpp
     )
@@ -174,7 +173,11 @@ endif()
 include_directories(${PROJECT_NAME} PRIVATE ${ZLIB_INCLUDE_DIR})
 include_directories(${PROJECT_NAME} PRIVATE Vendors/AnyOption)
 include_directories(${PROJECT_NAME} PRIVATE Vendors/basis_universal)
-
+target_include_directories(${PROJECT_NAME}
+PRIVATE
+    ${zlib_SOURCE_DIR} ${zlib_BINARY_DIR}
+    ${libpng_SOURCE_DIR} ${libpng_BINARY_DIR}
+)
 
 
 set(MAX_LIBRARIES 
@@ -191,6 +194,16 @@ if (PROJECT_OS_MACOS)
             xml2
             pthread
         )
+
+    set(CMAKE_XCODE_ATTRIBUTE_ONLY_ACTIVE_ARCH[variant=Debug] "YES")
+    set_target_properties(${PROJECT_NAME} PROPERTIES 
+        # MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/MAXNewOSX/MAXNewOSX-Info.plist
+        # XCODE_ATTRIBUTE_ASSETCATALOG_COMPILER_APPICON_NAME "AppIcon"
+        XCODE_ATTRIBUTE_SKIP_INSTALL NO
+        XCODE_ATTRIBUTE_INSTALL_PATH "$(LOCAL_APPS_DIR)"
+        XCODE_ATTRIBUTE_ONLY_ACTIVE_ARCH[variant=Debug] "YES"
+        XCODE_GENERATE_SCHEME ON
+    )
 elseif (PROJECT_OS_LINUX)
     list(APPEND MAX_LIBRARIES
         glfw libglew_static
