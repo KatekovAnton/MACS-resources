@@ -6,55 +6,6 @@
 #include <MAXContentUtils.h>
 
 
-void readBinary(const std::string& path, ByteBuffer& destination)
-{
-    std::filesystem::path fsPath(path);
-    if (!std::filesystem::exists(fsPath)) {
-        throw std::runtime_error("Input path does not exist: " + fsPath.string());
-    }
-
-    MAXContentUtils::ReadFileToBuffer(fsPath.string(), &destination);
-}
-
-void readJson(const std::string& path, Json::Value &destination)
-{
-    std::filesystem::path fsPath(path);
-    if (!std::filesystem::exists(fsPath)) {
-        throw std::runtime_error("Input path does not exist: " + fsPath.string());
-    }
-	ByteBuffer buffer;
-	readBinary(path, buffer);
-    std::string jsonStr((const char*)buffer.getPointer(), buffer.getDataSize());
-    
-	Json::Reader reader;
-	if (!reader.parse(jsonStr, destination)) {
-        throw std::runtime_error("Failed to parse json: " + fsPath.string() + " error: " + reader.getFormatedErrorMessages());
-	}
-}
-
-
-std::string toAbsolutePath(const std::string& path)
-{
-    std::filesystem::path fsPath(path);
-    if (fsPath.is_absolute())
-        return fsPath.string();
-    return std::filesystem::absolute(fsPath).string();
-}
-
-std::vector<std::string> getDirectoriesInPath(const std::string& inputPath)
-{
-    std::string absInputPath = inputPath;// toAbsolutePath(inputPath);
-    std::vector<std::string> directories;
-    for (const auto& entry : std::filesystem::directory_iterator(absInputPath))
-    {
-        if (entry.is_directory())
-        {
-            directories.push_back(entry.path().string());
-        }
-    }
-    return directories;
-}
-
 
 ProcessUnits::ProcessUnits(const ProcessOptions& options, const std::string& inputPath, const std::string& outputPath)
     : _options(options), _inputPath(inputPath), _outputPath(outputPath)
@@ -62,7 +13,7 @@ ProcessUnits::ProcessUnits(const ProcessOptions& options, const std::string& inp
     if (!std::filesystem::exists(_inputPath)) {
         throw std::runtime_error("Input path does not exist: " + _inputPath);
 	}
-    auto directories = getDirectoriesInPath(_inputPath);
+    auto directories = FileManager::getDirectoriesInPath(_inputPath);
     for (const auto& dir : directories) {
 		_units.push_back(std::make_shared<ProcessUnit>(_options, dir, _outputPath));
     }
@@ -85,7 +36,7 @@ ProcessUnitInputSettings::SpriteSettings::SpriteSettings(const Json::Value& valu
 ProcessUnitInputSettings::ProcessUnitInputSettings(const std::string& inputPath)
 {
     std::filesystem::path settingsPath = std::filesystem::absolute(inputPath + "/settings.json");
-    readJson(settingsPath.string(), _raw);
+    FileManager::readJson(settingsPath.string(), _raw);
 }
 
 

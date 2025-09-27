@@ -9,6 +9,10 @@
 #ifndef FileManager_h
 #define FileManager_h
 
+#include <json/json.h>
+#include <string>
+#include <vector>
+
 
 
 class ByteBuffer;
@@ -52,6 +56,18 @@ public:
     
     virtual void WriterFlush() = 0;
     
+};
+
+
+class FileManager
+{
+public:
+
+
+    static void readBinary(const std::string& path, ByteBuffer& destination);
+    static void readJson(const std::string& path, Json::Value& destination);
+    static std::string toAbsolutePath(const std::string& path);
+    static std::vector<std::string> getDirectoriesInPath(const std::string& inputPath);
 };
 
 
