@@ -19,6 +19,8 @@ int main(const int argc, char** argv) {
 	// -o="..\..\..\_max_files\res_output" - folder for output files
 	// together
 	// -a=units -i="..\DataInputShort" -o="..\..\_max_files\res_output"
+    // mac:
+    // -a=units -i="../../../DataInputShort" -o="-a=units -i="../../../DataInputShort" -o="../../../../_MAXFiles/_resOutput"
 	opt.autoUsagePrint(true);
 	opt.setOption('a');
 	opt.setOption('i');

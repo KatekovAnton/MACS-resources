@@ -52,7 +52,8 @@ void ProcessUnit::process()
 	_outputSettingsRaw["cellSize"] = _options._singleCellSize;
 
 	std::string outputFolder = _inputSettings._raw["outputFolder"].asString();
-	std::filesystem::path outputUnitPath = std::filesystem::absolute(_outputPath + "/" + outputFolder + "/");
+    std::filesystem::path outputBasePath = std::filesystem::absolute(_outputPath);
+	std::filesystem::path outputUnitPath = outputBasePath.append(outputFolder);
     if (std::filesystem::exists(outputUnitPath)) {
         std::filesystem::remove_all(outputUnitPath);
     }
